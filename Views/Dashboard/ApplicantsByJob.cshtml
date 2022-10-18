@@ -1,97 +1,67 @@
 ﻿@using Humanizer
-@model JobPortal.ViewModels.JobApplicantsViewModel
-
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
+ @model JobPortal.ViewModels.JobApplicantsViewModel 
+@{ ViewBag.Title = "title"; Layout = "_Layout"; } 
 
 <section class="bg-light-gray">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h1 class="heading">Applicants for the <span class="accent">@Model.Job.Title</span> position</h1>
+                <h1 class="heading">Applicants for the <span class="accent">@Model.Job.Title</span> position </h1>
             </div>
         </div>
     </div>
 </section>
 <section>
     <div class="container">
-        <div class="row">
-            @if (Model.Applicants.Any())
+        @if (Model.Applicants.Any())
+        {
+            @foreach (var applicant in Model.Applicants)
             {
-                foreach (var applicant in Model.Applicants)
-                {
-                    <div class="col-lg-6">
-                        <div class="box applicant">
-                            <h4>@applicant.User.FirstName @applicant.User.LastName</h4>
-                            <a href="#" data-toggle="modal" data-target="#contact-modal"
-                               class="btn btn-outline-white-secondary btn-sm">
-                                <i class="fa fa-envelope"></i>Contact
-                            </a>
-                            <p>
-                                <span class="badge badge-info">Applied @applicant.CreatedAt.Humanize()</span>
-                            </p>
-                            <iframe style="width:100%; height:700px" id="iframepdf" src="@applicant.CVPath"></iframe>
-                            <div class="d-flex justify-content-between">
-                                <p class="intro"></p>
-                                @*<div class="image">
-                                    <img src="~/img/avatar.png" alt=""
-                                         class="img-fluid rounded-circle">
-                                </div>*@
+                <div class="row">
+                    <div class="col">
+
+                        
+                            <div class="col">
+                                <div class="box applicant">
+                                    <h4 style="display:flex; justify-content:center;">@applicant.User.UserName CV</h4>
+                                    @*<a href="#" data-toggle="modal" data-target="#contact-modal" class="btn btn-outline-white-secondary btn-sm">
+                                        <i class="fa fa-envelope"></i>Contact
+                                    </a>*@
+                                    <p>
+                                        <span class="badge badge-info">Applied @applicant.CreatedAt.Humanize()</span>
+                                    </p>
+                                    <iframe style="width:100%; height:700px" id="iframepdf" src="@applicant.CVPath"></iframe>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="intro"></p> @* <div class="image">
+                                          <img src="~/img/avatar.png" alt="" class="img-fluid rounded-circle">
+                                        </div>*@
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        
+
                     </div>
-                }
+
+                    <div class="col">
+                        <h1>CONTACT INFORMATION</h1>
+                        <br />
+                        
+                            <div class="card" style="width: 18rem; display:flex; justify-content:center;">
+                                <ul class="list-group list-group-flush" style="display:flex; justify-content:center;">
+                                    <li class="list-group-item">Name: @applicant.User.FirstName @applicant.User.LastName</li>
+                                    <li class="list-group-item">E-Mail: @applicant.User.Email</li>
+                                    <li class="list-group-item">Phone Number: @applicant.User.PhoneNumber</li>
+                                </ul>
+                            </div>
+                            @*<h4>@applicant.User.FirstName @applicant.User.LastName</h4>
+                            <h3>@applicant.User.Email</h3>
+                            <h3>@applicant.User.PhoneNumber</h3>*@
+                        
+                    </div>
+
+                </div>
             }
-            
-            @* {% if is_paginated %} *@
-            @* <div class="row"> *@
-            @*     <div class="col-md-12"> *@
-            @*         <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4 mb-4"> *@
-            @*             <ul class="pagination"> *@
-            @*                 {% if page_obj.has_previous %} *@
-            @*                 <li class="page-item"> *@
-            @*                     <a href="?page={{ page_obj.previous_page_number }}" *@
-            @*                        class="page-link"> *@
-            @*                         &laquo; *@
-            @*                     </a> *@
-            @*                 </li> *@
-            @*                 {% else %} *@
-            @*                 <li class="page-item disabled"> *@
-            @*                     <a class="page-link">&laquo;</a> *@
-            @*                 </li> *@
-            @*                 {% endif %} *@
-            @*                 {% for i in page_obj.paginator.page_range %} *@
-            @*                 {% if page_obj.number == i %} *@
-            @*                 <li class="page-item active"> *@
-            @*                     <a class="page-link">{{ i }}</a> *@
-            @*                 </li> *@
-            @*                 {% else %} *@
-            @*                 <li class="page-item"> *@
-            @*                     <a href="?page={{ i }}" class="page-link">{{ i }}</a> *@
-            @*                 </li> *@
-            @*                 {% endif %} *@
-            @*                 {% endfor %} *@
-            @*                 {% if page_obj.has_next %} *@
-            @*                 <li class="page-item"> *@
-            @*                     <a href="?page={{ page_obj.next_page_number }}" *@
-            @*                        class="page-link"> *@
-            @*                         &raquo; *@
-            @*                     </a> *@
-            @*                 </li> *@
-            @*                 {% else %} *@
-            @*                 <li class="page-item disabled"> *@
-            @*                     <a class="page-link">&raquo;</a> *@
-            @*                 </li> *@
-            @*                 {% endif %} *@
-            @*             </ul> *@
-            @*         </nav> *@
-            @*     </div> *@
-            @* </div> *@
-            @* {% else %} *@
-            @* <h3>You are end</h3> *@
-            @* {% endif %} *@
+        }
+
         </div>
-    </div>
 </section>

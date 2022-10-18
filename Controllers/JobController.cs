@@ -68,32 +68,6 @@ namespace JobPortal.Controllers
             return View("Create", model);
         }
 
-        
-        //[HttpPost]
-        //public IActionResult Upload(JobDetailsViewModel model)
-        //{
-        //    // do other validations on your model as needed
-        //    if (model.MyPdf != null)
-        //    {
-        //        var uniqueFileName = GetUniqueFileName(model.MyPdf.FileName);
-        //        var uploads = Path.Combine(hostingEnvironment.WebRootPath, "uploads");
-        //        var filePath = Path.Combine(uploads, uniqueFileName);
-        //        model.MyPdf.CopyTo(new FileStream(filePath, FileMode.Create));
-
-        //        //to do : Save uniqueFileName  to your db table   
-        //    }
-        //    // to do  : Return something
-        //    return new EmptyResult();
-        //}
-        //private string GetUniqueFileName(string fileName)
-        //{
-        //    fileName = Path.GetFileName(fileName);
-        //    return Path.GetFileNameWithoutExtension(fileName)
-        //              + "_"
-        //              + Guid.NewGuid().ToString().Substring(0, 4)
-        //              + Path.GetExtension(fileName);
-        //}
-
         [HttpPost]
         //[Authorize(Roles = "Employee")]
         public async Task<IActionResult> Apply(int id, IFormFile upload,
@@ -209,7 +183,7 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Authorize(Roles = "Employer")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Category,Location,Type,CompanyName,CompanyDescription,Website")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Category,Location,Type,CompanyName,CompanyDescription,Website,Salary")] Job job)
         {
             if (id != job.Id)
             {

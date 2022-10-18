@@ -42,6 +42,11 @@
                 @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(c => c.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control"})
+            </div>
+
             <div>
                 <div> <label asp-for="Photo"></label></div>
                 <div>

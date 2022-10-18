@@ -42,6 +42,7 @@ html {
 }
 
 body {
+    width:100%;
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }

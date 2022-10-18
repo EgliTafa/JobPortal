@@ -26,6 +26,10 @@ namespace JobPortal.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
+        [Required, MaxLength(60), Display(Name = "Phone Number", Prompt = "Phone Number")]
+        [Phone]
+        public string PhoneNumber { get; set; }
+
         [Display(Name ="Profile Picture")]
         public IFormFile? Photo { get; set; }
 

@@ -15,6 +15,9 @@ namespace JobPortal.Models
         [Required, Display(Name = "Job Category", Prompt = "Job Category")]
         public string Category { get; set; }
 
+        [Required, Display(Name = "Salary", Prompt = "Salary")]
+        public string Salary { get; set; }
+
         [Required, Display(Name = "Location", Prompt = "Location")]
         public string Location { get; set; }
         [Required(ErrorMessage = "Type is required"), Display(Name = "Type", Prompt = "Type")]
@@ -25,6 +28,7 @@ namespace JobPortal.Models
         public string CompanyName { get; set; }
         [Required, Display(Name = "Company Description", Prompt = "Company Description")]
         public string CompanyDescription { get; set; }
+
         [Display(Name = "Website", Prompt = "Website")]
         [Url]
         public string Website { get; set; }
