@@ -55,18 +55,8 @@
                         {
                             <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
                                 @Html.AntiForgeryToken()
-
-                                @*<div class="input-group mb-3" style="width:50%;">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Upload Your CV</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" name="upload" class="custom-file-input form-control" >
-                                        <label class="custom-file-label" for="inputGroupFile01"></label>
-                                    </div>
-                                </div>*@
-                                <h4>Upload Your CV</h4>
-                                <input type="file" name="upload" class="form-control" />
+                                <h4>Upload Your CV(as PDF)</h4>
+                                <input type="file" name="upload" accept="application/pdf" class="form-control" />
                                 <input type="hidden" name="job" value="{{ job.id }}">
                                 <br />
                                 <input style="width:50%; margin:0 auto" type="submit" class="btn btn-outline-white-primary"
@@ -81,17 +71,19 @@
             <div class="col-lg-3">
                 <h4>About @Model.Job.CompanyName</h4>
                 <p class="job-detail__company-description">@Model.Job.CompanyDescription</p>
-                <p class="job-detail__social social social--outline">
-                    <a href="@Model.Job.Website" data-toggle="tooltip" data-placement="top" title="Website"
-                       class="link">
-                        <i class="fa fa-link"></i>
+                <p class="job-detail__social social ">
+                    Website:<a href="@Model.Job.Website" data-toggle="tooltip" data-placement="top" title="Website"
+                               class="link">
+                        @*<i class="fa fa-link"></i>*@
+
+                        @Model.Job.Website
                     </a>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter" class="twitter">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook" class="facebook">
-                        <i class="fa fa-facebook"></i>
-                    </a>
+                    @*<a href="#" data-toggle="tooltip" data-placement="top" title="Twitter" class="twitter">
+            <i class="fa fa-twitter"></i>
+        </a>
+        <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook" class="facebook">
+            <i class="fa fa-facebook"></i>
+        </a>*@
                 </p>
                 <div class="job-detail__apply-top">
                     @if (SignInManager.IsSignedIn(User))

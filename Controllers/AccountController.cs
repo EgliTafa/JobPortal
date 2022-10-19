@@ -49,7 +49,7 @@ namespace JobPortal.Controllers
             EmployerRegisterViewModel model)
         {
             //Profile Picture
-            if (upload != null && upload.Length > 0)
+            if (upload != null && upload.Length > 0 && upload.ContentType.Contains("image"))
             {
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
@@ -80,24 +80,27 @@ namespace JobPortal.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 //IdentityResult roleResult = await _roleManager.CreateAsync(new IdentityRole("Employee"));
 
-                if (!_context.Users.Any(u => u.Email == user.Email) && result.Succeeded)
+                if (_context.Users.Any(u => u.Email == user.Email))
                 {
-                    bool checkRole = await _roleManager.RoleExistsAsync("Employer");
-                    if (!checkRole)
+                    if (result.Succeeded)
                     {
-                        var role = new IdentityRole();
-                        role.Name = "Employer";
-                        await _roleManager.CreateAsync(role);
+                        bool checkRole = await _roleManager.RoleExistsAsync("Employer");
+                        if (!checkRole)
+                        {
+                            var role = new IdentityRole();
+                            role.Name = "Employer";
+                            await _roleManager.CreateAsync(role);
 
-                        await _userManager.AddToRoleAsync(user, "Employer");
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(user, "Employer");
-                    }
+                            await _userManager.AddToRoleAsync(user, "Employer");
+                        }
+                        else
+                        {
+                            await _userManager.AddToRoleAsync(user, "Employer");
+                        }
 
-                    //await _signManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                        //await _signManager.SignInAsync(user, false);
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
@@ -252,7 +255,7 @@ namespace JobPortal.Controllers
         [Route("employee/update-profile")]
         public async Task<IActionResult> UpdateProfile(IFormFile upload,[FromForm] User model)
         {
-            if (upload != null && upload.Length > 0)
+            if (upload != null && upload.Length > 0 && upload.ContentType.Contains("image"))
             {
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);

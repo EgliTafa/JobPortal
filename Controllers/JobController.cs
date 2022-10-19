@@ -34,6 +34,7 @@ namespace JobPortal.Controllers
         [Route("jobs")]
         public IActionResult Index()
         {
+
             var jobs = _context.Jobs.ToList();
 
             return View(jobs);
@@ -49,7 +50,8 @@ namespace JobPortal.Controllers
         [Route("jobs/save")]
         [Authorize(Roles = "Employer")]
         [HttpPost]
-        public async Task<IActionResult> Save(Job model)
+        public async Task<IActionResult> Save([Bind("User", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate")]
+                                                Job model)
         {
             if(ModelState.IsValid)
             {
@@ -183,7 +185,7 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Authorize(Roles = "Employer")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Category,Location,Type,CompanyName,CompanyDescription,Website,Salary")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate")] Job job)
         {
             if (id != job.Id)
             {
