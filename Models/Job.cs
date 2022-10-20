@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -36,5 +37,13 @@ namespace JobPortal.Models
         public bool Filled { get; set; } = false;
         public User User { get; set; }
         public List<Applicant> Applicants { get; set; }
+
+        //page number variable
+        [BindProperty(SupportsGet = true)]
+        public int P { get; set; } = 1;
+
+        //page size variable
+        [BindProperty(SupportsGet = true)]
+        public int S { get; set; } = 5;
     }
 }

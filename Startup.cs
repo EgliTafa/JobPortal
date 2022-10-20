@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Net;
+using System.Net.Mail;
 
 namespace JobPortal
 {
@@ -47,6 +49,26 @@ namespace JobPortal
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddControllersWithViews();
+
+            //---Gmail
+            var from = Configuration.GetSection("Email")["From"];
+
+            var gmailSender = Configuration.GetSection("Gmail")["Sender"];
+            var gmailPassword = Configuration.GetSection("Gmail")["Password"];
+            var gmailPort = Convert.ToInt32(Configuration.GetSection("Gmail")["Port"]);
+
+            services
+                .AddFluentEmail(gmailSender, from)
+                .AddRazorRenderer()
+                .AddSmtpSender(new SmtpClient("smtp.gmail.com")
+                {
+                    UseDefaultCredentials = false,
+                    Port = gmailPort,
+                    Credentials = new NetworkCredential(gmailSender, gmailPassword),
+                    EnableSsl = true,
+                });
 
             //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             //    .AddCookie(options =>

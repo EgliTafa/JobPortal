@@ -13,6 +13,7 @@ using JobPortal.ViewModels.Home;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using FluentEmail.Core;
 
 namespace JobPortal.Controllers
 {
@@ -34,6 +35,7 @@ namespace JobPortal.Controllers
         [Route("jobs")]
         public IActionResult Index()
         {
+
 
             var jobs = _context.Jobs.ToList();
 
@@ -74,8 +76,18 @@ namespace JobPortal.Controllers
         //[Authorize(Roles = "Employee")]
         public async Task<IActionResult> Apply(int id, IFormFile upload,
             [Bind("User", "Job", "CVPath", "CreatedAt")]
-             JobApplicantsViewModel model)
+             JobApplicantsViewModel model ,[FromServices] IFluentEmail mailer)
         {
+            //EMAIL FUNCTION
+            var email = mailer
+                .To("eglitafa88@gmail.com")
+                .Subject("Test email")
+                .Body("This is a single email. This is t test it and see.");
+
+    
+            await email.SendAsync();
+
+    
             var job = _context.Jobs.SingleOrDefault(x => x.Id == id);
             var user = await _userManager.GetUserAsync(HttpContext.User);
 

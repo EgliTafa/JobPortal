@@ -80,7 +80,7 @@ namespace JobPortal.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 //IdentityResult roleResult = await _roleManager.CreateAsync(new IdentityRole("Employee"));
 
-                if (_context.Users.Any(u => u.Email == user.Email))
+                if (!_context.Users.Any(u => u.Email == user.Email))
                 {
                     if (result.Succeeded)
                     {

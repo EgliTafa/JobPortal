@@ -22,20 +22,40 @@ namespace JobPortal.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        
+        public async Task<IActionResult> Index(int p, int s, int TotalRecords)
         {
-            var jobs = _context.Jobs
-                .Where(x => x.Filled == false)
-                .ToList();
+            TotalRecords = 0;
+            p = 1;
+            s = 5;
+
             var trendings = _context.Jobs
                 .Where(b => b.CreatedAt.Month == DateTime.Now.Month)
                 .Where(x => x.Filled == false)
                 .ToList();
+
+           
+
+            var jobs = await _context.Jobs
+                .Where(x => x.Filled == false)
+                .AsNoTracking()
+                .OrderBy(x => x.Id)
+                .Skip((p - 1) * s)
+                .Take(s)
+                .ToListAsync();
+
             var model = new TrendingJobViewModel
             {
                 Trendings = trendings,
+                TotalRecords = TotalRecords,
+                P = p,
+                S = s,
                 Jobs = jobs
             };
+
+            model.TotalRecords = await _context.Jobs
+               .AsNoTracking()
+               .CountAsync();
 
             return View(model);
         }
@@ -86,32 +106,3 @@ namespace JobPortal.Controllers
         }
     }
 }
-
-
-
-
-//public IActionResult Search()
-//{
-//    List<Job> jobs;
-
-//    string position = HttpContext.Request.Query["position"].ToString();
-//    string location = HttpContext.Request.Query["location"].ToString();
-//    if (position.Length > 0 && location.Length > 0)
-//    {
-//        jobs = _context.Jobs.Where(x => x.Title.Contains(position))
-//            .ToList();
-//    }
-//    else if (location.Length == 0)
-//    {
-//        jobs = _context.Jobs.Where(x => x.Title.Contains(position))
-//            .ToList();
-//    }
-//    else
-//    {
-//        jobs = _context.Jobs.Where(x => x.Location.Contains(location))
-//            .ToList();
-//    }
-
-
-//    return View(jobs);
-//}
