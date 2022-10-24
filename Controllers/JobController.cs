@@ -52,7 +52,7 @@ namespace JobPortal.Controllers
         [Route("jobs/save")]
         [Authorize(Roles = "Employer")]
         [HttpPost]
-        public async Task<IActionResult> Save([Bind("User", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate")]
+        public async Task<IActionResult> Save([Bind("User","Title","Description","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl")]
                                                 Job model)
         {
             if(ModelState.IsValid)
@@ -62,6 +62,7 @@ namespace JobPortal.Controllers
                 //_logger.LogInformation(model.ToString());
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 model.User = user;
+                model.posterUrl = user.ImagePath;
                 _context.Jobs.Add(model);
 
                 await _context.SaveChangesAsync();
@@ -229,21 +230,3 @@ namespace JobPortal.Controllers
 
     }
 }
-
-
-//public async Task<IActionResult> Destroy(int id)
-//{
-//    var job = _context.Jobs.SingleOrDefault(x => x.Id == id);
-//    if(job == null)
-//    {
-//        return NotFound();
-//    }
-
-//    _context.Jobs.Remove(job);
-//    await _context.SaveChangesAsync();
-
-//    TempData["type"] = "success";
-//    TempData["message"] = "Job deleted successfully";
-
-//    return RedirectToActionPermanent("Index", "Dashboard");
-//}

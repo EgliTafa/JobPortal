@@ -49,6 +49,7 @@ namespace JobPortal.Controllers
         public async Task<IActionResult> ApplicantsByJob(int id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
+
             var job = _context.Jobs
                 .Include(x => x.Applicants)
                     .ThenInclude(x => x.User)

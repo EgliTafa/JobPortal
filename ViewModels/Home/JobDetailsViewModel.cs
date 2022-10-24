@@ -12,5 +12,7 @@ namespace JobPortal.ViewModels.Home
         public Job Job { get; set; }
         public IFormFile MyPdf { set; get; }
         public bool IsApplied { get; set; }
+
+        public string PosterUrl { get; set; }
     }
 }

@@ -45,5 +45,7 @@ namespace JobPortal.Models
         //page size variable
         [BindProperty(SupportsGet = true)]
         public int S { get; set; } = 5;
+
+        public string posterUrl { get; set; }
     }
 }
