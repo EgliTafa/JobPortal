@@ -13,6 +13,7 @@ namespace JobPortal.Controllers
 {
     public class HomeController : Controller
     {
+        public IList<Job> JobList { get; set; }
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
 
@@ -22,27 +23,21 @@ namespace JobPortal.Controllers
             _userManager = userManager;
         }
 
-        
-        public async Task<IActionResult> Index(int p, int s, int TotalRecords)
+
+        public async Task<IActionResult> Index(int p = 1, int s = 5, int TotalRecords = 0)
         {
-            TotalRecords = 0;
-            p = 1;
-            s = 5;
+            TotalRecords = _context.Jobs.Count();
 
             var trendings = _context.Jobs
                 .Where(b => b.CreatedAt.Month == DateTime.Now.Month)
                 .Where(x => x.Filled == false)
                 .ToList();
 
-           
-
-            var jobs = await _context.Jobs
-                .Where(x => x.Filled == false)
-                .AsNoTracking()
-                .OrderBy(x => x.Id)
-                .Skip((p - 1) * s)
-                .Take(s)
-                .ToListAsync();
+            JobList = await _context.Jobs
+                        .OrderBy(x => x.Id)
+                        .Skip((p - 1) * s)
+                        .Take(s)
+                        .ToListAsync();
 
             var model = new TrendingJobViewModel
             {
@@ -50,12 +45,8 @@ namespace JobPortal.Controllers
                 TotalRecords = TotalRecords,
                 P = p,
                 S = s,
-                Jobs = jobs
+                JobList = JobList
             };
-
-            model.TotalRecords = await _context.Jobs
-               .AsNoTracking()
-               .CountAsync();
 
             return View(model);
         }
@@ -102,7 +93,7 @@ namespace JobPortal.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
