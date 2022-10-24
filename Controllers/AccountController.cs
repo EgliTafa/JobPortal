@@ -66,6 +66,13 @@ namespace JobPortal.Controllers
                 }
             }
 
+            var email = _context.Users.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+
+            if (email != null)
+            {
+                ModelState.AddModelError("Email", "Email Already Exist!");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new User
@@ -145,6 +152,13 @@ namespace JobPortal.Controllers
             }
 
             //model.User.ProfilePicture = photo.FileName;
+
+            var email = _context.Users.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+
+            if (email != null)
+            {
+                ModelState.AddModelError("Email", "Email Already Exist!");
+            }
 
             if (ModelState.IsValid && model != null)
             {
