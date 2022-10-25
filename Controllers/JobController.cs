@@ -121,6 +121,7 @@ namespace JobPortal.Controllers
             {
                 User = user,
                 Job = job,
+                //Email = user.Email,
                 CVPath = model.CVPath,
                 CreatedAt = DateTime.Now
             };
@@ -146,7 +147,7 @@ namespace JobPortal.Controllers
 
             var email = await Email
                 .From("mymicrowaveisdry@gmail.com")
-                .To("eglitafa008@gmail.com", "Egli")
+                .To(user.Email)
                 .Subject("Application Sent Succesfully!")
                 .UsingTemplate(template.ToString(), new { FirstName = apply.User.FirstName, Job = job.Title })
                 .SendAsync();
