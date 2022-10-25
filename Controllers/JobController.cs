@@ -14,6 +14,11 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using FluentEmail.Core;
+using FluentEmail.Smtp;
+using System.Net.Mail;
+using System.Text;
+using FluentEmail.Razor;
+using System.Net;
 
 namespace JobPortal.Controllers
 {
@@ -52,7 +57,7 @@ namespace JobPortal.Controllers
         [Route("jobs/save")]
         [Authorize(Roles = "Employer")]
         [HttpPost]
-        public async Task<IActionResult> Save([Bind("User","Title","Description","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl")]
+        public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl")]
                                                 Job model)
         {
             if(ModelState.IsValid)
@@ -79,16 +84,7 @@ namespace JobPortal.Controllers
             [Bind("User", "Job", "CVPath", "CreatedAt")]
              JobApplicantsViewModel model ,[FromServices] IFluentEmail mailer)
         {
-            //EMAIL FUNCTION
-            var email = mailer
-                .To("eglitafa88@gmail.com")
-                .Subject("Test email")
-                .Body("This is a single email. This is t test it and see.");
 
-    
-            await email.SendAsync();
-
-    
             var job = _context.Jobs.SingleOrDefault(x => x.Id == id);
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
@@ -115,7 +111,7 @@ namespace JobPortal.Controllers
             }
             else
             {
-                if(!User.IsInRole("Employee"))
+                if (!User.IsInRole("Employee"))
                 {
                     TempData["message"] = "You can't do this action";
                     return RedirectToActionPermanent("JobDetails", "Home", new { id });
@@ -128,6 +124,32 @@ namespace JobPortal.Controllers
                 CVPath = model.CVPath,
                 CreatedAt = DateTime.Now
             };
+
+            //EMAIL FUNCTION
+            var sender = new SmtpSender(() => new SmtpClient("smtp.gmail.com")
+            {
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Port = 587,
+                Credentials = new NetworkCredential("mymicrowaveisdry@gmail.com", "")
+                //DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
+                //PickupDirectoryLocation = @"C:\emails"
+            });
+
+            Email.DefaultSender = sender;
+            Email.DefaultRenderer = new RazorRenderer();
+
+            StringBuilder template = new StringBuilder();
+            template.AppendLine("Dear @Model.FirstName,");
+            template.AppendLine("<p>Thank you for your @Model.Job application. You'll be notified once we finish reviewing CV.</p>");
+            template.AppendLine("- ABC Bebitos");
+
+            var email = await Email
+                .From("mymicrowaveisdry@gmail.com")
+                .To("eglitafa008@gmail.com", "Egli")
+                .Subject("Application Sent Succesfully!")
+                .UsingTemplate(template.ToString(), new { FirstName = apply.User.FirstName, Job = job.Title })
+                .SendAsync();
 
             _context.Applicants.Add(apply);
 

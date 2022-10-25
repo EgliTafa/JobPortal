@@ -52,23 +52,10 @@ namespace JobPortal
 
             services.AddControllersWithViews();
 
-            //---Gmail
-            var from = Configuration.GetSection("Email")["From"];
-
-            var gmailSender = Configuration.GetSection("Gmail")["Sender"];
-            var gmailPassword = Configuration.GetSection("Gmail")["Password"];
-            var gmailPort = Convert.ToInt32(Configuration.GetSection("Gmail")["Port"]);
-
             services
-                .AddFluentEmail(gmailSender, from)
+                .AddFluentEmail("fromemail@test.test")
                 .AddRazorRenderer()
-                .AddSmtpSender(new SmtpClient("smtp.gmail.com")
-                {
-                    UseDefaultCredentials = false,
-                    Port = gmailPort,
-                    Credentials = new NetworkCredential(gmailSender, gmailPassword),
-                    EnableSsl = true,
-                });
+                .AddSmtpSender("localhost", 25);
 
             //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             //    .AddCookie(options =>
