@@ -31,18 +31,22 @@
                             <div class="row align-items-center">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <label for="profession">Position</label>
+                                        @*<label for="profession">Search by Keyword</label>*@
                                         <input type="text" id="profession" name="SearchString"
-                                               placeholder="Position you are looking for" class="form-control">
+                                               placeholder="Search by Keyword" class="form-control">
                                     </div>
                                 </div>
-                                @*<div class="col-md-5">
+                                  <div class="col-md-5">
                                         <div class="form-group">
-                                            <label for="location">Location</label>
-                                            <input type="text" id="location" name="location"
-                                                   placeholder="Any particular location?" class="form-control">
+                                            <select class="form-control" id="location">
+                                                <option value="" disabled selected>Select By Category</option>
+                                                @foreach (var category in Model.JobList)
+                                                {
+                                                    <option>@category.Category</option>
+                                                }
+                                            </select>
                                         </div>
-                                    </div>*@
+                                    </div>
                                 <div class="col-md-2">
                                     <button type="submit"
                                             class="btn btn-outline-white-primary job-main-form__button">
