@@ -238,7 +238,7 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Authorize(Roles = "Employer")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl")] Job job)
         {
             if (id != job.Id)
             {
@@ -247,9 +247,12 @@ namespace JobPortal.Controllers
 
             if (ModelState.IsValid)
             {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
                 try
                 {
+                    job.posterUrl = user.ImagePath;
                     _context.Update(job);
+                    _context.Entry(job).Property(x => x.PosterImageURl).IsModified = false;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

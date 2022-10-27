@@ -36,18 +36,20 @@
                                                placeholder="Search by Keyword" class="form-control">
                                     </div>
                                 </div>
-                                  <div class="col-md-5">
+                                  @*<div class="col-md-5">
                                         <div class="form-group">
                                             <select class="form-control" id="location">
                                                 <option value="" disabled selected>Select By Category</option>
-                                                @foreach (var category in Model.JobList)
-                                                {
-                                                    <option>@category.Category</option>
-                                                }
+                                                <option value="web-design">Web design</option>
+                                                <option value="graphic-design">Graphic design</option>
+                                                <option value="web-development">Web development</option>
+                                                <option value="human-resource">Human Resources</option>
+                                                <option value="support">Support</option>
+                                                <option value="android">Android</option>
                                             </select>
                                         </div>
-                                    </div>
-                                <div class="col-md-2">
+                                    </div>*@
+                                <div class="col-md-2" style="margin-bottom:30px">
                                     <button type="submit"
                                             class="btn btn-outline-white-primary job-main-form__button">
                                         <i class="fa fa-search"></i>
@@ -82,7 +84,9 @@
                         <a href="#">
                             <div class="bg"></div>
                             <div class="logo">
-                                <img src="@job.PosterImageURl" alt="" style="max-width: 200px;">
+                                <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
+                                    <img src="@job.PosterImageURl" alt="" style="max-width: 200px;">
+                                </a>
                             </div>
                         </a>
                     </div>

@@ -32,12 +32,20 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Description" class="control-label"></label>
-                            <input asp-for="Description" class="form-control" />
+                            <textarea class="form-control" asp-for="Description" placeholder="Enter Your Description"></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Category" class="control-label"></label>
-                            <input asp-for="Category" class="form-control" />
+                            <select asp-for="Category" id="category" name="category" placeholder="Choose category"
+                                    class="form-control">
+                                <option value="web-design">Web design</option>
+                                <option value="graphic-design">Graphic design</option>
+                                <option value="web-development">Web development</option>
+                                <option value="human-resource">Human Resources</option>
+                                <option value="support">Support</option>
+                                <option value="android">Android</option>
+                            </select>
                             <span asp-validation-for="Category" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -78,7 +86,7 @@
                             <input asp-for="Website" class="form-control" />
                             <span asp-validation-for="Website" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="display:none;">
                             <label asp-for="CreatedAt" class="control-label"></label>
                             <input asp-for="CreatedAt" class="form-control" />
                             <span asp-validation-for="CreatedAt" class="text-danger"></span>
