@@ -57,10 +57,27 @@ namespace JobPortal.Controllers
         [Route("jobs/save")]
         [Authorize(Roles = "Employer")]
         [HttpPost]
-        public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl")]
-                                                Job model)
+        public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl")]
+                                                Job model, IFormFile upload)
         {
-            if(ModelState.IsValid)
+            if (upload != null && upload.Length > 0)
+            {
+                var fileName = Path.GetFileName(upload.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+
+                var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
+
+                model.PosterImageURl = updatedFilePath;
+                //_context.Users.Add(model);
+                //_context.SaveChanges();
+
+                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await upload.CopyToAsync(fileSrteam);
+                }
+            }
+
+            if (ModelState.IsValid)
             {
                 TempData["type"] = "success";
                 TempData["message"] = "Job posted successfully";
@@ -69,7 +86,7 @@ namespace JobPortal.Controllers
                 model.User = user;
                 model.posterUrl = user.ImagePath;
                 _context.Jobs.Add(model);
-
+                
                 await _context.SaveChangesAsync();
 
                 return RedirectToActionPermanent("Index", "Home");
@@ -132,7 +149,7 @@ namespace JobPortal.Controllers
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 Port = 587,
-                Credentials = new NetworkCredential("mymicrowaveisdry@gmail.com", "")
+                Credentials = new NetworkCredential("mymicrowaveisdry@gmail.com", "lzuscmmoiwejyvvt")
                 //DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
                 //PickupDirectoryLocation = @"C:\emails"
             });

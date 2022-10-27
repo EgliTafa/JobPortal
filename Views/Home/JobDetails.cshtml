@@ -10,11 +10,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <section class="bg-light-gray">
     <div class="container">
         <h1 class="heading">
             @Model.Job.Title<br>
-            <small>at <a href="#"> @Model.Job.CompanyName</a></small>
+            <small>at <a href=""> @Model.Job.CompanyName</a></small>
         </h1>
         <div class="job-detail-description">
             <i class="fa fa-map-marker job__location"> </i>
@@ -34,13 +36,18 @@
         </div>
     </div>
 </section>
+
+
 <section>
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                <img src="@Model.Job.PosterImageURl"/>
                 <h3>Category: @Model.Job.Category</h3>
-                <h5>Last date: @Model.Job.LastDate.Date</h5>
+                <h5>Last date: @Model.Job.LastDate.Date.ToShortDateString()</h5>
                 <h5 class="text-info">Salary: @Model.Job.Salary LEK</h5>
+                <h5>Eduaction:</h5>
+                <h5 class="text-info">Preferred Age:</h5>
                 <blockquote class="blockquote">
                     <p>@Model.Job.Description</p>
                 </blockquote>
@@ -72,21 +79,13 @@
                 <h4>About @Model.Job.CompanyName</h4>
                 <p class="job-detail__company-description">@Model.Job.CompanyDescription</p>
 
-                <img src="@Model.Job.posterUrl" width="60" height="60" alt="Company Picture"/>
+                <img src="@Model.Job.posterUrl" width="60" height="60" alt="Company Picture" />
 
                 <p class="job-detail__social social ">
                     Website:<a href="@Model.Job.Website" data-toggle="tooltip" data-placement="top" title="Website"
                                class="link">
-                        @*<i class="fa fa-link"></i>*@
-
                         @Model.Job.Website
                     </a>
-                    @*<a href="#" data-toggle="tooltip" data-placement="top" title="Twitter" class="twitter">
-            <i class="fa fa-twitter"></i>
-        </a>
-        <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook" class="facebook">
-            <i class="fa fa-facebook"></i>
-        </a>*@
                 </p>
                 <div class="job-detail__apply-top">
                     @if (SignInManager.IsSignedIn(User))

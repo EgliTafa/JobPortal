@@ -47,5 +47,6 @@ namespace JobPortal.Models
         public int S { get; set; } = 5;
 
         public string posterUrl { get; set; }
+        public string PosterImageURl { get; set; }
     }
 }

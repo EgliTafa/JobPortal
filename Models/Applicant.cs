@@ -13,6 +13,7 @@ namespace JobPortal.Models
         public User User { get; set; }
         public Job Job { get; set; }
         //public string Email { get; set; }
+        [Required]
         public string CVPath { get; set; }
 
         public string ProfilePicture { get; set; }
