@@ -18,11 +18,19 @@
                         <input type="text" id="profession" name="SearchString"
                                placeholder="Position you are looking for" class="form-control">
                     </div>
-                    @*<div class="col-sm-5 col-lg-4 form-group">
-                            <label for="location">Location</label>
-                            <input type="text" id="location" name="location" placeholder="Any particular location?"
-                                   value="@Context.Request.Query["location"].ToString()" class="form-control">
-                        </div>*@
+                    @*<div class="col-md-5">
+                        <div class="form-group">
+                            <select class="form-control" id="location">
+                                <option value="" disabled selected>Select By Category</option>
+                                <option value="web-design">Web design</option>
+                                <option value="graphic-design">Graphic design</option>
+                                <option value="web-development">Web development</option>
+                                <option value="human-resource">Human Resources</option>
+                                <option value="support">Support</option>
+                                <option value="android">Android</option>
+                            </select>
+                        </div>
+                    </div>*@
                     <div class="col-sm-1 col-lg-2 form-group">
                         <button type="submit" class="btn btn-outline-white-primary job-main-form__button">
                             <i class="fa fa-search"></i>

@@ -73,6 +73,10 @@ namespace JobPortal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Education")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("Filled")
                         .HasColumnType("tinyint(1)");
 
@@ -87,6 +91,10 @@ namespace JobPortal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PosterImageURl")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PreferredAge")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("S")

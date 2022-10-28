@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221027084027_PosterImageUrl")]
-    partial class PosterImageUrl
+    [Migration("20221028083323_Add Preferred Age and Education")]
+    partial class AddPreferredAgeandEducation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,6 +75,10 @@ namespace JobPortal.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Education")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("Filled")
                         .HasColumnType("tinyint(1)");
 
@@ -89,6 +93,10 @@ namespace JobPortal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PosterImageURl")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PreferredAge")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("S")

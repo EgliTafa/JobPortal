@@ -49,7 +49,7 @@
                 <h5>Eduaction:</h5>
                 <h5 class="text-info">Preferred Age:</h5>
                 <blockquote class="blockquote">
-                    <p>@Model.Job.Description</p>
+                    <p style=" white-space: pre-line;">@Model.Job.Description</p>
                 </blockquote>
                 <div class="job-detail__apply-bottom">
                     @if (SignInManager.IsSignedIn(User))
@@ -77,7 +77,7 @@
             <div class="col-lg-1"></div>
             <div class="col-lg-3">
                 <h4>About @Model.Job.CompanyName</h4>
-                <p class="job-detail__company-description">@Model.Job.CompanyDescription</p>
+                <p class="job-detail__company-description" style="white-space:pre-line;">@Model.Job.CompanyDescription</p>
 
                 <img src="@Model.Job.posterUrl" width="60" height="60" alt="Company Picture" />
 

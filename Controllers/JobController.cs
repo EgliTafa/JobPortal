@@ -57,7 +57,7 @@ namespace JobPortal.Controllers
         [Route("jobs/save")]
         [Authorize(Roles = "Employer")]
         [HttpPost]
-        public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl")]
+        public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl","PreferredAge","Education")]
                                                 Job model, IFormFile upload)
         {
             if (upload != null && upload.Length > 0)
@@ -238,7 +238,7 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Authorize(Roles = "Employer")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl", "PreferredAge", "Education")] Job job)
         {
             if (id != job.Id)
             {

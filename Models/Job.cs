@@ -30,6 +30,12 @@ namespace JobPortal.Models
         [Required, Display(Name = "Company Description", Prompt = "Company Description")]
         public string CompanyDescription { get; set; }
 
+        [Required, Display(Name = "Education", Prompt = "Education")]
+        public string Education { get; set; }
+
+        [Required, Display(Name = "Preferred Age", Prompt = "Preferred Age")]
+        public string PreferredAge { get; set; }
+
         [Display(Name = "Website", Prompt = "Website")]
         [Url]
         public string Website { get; set; }
