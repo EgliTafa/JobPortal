@@ -46,8 +46,8 @@
                 <h3>Category: @Model.Job.Category</h3>
                 <h5>Last date: @Model.Job.LastDate.Date.ToShortDateString()</h5>
                 <h5 class="text-info">Salary: @Model.Job.Salary LEK</h5>
-                <h5>Eduaction:</h5>
-                <h5 class="text-info">Preferred Age:</h5>
+                <h5>Eduaction: @Model.Job.Education</h5>
+                <h5 class="text-info">Preferred Age: @Model.Job.PreferredAge Years Old</h5>
                 <blockquote class="blockquote">
                     <p style=" white-space: pre-line;">@Model.Job.Description</p>
                 </blockquote>
@@ -63,7 +63,7 @@
                             <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
                                 @Html.AntiForgeryToken()
                                 <h4>Upload Your CV(as PDF)</h4>
-                                <input type="file" name="upload" accept="application/pdf" class="form-control" />
+                                <input required type="file" name="upload" accept="application/pdf" class="form-control" />
                                 <input type="hidden" name="job" value="{{ job.id }}">
                                 <br />
                                 <input style="width:50%; margin:0 auto" type="submit" class="btn btn-outline-white-primary"

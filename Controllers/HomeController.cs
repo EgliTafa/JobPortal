@@ -24,9 +24,10 @@ namespace JobPortal.Controllers
         }
 
 
-        public async Task<IActionResult> Index(int p = 1, int s = 5, int TotalRecords = 0)
+        public async Task<IActionResult> Index(int p = 1, int s = 5, int TotalRecords = 0, int count = 0)
         {
             TotalRecords = _context.Jobs.Count();
+
 
             var trendings = _context.Jobs
                 .Where(b => b.CreatedAt.Month == DateTime.Now.Month)
