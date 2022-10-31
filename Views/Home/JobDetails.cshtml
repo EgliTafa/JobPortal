@@ -77,10 +77,8 @@
             <div class="col-lg-1"></div>
             <div class="col-lg-3">
                 <h4>About @Model.Job.CompanyName</h4>
+                <img src="@Model.Job.posterUrl" style="float:right;" width="60" height="60" alt="Company Picture" />
                 <p class="job-detail__company-description" style="white-space:pre-line;">@Model.Job.CompanyDescription</p>
-
-                <img src="@Model.Job.posterUrl" width="60" height="60" alt="Company Picture" />
-
                 <p class="job-detail__social social ">
                     Website:<a href="@Model.Job.Website" data-toggle="tooltip" data-placement="top" title="Website"
                                class="link">
