@@ -35,7 +35,7 @@ namespace JobPortal.Controllers
                 .ToList();
 
             JobList = await _context.Jobs
-                        .OrderBy(x => x.Id)
+                        .OrderByDescending(x => x.ViewCount)
                         .Skip((p - 1) * s)
                         .Take(s)
                         .ToListAsync();
@@ -53,10 +53,14 @@ namespace JobPortal.Controllers
         }
 
         [Route("jobs/{id}/details")]
-        public async Task<IActionResult> JobDetails(int id)
+        public async Task<IActionResult> JobDetails(int id, int count = 0)
         {
             //ViewBag.message = "You can't do this action";
             var job = _context.Jobs.FirstOrDefault(x => x.Id == id);
+            count++;
+            job.ViewCount = job.ViewCount + count;
+             _context.Update(job);
+            await _context.SaveChangesAsync();
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var applied = false;
             if (user != null)
