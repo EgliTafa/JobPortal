@@ -87,6 +87,11 @@ namespace JobPortal.Controllers
                 job = job.Where(s => s.Title!.Contains(searchString));
             }
 
+            else if (!String.IsNullOrEmpty(searchString))
+            {
+                job = job.Where(s => s.Category!.Contains(searchString));
+            }
+
             return View(await job.ToListAsync());
         }
 

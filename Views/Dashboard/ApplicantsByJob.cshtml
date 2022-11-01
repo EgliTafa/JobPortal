@@ -1,4 +1,4 @@
-﻿@using Humanizer
+﻿ @using Humanizer
  @model JobPortal.ViewModels.JobApplicantsViewModel 
 @{ ViewBag.Title = "title"; Layout = "_Layout"; } 
 
@@ -22,7 +22,9 @@
 
                         
                             <div class="col">
-                                <div class="box applicant">
+                                <h3 style="text-align:center;">Applicant CV</h3>
+                                <br />
+                                <div class="box applicant"> 
                                     <h4 style="display:flex; justify-content:center;">@applicant.User.UserName CV</h4>
                                     @*<a href="#" data-toggle="modal" data-target="#contact-modal" class="btn btn-outline-white-secondary btn-sm">
                                         <i class="fa fa-envelope"></i>Contact
@@ -30,7 +32,7 @@
                                     <p>
                                         <span class="badge badge-info">Applied @applicant.CreatedAt.Humanize()</span>
                                     </p>
-                                    <iframe style="width:100%; height:700px" id="iframepdf" src="@applicant.CVPath"></iframe>
+                                    <iframe style="width:100%; height:500px" id="iframepdf" src="@applicant.CVPath"></iframe>
                                     <div class="d-flex justify-content-between">
                                         <p class="intro"></p> @* <div class="image">
                                           <img src="~/img/avatar.png" alt="" class="img-fluid rounded-circle">
@@ -43,16 +45,17 @@
                     </div>
 
                     <div class="col">
-                        <h1>CONTACT INFORMATION</h1>
+                        <h3>Applicant Information</h3>
                         <br />
                         
-                            <div class="card" style="width: 18rem; display:flex; justify-content:center;">
-                                <ul class="list-group list-group-flush" style="display:flex; justify-content:center;">
-                                    <li class="list-group-item">Name: @applicant.User.FirstName @applicant.User.LastName</li>
-                                    <li class="list-group-item">E-Mail: @applicant.User.Email</li>
-                                    <li class="list-group-item">Phone Number: @applicant.User.PhoneNumber</li>
-                                </ul>
-                            </div>
+                        <div class="col">
+                            <img src="@applicant.User.ImagePath" style="float:right;" width="60" height="60" alt="Applicant Picture" />
+                            <h4 class="text-info">Name: @applicant.User.FirstName @applicant.User.LastName</h4>
+                            <br />
+                            <h5>E-Mail: @applicant.User.Email</h5>
+                            <br />
+                            <h5 class="text-info">Phone Number: @applicant.User.PhoneNumber LEK</h5>
+                        </div>
                             @*<h4>@applicant.User.FirstName @applicant.User.LastName</h4>
                             <h3>@applicant.User.Email</h3>
                             <h3>@applicant.User.PhoneNumber</h3>*@

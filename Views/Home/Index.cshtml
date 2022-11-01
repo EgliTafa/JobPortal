@@ -38,7 +38,7 @@
                                 </div>
                                   @*<div class="col-md-5">
                                         <div class="form-group">
-                                            <select class="form-control" id="location">
+                                            <select name="SearchString" class="form-control" id="location">
                                                 <option value="" disabled selected>Select By Category</option>
                                                 <option value="web-design">Web design</option>
                                                 <option value="graphic-design">Graphic design</option>
@@ -85,7 +85,7 @@
                             <div class="bg"></div>
                             <div class="logo">
                                 <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
-                                    <img src="@job.PosterImageURl" alt="" style="max-width: 200px;">
+                                    <img src="@job.PosterImageURl" alt="" style="max-width: 100px;">
                                 </a>
                             </div>
                         </a>
