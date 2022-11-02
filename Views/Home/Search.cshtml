@@ -14,7 +14,6 @@
                 <div class="row align-items-center">
                     <div class="col-md-5">
                         <div class="form-group">
-                            @*<label for="profession">Search by Keyword</label>*@
                             <input type="text" id="profession" name="SearchString"
                                    placeholder="Search by Keyword" class="form-control">
                         </div>
@@ -81,38 +80,3 @@
         }
     </div>
 </section>
-
-
-
-@*@foreach (var job in Model)
-    {
-        <div class="job-listing  ">
-            <div class="row">
-                <div class="col-md-12 col-lg-6">
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="~/img/company-1.png"
-                                 alt="Ipsioou " class="img-fluid">
-                        </div>
-                        <div class="col-10">
-                            <h4 class="job__title">
-                                <a href="{%url 'jobs:jobs-detail' job.id %}">
-                                    @job.Title
-                                </a>
-                            </h4>
-                            <p class="job__company">
-                                @job.CompanyName
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-10 col-md-3 col-lg-2 ml-auto">
-                    <i class="fa fa-map-marker job__location"></i>
-                    @job.Location
-                </div>
-                <div class="col-10 col-md-3 col-lg-3 ml-auto">
-                    <p>Posted @job.CreatedAt.Humanize()</p>
-                </div>
-            </div>
-        </div>
-    }*@
