@@ -54,6 +54,8 @@ namespace JobPortal.Models
 
         public string posterUrl { get; set; }
         public string PosterImageURl { get; set; }
+        [Required, Display(Name = "Company Phone Number", Prompt = "Company Phone Number")]
+        public string CompanyPhoneNumber { get; set; }
         public int ViewCount { get; set; }
     }
 }

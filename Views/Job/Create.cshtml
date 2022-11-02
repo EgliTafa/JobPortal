@@ -46,7 +46,7 @@
                             @Html.LabelFor(c => c.Title)
                             @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
                             <span class="help-inline">@Html.ValidationMessageFor(x => x.Title)</span>
-                        </div>                       
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 form-group @Html.AddClassIfPropertyInError(x => x.PreferredAge, "is-invalid")">
@@ -115,6 +115,13 @@
                             </div>
                         </div>
                     </div>
+                    @*<div class="row">
+                        <div class="col-lg-12 form-group">
+                            @Html.LabelFor(c => c.Salary)
+                            @Html.TextBoxFor(m => m.Salary, new { @class = "form-control", type = "number" })
+                            <span class="help-inline">@Html.ValidationMessageFor(x => x.Salary)</span>
+                        </div>
+                    </div>*@
                     <div class="row">
                         <div class="col-xl-6 form-group">
                             <label asp-for="Website" class="control-label">Company Website(optional)</label>

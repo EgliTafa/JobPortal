@@ -57,13 +57,13 @@ namespace JobPortal.Controllers
         [Route("jobs/save")]
         [Authorize(Roles = "Employer")]
         [HttpPost]
-        public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl","PreferredAge","Education")]
+        public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl","PreferredAge","Education","CompanyPhoneNumber")]
                                                 Job model, IFormFile upload)
         {
             if (upload != null && upload.Length > 0)
             {
                 var fileName = Path.GetFileName(upload.FileName);
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
 
                 var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
 
@@ -85,6 +85,7 @@ namespace JobPortal.Controllers
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 model.User = user;
                 model.posterUrl = user.ImagePath;
+                model.CompanyPhoneNumber = user.PhoneNumber;
                 _context.Jobs.Add(model);
                 
                 await _context.SaveChangesAsync();
@@ -159,7 +160,7 @@ namespace JobPortal.Controllers
 
             StringBuilder template = new StringBuilder();
             template.AppendLine("Dear @Model.FirstName,");
-            template.AppendLine("<p>Thank you for your @Model.Job application. You'll be notified once we finish reviewing CV.</p>");
+            template.AppendLine("<p>Your application for @Model.Job job post has been succesessfully sent. You'll be notified once we finish reviewing CV.</p>");
             template.AppendLine("- ABC Bebitos");
 
             var email = await Email
@@ -238,7 +239,7 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Authorize(Roles = "Employer")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl", "PreferredAge", "Education")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl", "PreferredAge", "Education","CompanyPhoneNumber")] Job job)
         {
             if (id != job.Id)
             {
@@ -251,6 +252,7 @@ namespace JobPortal.Controllers
                 try
                 {
                     job.posterUrl = user.ImagePath;
+                    job.CompanyPhoneNumber = user.PhoneNumber;
                     _context.Update(job);
                     _context.Entry(job).Property(x => x.PosterImageURl).IsModified = false;
                     await _context.SaveChangesAsync();

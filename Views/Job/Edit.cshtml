@@ -69,6 +69,11 @@
                                 <input type="file" asp-for="PosterImageURl" accept="image/png, image/gif, image/jpeg" class="form-control" />
                             </div>
                         </div>*@
+                        <div class="form-group">
+                            <label asp-for="CompanyPhoneNumber" class="control-label"></label>
+                            <input type="tel" asp-for="CompanyPhoneNumber" class="form-control" />
+                            <span asp-validation-for="CompanyPhoneNumber" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="col">
                         <div class="form-group">

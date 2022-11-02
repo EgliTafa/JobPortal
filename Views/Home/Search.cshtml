@@ -11,16 +11,17 @@
         <h4 class="heading">Find a <span class="accent">job </span> you will <span class="accent">love</span></h4>
         <form id="job-main-form" method="get" class="job-main-form">
             <div class="controls">
-                <div class="row align-items-end">
-                    <div class="col-sm-1 col-lg-2"></div>
-                    <div class="col-sm-5 col-lg-4 form-group">
-                        <label for="position">Position</label>
-                        <input type="text" id="profession" name="SearchString"
-                               placeholder="Position you are looking for" class="form-control">
-                    </div>
-                    @*<div class="col-md-5">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
                         <div class="form-group">
-                            <select class="form-control" id="location">
+                            @*<label for="profession">Search by Keyword</label>*@
+                            <input type="text" id="profession" name="SearchString"
+                                   placeholder="Search by Keyword" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <select typeof="text" name="searchCategory" class="form-control" id="location">
                                 <option value="" disabled selected>Select By Category</option>
                                 <option value="web-design">Web design</option>
                                 <option value="graphic-design">Graphic design</option>
@@ -30,9 +31,10 @@
                                 <option value="android">Android</option>
                             </select>
                         </div>
-                    </div>*@
-                    <div class="col-sm-1 col-lg-2 form-group">
-                        <button type="submit" class="btn btn-outline-white-primary job-main-form__button">
+                    </div>
+                    <div class="col-md-2" style="margin-bottom:30px">
+                        <button type="submit"
+                                class="btn btn-outline-white-primary job-main-form__button">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -51,7 +53,7 @@
                     <div class="col-md-12 col-lg-6">
                         <div class="row">
                             <div class="col-2">
-                                <img src="~/img/company-1.png"
+                                <img style="max-width:80px;" src="@job.PosterImageURl"
                                      alt="Ipsioou " class="img-fluid">
                             </div>
                             <div class="col-10">
