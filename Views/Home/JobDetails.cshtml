@@ -48,31 +48,11 @@
                 <h5 class="text-info">Salary: @Model.Job.Salary LEK</h5>
                 <h5>Eduaction: @Model.Job.Education</h5>
                 <h5 class="text-info">Preferred Age: @Model.Job.PreferredAge Years Old</h5>
+                <h5>Total Views: @Model.Job.ViewCount</h5>
                 <blockquote class="blockquote">
                     <p style=" white-space: pre-line;">@Model.Job.Description</p>
                 </blockquote>
-                <div class="job-detail__apply-bottom">
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        if (Model.IsApplied)
-                        {
-                            <input type="button" class="btn btn-outline-white-primary" value="Already applied" />
-                        }
-                        else
-                        {
-                            <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
-                                @Html.AntiForgeryToken()
-                                <h4>Upload Your CV(as PDF)</h4>
-                                <input required type="file" name="upload" accept="application/pdf" class="form-control" />
-                                <input type="hidden" name="job" value="{{ job.id }}">
-                                <br />
-                                <input style="width:50%; margin:0 auto" type="submit" class="btn btn-outline-white-primary"
-                                       value="Apply for this job" />
-                            </form>
-
-                        }
-                    }
-                </div>
+                
             </div>
             <div class="col-lg-1"></div>
             <div class="col-lg-3">
@@ -85,6 +65,29 @@
                         @Model.Job.Website
                     </a>
                 </p>
+                <div class="job-detail__apply-bottom">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        if (Model.IsApplied)
+                        {
+                            <input type="button" class="btn btn-outline-white-primary" value="Already applied" />
+                        }
+                        else
+                        {
+
+                            <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
+                                @Html.AntiForgeryToken()
+                                <h4>Upload Your CV</h4>
+                                <input required type="file" name="upload" accept="application/pdf" class="form-control" />
+                                <input type="hidden" name="job" value="{{ job.id }}">
+                                <br />
+                                <input style="width:100%;" type="submit" class="btn btn-outline-white-primary"
+                                       value="Apply Now" />
+                            </form>
+
+                        }
+                    }
+                </div>
                 <div class="job-detail__apply-top">
                     @if (SignInManager.IsSignedIn(User))
                     {

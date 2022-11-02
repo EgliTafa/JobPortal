@@ -75,21 +75,26 @@ namespace JobPortal.Controllers
         }
 
         [Route("search")]
-        public async Task<IActionResult> Search(string searchString, int? id)
+        public async Task<IActionResult> Search(string searchString, string searchCategory, int? id)
         {
             //creates a LINQ Query to select jobs
             var job = from j in _context.Jobs
                       select j;
 
             //checks if empty and get matching data
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchCategory))
             {
-                job = job.Where(s => s.Title!.Contains(searchString));
+                job = job.Where(s => s.Title!.Contains(searchString) && s.Category!.Contains(searchCategory));
             }
 
             else if (!String.IsNullOrEmpty(searchString))
             {
-                job = job.Where(s => s.Category!.Contains(searchString));
+                job = job.Where(s => s.Title!.Contains(searchString));
+            }
+
+            else if (!String.IsNullOrEmpty(searchCategory))
+            {
+                job = job.Where(s => s.Category!.Contains(searchCategory));
             }
 
             return View(await job.ToListAsync());

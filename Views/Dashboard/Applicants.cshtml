@@ -22,7 +22,7 @@
             {
                 <div class="col-lg-6">
                     <div class="box applicant">
-                        <h4>@applicant.User.FirstName @applicant.User.LastName</h4>
+                        <h4>Applicant @applicant.User.FirstName @applicant.User.LastName has applied in @applicant.Job.Title</h4>
                         @*<a href="#" data-toggle="modal" data-target="#contact-modal"
                            class="btn btn-outline-white-secondary btn-sm">
                             <i class="fa fa-envelope"></i>Contact
@@ -33,12 +33,21 @@
                         <div class="d-flex justify-content-between">
                             <iframe style="width:100%; height:700px" id="iframepdf" src="@applicant.CVPath"></iframe>
                             <p class="intro"></p>
+                            
+                            @* Applicant Information *@
+                        <div class="col">
                             <div class="image">
                                 <img src="@applicant.User.ImagePath"
                                      class="rounded-circle"
                                      height="40" width="40"
                                      asp-append-version="true" />
                             </div>
+                            <h4 class="text-info">Name: @applicant.User.FirstName @applicant.User.LastName</h4>
+                            <br />
+                            <h5>E-Mail: @applicant.User.Email</h5>
+                            <br />
+                            <h5 class="text-info">Phone Number: @applicant.User.PhoneNumber LEK</h5>
+                        </div>
                         </div>
                     </div>
                 </div>
