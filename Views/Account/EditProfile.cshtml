@@ -5,7 +5,184 @@
     Layout = "_Layout";
 }
 
-<div class="col-lg-6 offset-3">
+<head>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding-top: 40px;
+            color: #2e323c;
+            background: #f5f6fa;
+            position: relative;
+            height: 100%;
+        }
+
+        .account-settings .user-profile {
+            margin: 0 0 1rem 0;
+            padding-bottom: 1rem;
+            text-align: center;
+        }
+
+            .account-settings .user-profile .user-avatar {
+                margin: 0 0 1rem 0;
+            }
+
+                .account-settings .user-profile .user-avatar img {
+                    width: 90px;
+                    height: 90px;
+                    -webkit-border-radius: 100px;
+                    -moz-border-radius: 100px;
+                    border-radius: 100px;
+                }
+
+            .account-settings .user-profile h5.user-name {
+                margin: 0 0 0.5rem 0;
+            }
+
+            .account-settings .user-profile h6.user-email {
+                margin: 0;
+                font-size: 0.8rem;
+                font-weight: 400;
+                color: #9fa8b9;
+            }
+
+        .account-settings .about {
+            margin: 2rem 0 0 0;
+            text-align: center;
+        }
+
+            .account-settings .about h5 {
+                margin: 0 0 15px 0;
+                color: #007ae1;
+            }
+
+            .account-settings .about p {
+                font-size: 0.825rem;
+            }
+
+        .form-control {
+            border: 1px solid #cfd1d8;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            font-size: .825rem;
+            background: #ffffff;
+            color: #2e323c;
+        }
+
+        .card {
+            background: #ffffff;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 0;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<section>
+    <div class="container">
+        <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="user-profile">
+                                <div class="user-avatar">
+                                    <img src="@Model.ImagePath" alt="User PFP">
+                                </div>
+                                <h5 class="user-name">@Model.FirstName @Model.LastName</h5>
+                                <h6 class="user-email">@Model.Email</h6>
+                            </div>
+                            <div class="about">
+                                <h5>About</h5>
+                                <p>*User Description*</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <form asp-controller="Account" asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
+                            @Html.ValidationSummary()
+                            @Html.AntiForgeryToken()
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h6 class="mb-2 text-primary">Personal Details</h6>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.FirstName, "First Name")
+                                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.LastName, "Last Name")
+                                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.PhoneNumber)
+                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.Email)
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <div> <label>Change Profile Picture</label></div>
+                                        <div>
+                                            <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>Gender</label><br />
+                                        <div class="form-check form-check-inline">
+                                            @Html.RadioButtonFor(x => x.Gender, "Male", new { @class = "form-check-input", id = "male", @checked = "checked" })
+                                            @* <input class="form-check-input" checked *@
+                                            @*        type="radio" name="Gender" id="male gender" *@
+                                            @*        value="male"> *@
+                                            @* <label class="form-check-label" for="male">Male</label> *@
+                                            @Html.LabelFor(x => x.Gender, "Male", new { @class = "form-check-label" })
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            @Html.RadioButtonFor(x => x.Gender, "Female", new { @class = "form-check-input", id = "female" })
+                                            @* <input class="form-check-input" *@
+                                            @*        type="radio" name="Gender" id="female" *@
+                                            @*        value="female"> *@
+                                            @* <label class="form-check-label" for="female">Female</label> *@
+                                            @Html.LabelFor(x => x.Gender, "Female", new { @class = "form-check-label" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gutters">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="text-right">
+                                        <button type="button" asp-controller="Home" asp-action="Index" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--<div class="col-lg-6 offset-3">
     <div class="box">
         <h3 class="heading">Edit Profile</h3>
 
@@ -27,14 +204,14 @@
             <div class="form-group">
                 @Html.LabelFor(c => c.PhoneNumber)
                 @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-            </div>
+            </div>-->
 
             @*<div class="form-group">
                 @Html.LabelFor(c => c.Email)
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
             </div>*@
 
-            <div>
+            <!--<div>
                 <div> <label>Change Profile Picture</label></div>
                 <div>
                     <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
@@ -45,20 +222,20 @@
                 <label>Gender</label>
                 <br>
                 <div class="form-check form-check-inline">
-                    @Html.RadioButtonFor(x => x.Gender, "Male", new { @class = "form-check-input", id = "male", @checked = "checked" })
+                    @Html.RadioButtonFor(x => x.Gender, "Male", new { @class = "form-check-input", id = "male", @checked = "checked" })-->
                     @* <input class="form-check-input" checked *@
                     @*        type="radio" name="Gender" id="male gender" *@
                     @*        value="male"> *@
                     @* <label class="form-check-label" for="male">Male</label> *@
-                    @Html.LabelFor(x => x.Gender, "Male", new { @class = "form-check-label" })
+                    <!--@Html.LabelFor(x => x.Gender, "Male", new { @class = "form-check-label" })
                 </div>
                 <div class="form-check form-check-inline">
-                    @Html.RadioButtonFor(x => x.Gender, "Female", new { @class = "form-check-input", id = "female" })
+                    @Html.RadioButtonFor(x => x.Gender, "Female", new { @class = "form-check-input", id = "female" })-->
                     @* <input class="form-check-input" *@
                     @*        type="radio" name="Gender" id="female" *@
                     @*        value="female"> *@
                     @* <label class="form-check-label" for="female">Female</label> *@
-                    @Html.LabelFor(x => x.Gender, "Female", new { @class = "form-check-label" })
+                    <!--@Html.LabelFor(x => x.Gender, "Female", new { @class = "form-check-label" })
                 </div>
             </div>
 
@@ -70,4 +247,4 @@
             </div>
         </form>
     </div>
-</div>
+</div>-->
