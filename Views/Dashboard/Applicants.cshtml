@@ -21,36 +21,55 @@
             @foreach (var applicant in Model)
             {
                 <div class="col-lg-6">
-                    <div class="box applicant">
-                        <h4>Applicant @applicant.User.FirstName @applicant.User.LastName has applied in @applicant.Job.Title</h4>
-                        @*<a href="#" data-toggle="modal" data-target="#contact-modal"
-                           class="btn btn-outline-white-secondary btn-sm">
-                            <i class="fa fa-envelope"></i>Contact
-                        </a>*@
-                        <p>
-                            <span class="badge badge-info">Applied @applicant.CreatedAt.Humanize()</span>
-                        </p>
-                        <div class="d-flex justify-content-between">
-                            <iframe style="width:100%; height:700px" id="iframepdf" src="@applicant.CVPath"></iframe>
-                            <p class="intro"></p>
-                            
-                            @* Applicant Information *@
-                        <div class="col">
-                            <div class="image">
-                                <img src="@applicant.User.ImagePath"
-                                     class="rounded-circle"
-                                     height="40" width="40"
-                                     asp-append-version="true" />
+                    <table style="width:100%;" class="table table-striped table-responsive-xxl">
+                        <tr>
+                            <td style="white-space:nowrap;"><strong>First Name: </strong></td>
+                            <th></th>
+                            <th style="text-transform:capitalize;">@applicant.User.FirstName</th>
+                        </tr>
+                        <tr>
+                            <td style="white-space:nowrap;"><strong>Last Name: </strong></td>
+                            <th></th>
+                            <th style="text-transform:capitalize;">@applicant.User.LastName</th>
+                        </tr>
+                        <tr>
+                            <td style="white-space:nowrap;"><strong>Gender: </strong></td>
+                            <th></th>
+                            <th style="text-transform:capitalize;">@applicant.User.Gender</th>
+                        </tr>
+                        <tr>
+                            <td style="white-space:nowrap;"><strong>E-Mail: </strong></td>
+                            <th></th>
+                            <th style="text-transform:capitalize;"><email>@applicant.User.Email</email></th>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone Number</strong></td>
+                            <th></th>
+                            <th style="text-transform:capitalize;"><a href="tel:@applicant.User.PhoneNumber">@applicant.User.PhoneNumber</a></th>
+                        </tr>
+                        <tr>
+                            <td><strong>Applied At:</strong></td>
+                            <th></th>
+                            <th style="text-transform:capitalize;">@applicant.Job.Title</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Applied:</strong></td>
+                            <th></th>
+                            <th style="text-transform:capitalize;">@applicant.CreatedAt.Humanize()</th>
+                        </tr>
+                        <hr />
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col">
+                        <div class="box-image applicant"> 
+                            <iframe style="width:100%; height:450px;" id="iframepdf" src="@applicant.CVPath"></iframe>
+                            <div class="d-flex justify-content-between">
+                                <p class="intro"></p>
                             </div>
-                            <h4 class="text-info">Name: @applicant.User.FirstName @applicant.User.LastName</h4>
-                            <br />
-                            <h5>E-Mail: @applicant.User.Email</h5>
-                            <br />
-                            <h5 class="text-info">Phone Number: @applicant.User.PhoneNumber LEK</h5>
-                        </div>
                         </div>
                     </div>
-                </div>
+                </div> 
             }
           
         </div>

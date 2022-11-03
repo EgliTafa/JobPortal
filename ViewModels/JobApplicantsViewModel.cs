@@ -8,6 +8,7 @@ namespace JobPortal.ViewModels
         public Job Job { get; set; }
 
         public string CVPath { get; set; }
+        public string Gender { get; set; }
 
         public List<Applicant> Applicants { get; set; }
     }

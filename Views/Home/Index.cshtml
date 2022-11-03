@@ -14,6 +14,18 @@
             overflow: hidden;
             white-space: nowrap;
         }
+
+        .fade-in {
+            animation: fadeIn 2s;
+            -webkit-animation: fadeIn 2s;
+            -moz-animation: fadeIn 2s;
+            -o-animation: fadeIn 2s;
+        }
+
+        @@keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+}
     </style>
 </head>
 
@@ -30,14 +42,14 @@
                         <div class="controls">
                             <div class="row align-items-center">
                                 <div class="col-md-5">
-                                    <div class="form-group">
+                                    <div class="form-group fade-in">
                                         <input type="text" id="profession" name="SearchString"
-                                               placeholder="Search by Keyword" class="form-control">
+                                               placeholder="Search by Keyword" class="form-control rounded-lg">
                                     </div>
                                 </div>
-                                  <div class="col-md-5">
+                                  <div class="col-md-5 fade-in">
                                         <div class="form-group">
-                                            <select typeof="text" name="searchCategory" class="form-control" id="location">
+                                            <select typeof="text" name="searchCategory" class="form-control rounded-lg" id="location">
                                                 <option value="" disabled selected>Select By Category</option>
                                                 <option value="web-design">Web design</option>
                                                 <option value="graphic-design">Graphic design</option>
@@ -48,7 +60,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                <div class="col-md-2" style="margin-bottom:30px">
+                                <div class="col-md-2 fade-in" style="margin-bottom:30px">
                                     <button type="submit"
                                             class="btn btn-outline-white-primary job-main-form__button">
                                         <i class="fa fa-search"></i>
@@ -64,11 +76,11 @@
 </section>
 <section class="bg-light-gray">
     <div class="container">
-        <h3 class="heading">Featured jobs</h3>
+        <h3 class="heading">Most Popular Jobs</h3>
         <div class="row featured align-items-stretch">
-            <table class="table table-bordered">
+            <table class="table table-striped bg-gradient">
                 <tr>
-                    <th scope="col">#</th>
+                    <th class="ellipsis" scope="col">#</th>
                     <th scope="col">Job</th>
                     <th scope="col">Description</th>
                     <th scope="col">Salary</th>
@@ -84,7 +96,7 @@
                             <div class="bg"></div>
                             <div class="logo">
                                 <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
-                                    <img src="@job.PosterImageURl" alt="" style="max-width: 100px;">
+                                    <img class="ellipsis" src="@job.PosterImageURl" alt="" style="max-width: 100px;">
                                 </a>
                             </div>
                         </a>
@@ -105,7 +117,7 @@
         </div>
     </div>
 </section>
-<section style="background-image: url(~/img/meeting.jpg); " class="section-divider">
+@*<section style="background-image: url(~/img/meeting.jpg); " class="section-divider">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -115,4 +127,4 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@

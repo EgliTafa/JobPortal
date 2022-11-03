@@ -24,6 +24,7 @@ namespace JobPortal.Models
         [Required(ErrorMessage = "Type is required"), Display(Name = "Type", Prompt = "Type")]
         public string Type { get; set; }
         [Required, Display(Name = "Last Date", Prompt = "Last Date")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime LastDate { get; set; }
         [Required, Display(Name = "Company Name", Prompt = "Company Name")]
         public string CompanyName { get; set; }
@@ -54,7 +55,7 @@ namespace JobPortal.Models
 
         public string posterUrl { get; set; }
         public string PosterImageURl { get; set; }
-        [Required, Display(Name = "Company Phone Number", Prompt = "Company Phone Number")]
+        [ Display(Name = "Company Phone Number", Prompt = "Company Phone Number")]
         public string CompanyPhoneNumber { get; set; }
         public int ViewCount { get; set; }
     }

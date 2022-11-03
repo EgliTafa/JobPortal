@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.Antiforgery.Aes" Version="1.0.4" />
+    <PackageReference Include="bootstrap" Version="5.2.2" />
+    <PackageReference Include="bootstrap.sass" Version="5.2.2" />
     <PackageReference Include="FluentEmail.Core" Version="3.0.2" />
     <PackageReference Include="FluentEmail.Razor" Version="3.0.2" />
     <PackageReference Include="FluentEmail.Smtp" Version="3.0.2" />

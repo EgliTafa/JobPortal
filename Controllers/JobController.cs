@@ -114,6 +114,7 @@ namespace JobPortal.Controllers
                 var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
 
                 model.CVPath = updatedFilePath;
+                model.Gender = user.Gender;
                 //_context.Users.Add(model);
                 //_context.SaveChanges();
 
@@ -141,7 +142,7 @@ namespace JobPortal.Controllers
                 Job = job,
                 //Email = user.Email,
                 CVPath = model.CVPath,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
             };
 
             //EMAIL FUNCTION
@@ -150,7 +151,7 @@ namespace JobPortal.Controllers
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 Port = 587,
-                Credentials = new NetworkCredential("mymicrowaveisdry@gmail.com", "")
+                Credentials = new NetworkCredential("mymicrowaveisdry@gmail.com", "lzuscmmoiwejyvvt")
                 //DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
                 //PickupDirectoryLocation = @"C:\emails"
             });

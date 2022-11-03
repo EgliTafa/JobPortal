@@ -2,6 +2,26 @@
  @model JobPortal.ViewModels.JobApplicantsViewModel 
 @{ ViewBag.Title = "title"; Layout = "_Layout"; } 
 
+<head>
+    <style>
+        .remove-cell{
+            visibility:hidden;
+        }
+
+        @@media screen and (max-width: 600px){
+            .remove-cell{
+                visibility:visible
+            }
+        }
+
+        @@media screen and (max-width: 600px) {
+            .remove-frame {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
 <section class="bg-light-gray">
     <div class="container">
         <div class="row">
@@ -18,51 +38,65 @@
             @foreach (var applicant in Model.Applicants)
             {
                 <div class="row">
-                    <div class="col">
+                    <div class="col-lg-6">
+                        <br /><br /><br /><br />
+                        <table style="width:100%;" class="table table-striped table-responsive-xxl">
+                            <tr>
+                                <td style="white-space:nowrap;"><strong>First Name: </strong></td>
+                                <th></th>
+                                <th style="text-transform:capitalize;">@applicant.User.FirstName</th>
+                            </tr>
+                            <tr>
+                                <td style="white-space:nowrap;"><strong>Last Name: </strong></td>
+                                <th></th>
+                                <th style="text-transform:capitalize;">@applicant.User.LastName</th>
+                            </tr>
+                            <tr>
+                                <td style="white-space:nowrap;"><strong>Gender: </strong></td>
+                                <th></th>
+                                <th style="text-transform:capitalize;">@applicant.User.Gender</th>
+                            </tr>
+                            <tr>
+                                <td style="white-space:nowrap;"><strong>E-Mail: </strong></td>
+                                <th></th>
+                                <th style="text-transform:capitalize;"><email>@applicant.User.Email</email></th>
+                            </tr>
+                            <tr>
+                                <td><strong>Phone Number</strong></td>
+                                <th></th>
+                                <th style="text-transform:capitalize;"><a href="tel:@applicant.User.PhoneNumber">@applicant.User.PhoneNumber</a></th>
+                            </tr>
+                            <tr>
+                                <td><strong>Applied At:</strong></td>
+                                <th></th>
+                                <th style="text-transform:capitalize;">@applicant.Job.Title</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Applied:</strong></td>
+                                <th></th>
+                                <th style="text-transform:capitalize;">@applicant.CreatedAt.Humanize()</th>
+                            </tr>
+                            <tr class="remove-cell">
+                                <td><strong>Applicant CV:</strong></td>
+                                <th></th>
+                                <th><a href="@applicant.CVPath">View CV</a></th>
+                            </tr>
+                        </table>
+                    </div>
 
-                        
-                            <div class="col">
-                                <h3 style="text-align:center;">Applicant CV</h3>
-                                <br />
-                                <div class="box applicant"> 
-                                    <h4 style="display:flex; justify-content:center;">@applicant.User.UserName CV</h4>
-                                    @*<a href="#" data-toggle="modal" data-target="#contact-modal" class="btn btn-outline-white-secondary btn-sm">
-                                        <i class="fa fa-envelope"></i>Contact
-                                    </a>*@
-                                    <p>
-                                        <span class="badge badge-info">Applied @applicant.CreatedAt.Humanize()</span>
-                                    </p>
-                                    <iframe style="width:100%; height:500px" id="iframepdf" src="@applicant.CVPath"></iframe>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="intro"></p> @* <div class="image">
-                                          <img src="~/img/avatar.png" alt="" class="img-fluid rounded-circle">
-                                        </div>*@
-                                    </div>
-                                </div>
+                    <div class="col-lg-6 remove-frame">
+                    <div class="col">
+                        <div class="box-image applicant"> 
+                            <iframe style="width:100%; height:450px;" id="iframepdf" src="@applicant.CVPath"></iframe>
+                            <div class="d-flex justify-content-between">
+                                <p class="intro"></p>
                             </div>
-                        
-
-                    </div>
-
-                    <div class="col">
-                        <h3>Applicant Information</h3>
-                        <br />
-                        
-                        <div class="col">
-                            <img src="@applicant.User.ImagePath" style="float:right;" width="60" height="60" alt="Applicant Picture" />
-                            <h4 class="text-info">Name: @applicant.User.FirstName @applicant.User.LastName</h4>
-                            <br />
-                            <h5>E-Mail: @applicant.User.Email</h5>
-                            <br />
-                            <h5 class="text-info">Phone Number: @applicant.User.PhoneNumber LEK</h5>
                         </div>
-                            @*<h4>@applicant.User.FirstName @applicant.User.LastName</h4>
-                            <h3>@applicant.User.Email</h3>
-                            <h3>@applicant.User.PhoneNumber</h3>*@
-                        
                     </div>
+                </div> 
 
                 </div>
+                <hr />
             }
         }
 

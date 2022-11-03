@@ -52,6 +52,9 @@ namespace JobPortal
 
             services.AddControllersWithViews();
 
+            services.AddControllersWithViews(x => x.SuppressAsyncSuffixInActionNames = false)
+                    .AddRazorRuntimeCompilation();
+
             services
                 .AddFluentEmail("fromemail@test.test")
                 .AddRazorRenderer()

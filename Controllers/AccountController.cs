@@ -131,7 +131,7 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Route("employee/register")]
         public async Task<IActionResult> EmployeeRegister(IFormFile upload,
-            [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword","ImagePath", "PhoneNumber")]
+            [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword","ImagePath", "PhoneNumber","Gender")]
             EmployeeRegisterViewModel model)
         {
             if (upload != null && upload.Length > 0)
