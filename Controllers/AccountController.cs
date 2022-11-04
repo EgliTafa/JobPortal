@@ -45,8 +45,8 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Route("employer/register")]
         public async Task<IActionResult> EmployerRegister(IFormFile upload,
-            [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword", "ImagePath", "PhoneNumber")]
-            EmployerRegisterViewModel model)
+            [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword", "ImagePath", "PhoneNumber","Description","CompanyDescription")]
+            EmployerRegisterViewModel model, Job job)
         {
             //Profile Picture
             if (upload != null && upload.Length > 0 && upload.ContentType.Contains("image"))
@@ -73,6 +73,8 @@ namespace JobPortal.Controllers
                 ModelState.AddModelError("Email", "Email Already Exist!");
             }
 
+            var companyDescription = job.CompanyDescription;
+
             if (ModelState.IsValid)
             {
                 var user = new User
@@ -81,6 +83,7 @@ namespace JobPortal.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
+                    Description = model.Description,
                     PhoneNumber = model.PhoneNumber,
                     ImagePath = model.ImagePath
                 };
@@ -131,7 +134,7 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Route("employee/register")]
         public async Task<IActionResult> EmployeeRegister(IFormFile upload,
-            [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword","ImagePath", "PhoneNumber","Gender")]
+            [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword","ImagePath", "PhoneNumber","Gender","Description")]
             EmployeeRegisterViewModel model)
         {
             if (upload != null && upload.Length > 0)
@@ -168,6 +171,7 @@ namespace JobPortal.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
+                    Description = model.Description,
                     PhoneNumber = model.PhoneNumber,
                     //ProfilePicture = model.User.ProfilePicture,
                     ImagePath = model.ImagePath
@@ -286,20 +290,21 @@ namespace JobPortal.Controllers
                 }
             }
 
-            //            _logger.LogError(model.Gender.ToString());
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Gender = model.Gender;
-            user.PhoneNumber = model.PhoneNumber;
-            user.ImagePath = model.ImagePath;
-            //user.ProfilePicture = model.ProfilePicture;
-            //user.ImageLocation = model.ImageLocation;
-            
-            _context.Users.Update(user);
-
-            await _context.SaveChangesAsync();
-
+            if (ModelState.IsValid)
+            {
+                //_logger.LogError(model.Gender.ToString());
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Gender = model.Gender;
+                user.Description = model.Description;
+                user.PhoneNumber = model.PhoneNumber;
+                user.ImagePath = model.ImagePath;
+                //user.ProfilePicture = model.ProfilePicture;
+                //user.ImageLocation = model.ImageLocation;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToActionPermanent("EditProfile", "Account");
         }
 

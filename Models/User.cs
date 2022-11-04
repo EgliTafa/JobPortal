@@ -18,6 +18,7 @@ namespace JobPortal.Models
         public string LastName { get; set; }
         [MaxLength(10)]
         public string Gender { get; set; }
+        public string Description { get; set; }
 
         public override string PhoneNumber { get; set; }
 

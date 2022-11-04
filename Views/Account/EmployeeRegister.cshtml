@@ -5,7 +5,87 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-lg-6 offset-3">
+<section class="h-100 h-custom" style="background-color: white;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card rounded-3">
+                    <img src="~/img/employees.jpg"
+                         class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                         alt="Sample photo">
+                    <div style="background-color:whitesmoke;" class="card-body p-4 p-md-5">
+                        <h4 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Employee Registration Info</h4>
+
+                        <form class="px-md-2" method="post" enctype="multipart/form-data" asp-controller="Account" asp-action="EmployeeRegister">
+                            <div asp-validation-summary="ModelOnly"></div>
+                            @Html.ValidationSummary()
+
+                            <div class="row">
+                                <div class="form-outline col-md-6 mb-4 form-group">
+                                    @Html.LabelFor(c => c.FirstName)
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="form-outline col-md-6 mb-4 form-group">
+                                    @Html.LabelFor(c => c.LastName)
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-outline col-md-6 mb-4 form-group">
+                                    @Html.LabelFor(c => c.Email)
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email" })
+                                </div>
+
+                                <div class="form-outline col-md-6 mb-4 form-group">
+                                    @Html.LabelFor(c => c.PhoneNumber)
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @type = "tel" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-outline col-md-6 mb-4 form-group">
+                                    @Html.LabelFor(c => c.Password)
+                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
+                                </div>
+
+                                <div class="form-outline col-md-6 mb-4 form-group">
+                                    @Html.LabelFor(c => c.ConfirmPassword)
+                                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-outline col-md-12 mb-4 form-group">
+                                    @Html.LabelFor(c => c.Description)
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div>
+                                <div> <label asp-for="Photo"></label></div>
+                                <div>
+                                    <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            @Html.AntiForgeryToken()
+                            <div class="text-center">
+                                <button type="submit" value="submit" class="btn btn-outline-white-primary">
+                                    <i class="fa fa-user-md"></i> Register
+                                </button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<div class="col-lg-6 offset-3">
     <div class="box">
         <h3 class="heading">New account</h3>
         <p class="lead">Not our registered yet?</p>
@@ -33,6 +113,11 @@
             </div>
 
             <div class="form-group">
+                @Html.LabelFor(c => c.Description)
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(c => c.Password)
                 @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
             </div>
@@ -44,7 +129,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(c => c.PhoneNumber)
-                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control"})
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
             </div>
 
             <div>
@@ -62,4 +147,4 @@
             </div>
         </form>
     </div>
-</div>
+</div>*@

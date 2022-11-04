@@ -96,7 +96,7 @@
                             </div>
                             <div class="about">
                                 <h5>About</h5>
-                                <p>*User Description*</p>
+                                <p>@Model.Description</p>
                             </div>
                         </div>
                     </div>
@@ -138,9 +138,15 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
+                                        @Html.LabelFor(c => c.Description)
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="form-group">
                                         <div> <label>Change Profile Picture</label></div>
                                         <div>
-                                            <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
+                                            <input required type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +175,7 @@
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="text-right">
-                                        <button type="button" asp-controller="Home" asp-action="Index" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" asp-controller="Home" asp-action="Index" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
                                         <button type="submit" id="submit" name="submit" class="btn btn-primary">Update</button>
                                     </div>
                                 </div>

@@ -22,6 +22,9 @@ namespace JobPortal.ViewModels
         [EmailAddress]
         public string Email { get; set; }
 
+        [MaxLength(200), Display(Name = "Description", Prompt = "Description")]
+        public string Description { get; set; }
+
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }
 

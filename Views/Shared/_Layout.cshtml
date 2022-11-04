@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                    <ul class="navbar-nav ml-auto ml-1">   
+                    <ul class="navbar-nav ml-auto ml-1">
                         @if (this.User.IsInRole("Employer") && SignInManager.IsSignedIn(User))
                         {
                             <form method="post" style="display: none;" id="logout-form" asp-controller="Account" asp-action="Logout">
@@ -90,9 +90,9 @@
                                     <a asp-controller="Dashboard" asp-action="Index" class="dropdown-item">Dashboard</a>
                                     <a asp-controller="Account" asp-action="EditProfile" class="dropdown-item">Edit Profile</a>
                                     @*<a asp-controller="Dashboard" asp-action="Applicants" class="dropdown-item">Applicants </a>
-                                    <a asp-controller="Job" asp-action="Create" class="dropdown-item">
-                                        Post a new job
-                                    </a>*@
+                                        <a asp-controller="Job" asp-action="Create" class="dropdown-item">
+                                            Post a new job
+                                        </a>*@
                                     <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">Logout</a>
                                 </div>
                             </li>
@@ -108,7 +108,7 @@
                                     <img src="@user.ImagePath"
                                          class="rounded-circle bg-white"
                                          height="40" width="40"
-                                         asp-append-version="true" />                                    
+                                         asp-append-version="true" />
                                     @user.FirstName @user.LastName
                                 </a>
                                 <div aria-labelledby="clientZone" class="dropdown-menu">
@@ -160,22 +160,87 @@
         @RenderBody()
     </div>
 
-    <footer class="footer">
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+    <div class=" ">
+
+        <!-- Footer -->
+        <footer class="text-center text-lg-start text-white"
+                style="background-color: #1c2331">
+            <section class="">
+                <div class="container text-center text-md-start mt-5">
+                    <!-- Grid row -->
+                    <div class="row mt-3">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <!-- Content -->
+                            <h6 class="text-uppercase fw-bold text-white">Job Portal</h6>
+                            <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                                style="width: 60px; background-color: #7c4dff; height: 2px" />
+                            <p>
+                                *add a description for the site*
+                            </p>
+                        </div>
+
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold text-white">Useful links</h6>
+                            <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                                style="width: 60px; background-color: #7c4dff; height: 2px" />
+                            <p>
+                                <a class="text-white" asp-controller="Home" asp-action="Index">Home</a>
+                            </p>
+                            <p>
+                                <a class="text-white" asp-controller="Jobs" asp-action="Index">All Jobs</a>
+                            </p>
+                            <p>
+                                <a class="text-white" asp-controller="Account" asp-action="Login">Login</a>
+                            </p>
+                        </div>
+                        <!-- Grid column -->
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold text-white">Contact</h6>
+                            <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                                style="width: 60px; background-color: #7c4dff; height: 2px" />
+                            <p>@*<i class="fa-sol mr-3"></i>*@ *address*</p>
+                            <p>@*<i class="fas fa-envelope mr-3"></i>*@ *email*</p>
+                            <p>@*<i class="fas fa-phone mr-3"></i>*@ *phone number*</p>
+                            <p>@*<i class="fas fa-print mr-3"></i>*@ *phone number 2*</p>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+                </div>
+            </section>
+            <!-- Section: Links  -->
+            <!-- Copyright -->
+            <div class="text-center p-3"
+                 style="background-color: rgba(0, 0, 0, 0.2)">
+                © 2022
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+
+    </div>
+    <!-- End of .container -->
+    @*<footer class="footer">
         <div class="footer__block">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-12 mb-5">
                         <h3 style="color:snow;">About Us</h3>
                         <ul>
-                            
+
                             <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                            
-                            
+
+
                             <li><a asp-controller="Jobs" asp-action="Index">All Jobs</a></li>
-                            
-                            
+
+
                             <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                            
+
                         </ul>
                     </div>
                 </div>
@@ -190,7 +255,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer>*@
 
     <script src="~/vendor/jquery/jquery.min.js"></script>
     <script src="~/vendor/popper.js/umd/popper.min.js"></script>
