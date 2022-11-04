@@ -84,6 +84,7 @@ namespace JobPortal.Controllers
                 //_logger.LogInformation(model.ToString());
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 model.User = user;
+                model.CompanyDescription = user.Description;
                 model.posterUrl = user.ImagePath;
                 model.CompanyPhoneNumber = user.PhoneNumber;
                 _context.Jobs.Add(model);
@@ -254,6 +255,7 @@ namespace JobPortal.Controllers
                 {
                     job.posterUrl = user.ImagePath;
                     job.CompanyPhoneNumber = user.PhoneNumber;
+                    job.CompanyDescription = user.Description;
                     _context.Update(job);
                     _context.Entry(job).Property(x => x.PosterImageURl).IsModified = false;
                     await _context.SaveChangesAsync();

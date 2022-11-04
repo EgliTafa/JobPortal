@@ -28,7 +28,7 @@ namespace JobPortal.Models
         public DateTime LastDate { get; set; }
         [Required, Display(Name = "Company Name", Prompt = "Company Name")]
         public string CompanyName { get; set; }
-        [Required, Display(Name = "Company Description", Prompt = "Company Description")]
+        [Display(Name = "Company Description", Prompt = "Company Description")]
         public string CompanyDescription { get; set; }
 
         [Required, Display(Name = "Education", Prompt = "Education")]
