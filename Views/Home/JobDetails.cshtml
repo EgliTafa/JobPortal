@@ -85,12 +85,12 @@
                 <div class="card" style="width:20em;">
                     <img class="card-img-top" src="@Model.Job.posterUrl" style="margin:0 auto; width:50%; height:50%;" alt="Card image cap">
                     <div class="card-body">
-                        <h4>About @Model.Job.CompanyName</h4>
-                        <p class="card-text">@Model.Job.CompanyDescription</p>
-                        <p class="job-detail__social social ">
-                            Website:<a href="@Model.Job.Website" data-toggle="tooltip" data-placement="top" title="Website"
+                        <h4 class="card-text text-center">About @Model.Job.CompanyName</h4>
+                        <p class="card-text text-center">@Model.Job.User.Description</p>
+                        <p class="job-detail__social social card-text">
+                            Website:<a href="@Model.Job.Website" data-toggle="tooltip" data-placement="top" title="Website" target="_blank"
                                        class="link">
-                                @Model.Job.Website
+                                @Model.Job.CompanyName
                             </a>
                         </p>
                         <div class="job-detail__apply-bottom">
