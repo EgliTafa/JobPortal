@@ -241,8 +241,24 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Authorize(Roles = "Employer")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl", "PreferredAge", "Education","CompanyPhoneNumber")] Job job)
+        public async Task<IActionResult> Edit(int id,IFormFile upload, Job model, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl", "PreferredAge", "Education","CompanyPhoneNumber")] Job job)
         {
+            if (upload != null && upload.Length > 0)
+            {
+                var fileName = Path.GetFileName(upload.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+
+                var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
+                model.PosterImageURl = updatedFilePath;
+                //_context.Users.Add(model);
+                //_context.SaveChanges();
+
+                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await upload.CopyToAsync(fileSrteam);
+                }
+            }
+
             if (id != job.Id)
             {
                 return NotFound();
@@ -256,8 +272,9 @@ namespace JobPortal.Controllers
                     job.posterUrl = user.ImagePath;
                     job.CompanyPhoneNumber = user.PhoneNumber;
                     job.CompanyDescription = user.Description;
+                    job.PosterImageURl = model.PosterImageURl;
                     _context.Update(job);
-                    _context.Entry(job).Property(x => x.PosterImageURl).IsModified = false;
+                    //_context.Entry(job).Property(x => x.PosterImageURl).IsModified = false;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
