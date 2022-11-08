@@ -195,11 +195,11 @@
                             <p>
                                 @if (this.User.IsInRole("Employer") && SignInManager.IsSignedIn(User))
                                 {
-                                    <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                    <a href="#" style="color:white; text-decoration:none;" onclick="document.getElementById('logout-form').submit();">Logout</a>
                                 }
                                 else if (this.User.IsInRole("Employee") && SignInManager.IsSignedIn(User))
                                 {
-                                    <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                    <a href="#" style="color:white; text-decoration:none;" onclick="document.getElementById('logout-form').submit();">Logout</a>
                                 }
                                 else
                                 {
