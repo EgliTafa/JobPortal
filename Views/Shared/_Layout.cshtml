@@ -193,7 +193,18 @@
                                 <a class="text-white" asp-controller="Jobs" asp-action="Index">All Jobs</a>
                             </p>
                             <p>
-                                <a class="text-white" asp-controller="Account" asp-action="Login">Login</a>
+                                @if (this.User.IsInRole("Employer") && SignInManager.IsSignedIn(User))
+                                {
+                                    <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                }
+                                else if (this.User.IsInRole("Employee") && SignInManager.IsSignedIn(User))
+                                {
+                                    <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                }
+                                else
+                                {
+                                    <a class="text-white" asp-controller="Account" asp-action="Login">Login</a>
+                                }
                             </p>
                         </div>
                         <!-- Grid column -->

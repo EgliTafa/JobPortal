@@ -63,6 +63,7 @@
     <div class="container rounded bg-white mt-5 mb-5">
         <form id="job-main-form" method="post" asp-controller="Job" asp-action="Save" class="job-add-form" enctype="multipart/form-data">
             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <a asp-action="Index">Back to List</a>
             <div class="row">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -72,7 +73,7 @@
                                     <img class="img-thumbnail" src="~/img/placeholder.jpg" />
                                 </label>
                                 <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
-                            </div>          
+                            </div>
                         </div>
                         @*<span class="font-weight-bold">Upload an Image for your post</span>*@
                     </div>
@@ -190,7 +191,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

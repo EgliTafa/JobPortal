@@ -8,6 +8,13 @@
 
 <head>
     <style>
+        .fifty-chars {
+            width: 50ch;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
         .remove-cell {
             visibility: hidden;
         }
@@ -26,16 +33,55 @@
     </style>
 </head>
 
-<section class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h1 class="heading">Applicants for all of your position</h1>
-            </div>
-        </div>
-    </div>
-</section>
 <section>
+    <h3 style="text-align:center;">All Applicants On Your Jobs</h3>
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Applied At</th>
+                <th>Applied</th>
+                <th>Phone Number</th>
+                <th>Applicant CV</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var applicant in Model)
+            {
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="@applicant.User.ImagePath"
+                             alt=""
+                             style="width: 45px; height: 45px"
+                             class="rounded-circle" />
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">@applicant.User.FirstName @applicant.User.LastName</p>
+                            <p class="text-muted mb-0">@applicant.User.Email</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <p>@applicant.User.Gender</p>
+                </td>
+                <td>
+                    <p class="fw-normal mb-1 fifty-chars">@applicant.Job.Title</p>
+                </td>
+                <td>
+                    <p style="text-transform:capitalize;">@applicant.CreatedAt.Humanize()</p>
+                </td>
+                <td>
+                    <span><a href="tel:@applicant.User.PhoneNumber">@applicant.User.PhoneNumber</a></span>
+                </td>
+                <td><a href="@applicant.CVPath" target="_blank">View CV</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+@*<section>
     <div class="container">
         <div class="row">
             @foreach (var applicant in Model)
@@ -99,4 +145,4 @@
           
         </div>
     </div>
-</section>
+</section>*@
