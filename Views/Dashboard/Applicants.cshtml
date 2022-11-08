@@ -40,9 +40,9 @@
             <tr>
                 <th>Name</th>
                 <th>Gender</th>
+                <th>Phone Number</th>
                 <th>Applied At</th>
                 <th>Applied</th>
-                <th>Phone Number</th>
                 <th>Applicant CV</th>
             </tr>
         </thead>
@@ -58,7 +58,7 @@
                              class="rounded-circle" />
                         <div class="ms-3">
                             <p class="fw-bold mb-1">@applicant.User.FirstName @applicant.User.LastName</p>
-                            <p class="text-muted mb-0">@applicant.User.Email</p>
+                            <p class="text-muted mb-0"><email>@applicant.User.Email</email></p>
                         </div>
                     </div>
                 </td>
@@ -66,13 +66,13 @@
                     <p>@applicant.User.Gender</p>
                 </td>
                 <td>
-                    <p class="fw-normal mb-1 fifty-chars">@applicant.Job.Title</p>
+                    <span><a href="tel:@applicant.User.PhoneNumber">@applicant.User.PhoneNumber</a></span>
+                </td>
+                <td>
+                    <p class="fw-normal mb-1 fifty-chars"><a asp-controller="Home" asp-action="JobDetails" asp-route-id="@applicant.Job.Id">@applicant.Job.Title</a></p>
                 </td>
                 <td>
                     <p style="text-transform:capitalize;">@applicant.CreatedAt.Humanize()</p>
-                </td>
-                <td>
-                    <span><a href="tel:@applicant.User.PhoneNumber">@applicant.User.PhoneNumber</a></span>
                 </td>
                 <td><a href="@applicant.CVPath" target="_blank">View CV</a></td>
             </tr>
