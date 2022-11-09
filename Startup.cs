@@ -35,19 +35,13 @@ namespace JobPortal
                 options.Password = new PasswordOptions
                 {
                     RequireDigit = true,
-                    RequiredLength = 6,
-                    RequireLowercase = false,
-                    RequireUppercase = false,
+                    RequiredLength = 8,
+                    RequireLowercase = true,
+                    RequireUppercase = true,
                     RequireNonAlphanumeric = false,
                 }
             )
                .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.Configure<IdentityOptions>(opts => {
-                opts.Password.RequiredLength = 8;
-                opts.Password.RequireDigit = true;
-                opts.Password.RequireLowercase = true;
-            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {

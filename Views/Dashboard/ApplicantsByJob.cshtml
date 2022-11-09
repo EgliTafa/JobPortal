@@ -22,16 +22,12 @@
     </style>
 </head>
 
-<section class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h1 class="heading">Applicants for the <span class="accent">@Model.Job.Title</span> position </h1>
-            </div>
+<section>
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="heading">Applicants for the <span class="accent">@Model.Job.Title</span> position </h1>
         </div>
     </div>
-</section>
-<section>
     <div class="container">
         @if (Model.Applicants.Any())
         {
@@ -85,20 +81,20 @@
                     </div>
 
                     <div class="col-lg-6 remove-frame">
-                    <div class="col">
-                        <div class="box-image applicant"> 
-                            <iframe style="width:100%; height:450px;" id="iframepdf" src="@applicant.CVPath"></iframe>
-                            <div class="d-flex justify-content-between">
-                                <p class="intro"></p>
+                        <div class="col">
+                            <div class="box-image applicant">
+                                <iframe style="width:100%; height:450px;" id="iframepdf" src="@applicant.CVPath"></iframe>
+                                <div class="d-flex justify-content-between">
+                                    <p class="intro"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div> 
 
                 </div>
                 <hr />
             }
         }
 
-        </div>
+    </div>
 </section>

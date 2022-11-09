@@ -30,6 +30,16 @@
                 display: none;
             }
         }
+
+        #ifrm1 {
+            opacity: 0;
+            transition: opacity 1.5s linear;
+        }
+
+        #trig1:hover + iframe {
+            opacity: 1;
+            transition: opacity 1.5s linear;
+        }
     </style>
 </head>
 
@@ -74,7 +84,9 @@
                 <td>
                     <p style="text-transform:capitalize;">@applicant.CreatedAt.Humanize()</p>
                 </td>
-                <td><a href="@applicant.CVPath" target="_blank">View CV</a></td>
+                <td>
+                    <a href="@applicant.CVPath" id="trig1" target="_blank">View CV</a>
+                </td>
             </tr>
             }
         </tbody>
