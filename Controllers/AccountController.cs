@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
+using NETCore.MailKit.Core;
 
 namespace JobPortal.Controllers
 {
@@ -23,15 +24,16 @@ namespace JobPortal.Controllers
         private readonly ILogger _logger;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment webHostEnvironment;
-
+        private IEmailService _emailService;
         public AccountController(UserManager<User> userManager,
-            SignInManager<User> signManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context, ILogger<AccountController> logger, IWebHostEnvironment hostEnvironment)
+            SignInManager<User> signManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context, ILogger<AccountController> logger, IWebHostEnvironment hostEnvironment, IEmailService emailService)
         {
             _userManager = userManager;
             _signManager = signManager;
             _roleManager = roleManager;
             _context = context;
             _logger = logger;
+            _emailService = emailService;
             webHostEnvironment = hostEnvironment;
         }
 
@@ -179,7 +181,7 @@ namespace JobPortal.Controllers
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 //IdentityResult roleResult = await _roleManager.CreateAsync(new IdentityRole("Employee"));
-                
+
                 if (result.Succeeded)
                 {
                     bool checkRole = await _roleManager.RoleExistsAsync("Employee");
@@ -196,10 +198,12 @@ namespace JobPortal.Controllers
                         await _userManager.AddToRoleAsync(user, "Employee");
                     }
 
-                    //await _signManager.SignInAsync(user, false);
-                    return RedirectToAction("Login", "Account");
-                }
+                    var emailConfirm = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
+                    var link = Url.Action(nameof(VerifyEmail), "Home", new { userId = user.Id, emailConfirm }, Request.Scheme, Request.Host.ToString());
+                    await _emailService.SendAsync(user.Email, "email verify", $"<a href=\"{link}\">Verify Your Email</a>", true);
+                    return RedirectToAction("EmailVerification" );
+                }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
@@ -208,12 +212,32 @@ namespace JobPortal.Controllers
 
             return View();
         }
+        [HttpGet(Name = "VerifyEmail")]
+        public async Task<IActionResult> VerifyEmail(string userId, string emailConfirm)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return BadRequest();
+            var result = await _userManager.ConfirmEmailAsync(user, emailConfirm);
+
+            if (result.Succeeded)
+            {
+                user.EmailConfirmed = true;
+                await _context.SaveChangesAsync();
+                return View();
+            }
+
+
+            return BadRequest();
+        }
+
+        [HttpGet(Name = "EmailVerification")]
+        public IActionResult EmailVerification() => View();
 
         [HttpGet]
         [Route("login")]
         public IActionResult Login(string returnUrl = "")
         {
-            var model = new LoginViewModel {ReturnUrl = returnUrl};
+            var model = new LoginViewModel { ReturnUrl = returnUrl };
             return View(model);
         }
 
@@ -271,7 +295,7 @@ namespace JobPortal.Controllers
         //[Authorize(Roles = "Employee")]
         [HttpPost]
         [Route("employee/update-profile")]
-        public async Task<IActionResult> UpdateProfile(IFormFile upload,[FromForm] User model)
+        public async Task<IActionResult> UpdateProfile(IFormFile upload, [FromForm] User model)
         {
             if (upload != null && upload.Length > 0 && upload.ContentType.Contains("image"))
             {
@@ -308,6 +332,6 @@ namespace JobPortal.Controllers
             return RedirectToActionPermanent("EditProfile", "Account");
         }
 
-        
+
     }
 }

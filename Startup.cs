@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
 using System;
 using System.Net;
 using System.Net.Mail;
@@ -31,7 +33,23 @@ namespace JobPortal
                 UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 11)))
                     .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning)));
 
+            //services.AddIdentity<User, IdentityRole>(options =>
+            //    options.Password = new PasswordOptions
+            //    {
+            //        RequireDigit = true,
+            //        RequiredLength = 8,
+            //        RequireLowercase = true,
+            //        RequireUppercase = true,
+            //        RequireNonAlphanumeric = false,
+            //    }
+            //)
+            //   .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = true;
+                options.Tokens.AuthenticatorIssuer = "JWT";
                 options.Password = new PasswordOptions
                 {
                     RequireDigit = true,
@@ -39,9 +57,20 @@ namespace JobPortal
                     RequireLowercase = true,
                     RequireUppercase = true,
                     RequireNonAlphanumeric = false,
-                }
-            )
-               .AddEntityFrameworkStores<ApplicationDbContext>();
+                };
+
+                // Add this line for Email confirmation
+                options.SignIn.RequireConfirmedEmail = true;
+
+            }).AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            var mailKitOptions = Configuration.GetSection("Email").Get<MailKitOptions>();
+
+            services.AddMailKit(config => {
+                var options = new MailKitOptions();
+                config.UseMailKit(mailKitOptions);
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -79,7 +108,7 @@ namespace JobPortal
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-//            loggerFactory.AddFile("Logs/mylog-{Date}.txt");
+            //            loggerFactory.AddFile("Logs/mylog-{Date}.txt");
 
             if (env.IsDevelopment())
             {
