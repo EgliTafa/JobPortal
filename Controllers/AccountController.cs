@@ -198,11 +198,22 @@ namespace JobPortal.Controllers
                         await _userManager.AddToRoleAsync(user, "Employee");
                     }
 
-                    var emailConfirm = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    var link = Url.Action(nameof(VerifyEmail), "Home", new { userId = user.Id, emailConfirm }, Request.Scheme, Request.Host.ToString());
-                    await _emailService.SendAsync(user.Email, "email verify", $"<a href=\"{link}\">Verify Your Email</a>", true);
-                    return RedirectToAction("EmailVerification" );
+                    var confirmationLink = Url.Action("ConfirmEmail", "Account",
+                        new { userId = user.Id, token = token }, Request.Scheme);
+
+                    _logger.Log(LogLevel.Warning, confirmationLink);
+
+                    if (_signManager.IsSignedIn(User) && User.IsInRole("Employee"))
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
+                    //ViewBag.ErrorTitle = "Registration successful";
+                    //ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
+                    //        "email, by clicking on the confirmation link we have emailed you";
+                    return View("EmailVerification");
                 }
                 foreach (var error in result.Errors)
                 {
@@ -212,26 +223,33 @@ namespace JobPortal.Controllers
 
             return View();
         }
-        [HttpGet(Name = "VerifyEmail")]
-        public async Task<IActionResult> VerifyEmail(string userId, string emailConfirm)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) return BadRequest();
-            var result = await _userManager.ConfirmEmailAsync(user, emailConfirm);
 
+        [AllowAnonymous]
+        [Route("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"The User ID {userId} is invalid";
+                return View("NotFound");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                user.EmailConfirmed = true;
-                await _context.SaveChangesAsync();
                 return View();
             }
 
-
-            return BadRequest();
+            ViewBag.ErrorTitle = "Email cannot be confirmed";
+            return View("Error");
         }
 
-        [HttpGet(Name = "EmailVerification")]
-        public IActionResult EmailVerification() => View();
 
         [HttpGet]
         [Route("login")]
