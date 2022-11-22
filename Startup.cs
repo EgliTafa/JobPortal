@@ -33,18 +33,6 @@ namespace JobPortal
                 UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 11)))
                     .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning)));
 
-            //services.AddIdentity<User, IdentityRole>(options =>
-            //    options.Password = new PasswordOptions
-            //    {
-            //        RequireDigit = true,
-            //        RequiredLength = 8,
-            //        RequireLowercase = true,
-            //        RequireUppercase = true,
-            //        RequireNonAlphanumeric = false,
-            //    }
-            //)
-            //   .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
