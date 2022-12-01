@@ -463,11 +463,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5">
-                <!--<div class="project-info-box mt-0">
-        <h5>PROJECT DETAILS</h5>
-        <p class="mb-0">Vivamus pellentesque, felis in aliquam ullamcorper, lorem tortor porttitor erat, hendrerit porta nunc tellus eu lectus. Ut vel imperdiet est. Pellentesque condimentum, dui et blandit laoreet, quam nisi tincidunt tortor.</p>
-    </div>-->
-                <!-- / project-info-box -->
                 <h3 style="text-align:center;">Job Details</h3>
                 <div class="project-info-box">
                     <p style="text-transform:capitalize;"><b>Category:</b> @Model.Job.Category</p>
@@ -476,155 +471,49 @@
                     <p style="text-transform:capitalize;"><b>Education:</b> @Model.Job.Education</p>
                     <p style="text-transform:capitalize;"><b>Preferred Age:</b> @Model.Job.PreferredAge</p>
                     <p class="mb-0" style="text-transform:capitalize;"><b>View Count: </b> @Model.Job.ViewCount</p>
-                </div><!-- / project-info-box -->
+                </div>
                 <br />
                 <h3 style="text-align:center;">Company Details</h3>
                 <div class="project-info-box">
                     <p style="text-transform:capitalize;"><b>Employer:</b> @Model.Job.CompanyName</p>
                     <p><b>Employer Website:</b> <a href="@Model.Job.Website" target="_blank">@Model.Job.CompanyName Website</a></p>
                     <p class="mb-0" style="text-transform:capitalize; white-space:pre-line;"><b>Company Description: </b> @Model.Job.CompanyDescription</p>
-                </div><!-- / project-info-box -->
+                </div>
 
                 <h3 style="text-align:center;">Apply Now</h3>
                 <div class="project-info-box">
                     <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
-                        @Html.AntiForgeryToken()
-                        <h4>Upload Your CV</h4>
-                        <input required type="file" name="upload" accept="application/pdf" class="form-control" />
-                        <input type="hidden" name="job" value="{{ job.id }}">
-                        <br />
-                        <input style="width:100%;" type="submit" class="btn btn-outline-white-primary"
-                               value="Apply Now" />
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            if (Model.IsApplied)
+                            {
+                                <input style="width:100%;" type="button" class="btn btn-outline-white-primary" value="Already applied" /><br />
+                            }
+                            else
+                            {
+
+                                    <h4>Upload Your CV</h4>
+                                    <input required type="file" name="upload" accept="application/pdf" class="form-control" />
+                                    <input type="hidden" name="job" value="{{ job.id }}">
+                                    <br />
+                                    <input style="width:100%;" type="submit" class="btn btn-outline-white-primary"
+                                           value="Apply Now" />
+
+                            }
+                        }
                     </form>
                     <br />
                     <a style="width:100%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi <br /> Kompaninë</a>
-                </div><!-- / project-info-box -->
+                </div>
 
-            </div><!-- / column -->
+            </div>
 
             <div class="col-md-7">
-                <img style="width: 100%; max-width: 100%; height: auto; -webkit-backface-visibility: hidden;" src="@Model.Job.PosterImageURl" alt="project-image" class="rounded img-details">
+                <img style="max-width: 100%; height: auto; -webkit-backface-visibility: hidden; width:650px; height:400px;" src="@Model.Job.PosterImageURl" alt="project-image" class="rounded img-details">
                 <div class="project-info-box">
                     <p style=" white-space: pre-line;">@Model.Job.Description</p>
-                </div><!-- / project-info-box -->
-            </div><!-- / column -->
+                </div>
+            </div>
         </div>
     </div>
 </section>
-
-<!--<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <img src="@Model.Job.PosterImageURl" style="max-width:100%; max-height:85%;" />
-                <br /><br />
-                <table style="width:100%;" class="table table-striped table-responsive-xxl">
-                    <tr>
-                        <td style="white-space:nowrap;"><strong>Category</strong></td>
-                        <th></th>
-                        <th style="text-transform:capitalize;">@Model.Job.Category</th>
-                    </tr>
-                    <tr>
-                        <td style="white-space:nowrap;"><strong>Last Date</strong></td>
-                        <th></th>
-                        <th style="text-transform:capitalize;">@Model.Job.LastDate.Date.ToString("dd/MM/yyyy")</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Salary</strong></td>
-                        <th></th>
-                        <th style="text-transform:capitalize;">@Model.Job.Salary LEK</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Education</strong></td>
-                        <th></th>
-                        <th style="text-transform:capitalize;">@Model.Job.Education</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Preferred Age</strong></td>
-                        <th></th>
-                        <th style="text-transform:capitalize;">@Model.Job.PreferredAge</th>
-                    </tr>
-                    <tr>
-                        <td><strong>View Count</strong></td>
-                        <th></th>
-                        <th style="text-transform:capitalize;">@Model.Job.ViewCount</th>
-                    </tr>
-                </table>
-                <blockquote class="blockquote">
-                    <p style=" white-space: pre-line;">@Model.Job.Description</p>
-                </blockquote>
-
-            </div>
-            <div class="col-lg-1"></div>
-            <div class="col-lg-3">
-                <div class="card" style="width:20em;">
-                    <img class="card-img-top" src="@Model.Job.posterUrl" style="margin:0 auto; width:50%; height:50%;" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-text text-center">About @Model.Job.CompanyName</h4>
-                        <p class="card-text text-center">@Model.Job.CompanyDescription</p>
-                        <p class="job-detail__social social card-text">
-                            Website:<a href="@Model.Job.Website" data-toggle="tooltip" data-placement="top" title="Website" target="_blank"
-                                       class="link">
-                                @Model.Job.CompanyName
-                            </a>
-                        </p>
-                        <div class="job-detail__apply-bottom">
-                            @if (SignInManager.IsSignedIn(User))
-                            {
-                                if (Model.IsApplied)
-                                {
-                                    <input style="width:100%;" type="button" class="btn btn-outline-white-primary" value="Already applied" /><br />
-                                }
-                                else
-                                {
-
-                                    <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
-                                        @Html.AntiForgeryToken()
-                                        <h4>Upload Your CV</h4>
-                                        <input required type="file" name="upload" accept="application/pdf" class="form-control" />
-                                        <input type="hidden" name="job" value="{{ job.id }}">
-                                        <br />
-                                        <input style="width:100%;" type="submit" class="btn btn-outline-white-primary"
-                                               value="Apply Now" />
-                                    </form>
-
-                                }
-                                <br />
-                                <a style="width:100%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi <br /> Kompaninë</a>
-                            }
-                        </div>-->
-                        @*<div class="job-detail__apply-top">
-                                @if (SignInManager.IsSignedIn(User))
-                                {
-                                    if (Model.IsApplied)
-                                    {
-                                        <input style="display:none" type="button" class="btn btn-outline-white-primary" value="Already applied" />
-                                    }
-                                    else
-                                    {
-                                        <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <input style="display:none" type="submit" class="btn btn-outline-white-primary"
-                                                   value="Apply for this job" />
-                                        </form>
-                                    }
-                                }
-                                else
-                                {
-                                    <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="job" value="{{ job.id }}">
-                                        <input style="display:none" type="submit" class="btn btn-outline-white-primary"
-                                               value="Apply for this job" />
-                                    </form>
-                                }
-                            </div>*@
-                    <!--</div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-</section>-->
-

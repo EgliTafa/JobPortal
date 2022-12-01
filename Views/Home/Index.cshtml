@@ -6,27 +6,8 @@
 }
 
 <head>
-    <style>
-        .ellipsis {
-            max-width: 300px;
-            max-height: 100px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .fade-in {
-            animation: fadeIn 2s;
-            -webkit-animation: fadeIn 2s;
-            -moz-animation: fadeIn 2s;
-            -o-animation: fadeIn 2s;
-        }
-
-        @@keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-}
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Home-Index.css" />
 </head>
 
 <section class="job-form-section job-form-section--image">
@@ -77,14 +58,15 @@
 <section class="bg-light-gray">
     <div class="container">
         <h3 class="heading">Most Popular Jobs</h3>
-        <div class="row featured align-items-stretch">
-            <table class="table table-striped bg-gradient">
+        <div class="row featured align-items-stretch table-responsive-lg">
+            <table class="table  bg-gradient">
                 <tr>
-                    <th class="ellipsis" scope="col">#</th>
-                    <th scope="col">Job</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Salary</th>
-                    <th scope="col">Location</th>
+                    <th class="ellipsis removed" scope="col"></th>
+                    <th class="removed" scope="col"></th>
+                    <th class="removed" scope="col"></th>
+                    <th class="removed" scope="col"></th>
+                    <th class="removed" scope="col"></th>
+                    <th class="removed" scope="col"></th>
                 </tr>
 
                 @foreach (var job in Model.JobList)
@@ -103,28 +85,18 @@
                     </div>
                 </td>
                 <td><a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">@job.Title</a></td>
+                <td class="ellipsis text-capitalize">@job.Category</td>
                 <td class="ellipsis">@job.Description</td>
                 <td>@job.Salary LEK</td>
                 <td>@job.Location</td>
             </tr>
 
                 }
-                <paging total-records="Model.TotalRecords"
-                        page-no="Model.P"
-                        page-size="Model.S">
-                </paging>
-            </table>         
+            </table>  
+            <paging total-records="Model.TotalRecords"
+                    page-no="Model.P"
+                    page-size="Model.S">
+            </paging>
         </div>
     </div>
 </section>
-@*<section style="background-image: url(~/img/meeting.jpg); " class="section-divider">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <p>Start searching for your new job now! </p>
-                <p><a asp-controller="Job" asp-action="Index" class="btn btn-outline-light">See all offers </a></p>
-            </div>
-        </div>
-    </div>
-</section>*@
