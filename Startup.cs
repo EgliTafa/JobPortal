@@ -33,6 +33,10 @@ namespace JobPortal
                 UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 11)))
                     .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning)));
 
+
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+        o.TokenLifespan = TimeSpan.FromMinutes(30));
+
             services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -52,9 +56,6 @@ namespace JobPortal
 
             }).AddDefaultTokenProviders()
             .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.Configure<DataProtectionTokenProviderOptions>(o =>
-        o.TokenLifespan = TimeSpan.FromMinutes(30));
 
             var mailKitOptions = Configuration.GetSection("Email").Get<MailKitOptions>();
 
