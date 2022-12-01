@@ -53,6 +53,9 @@ namespace JobPortal
             }).AddDefaultTokenProviders()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+        o.TokenLifespan = TimeSpan.FromMinutes(30));
+
             var mailKitOptions = Configuration.GetSection("Email").Get<MailKitOptions>();
 
             services.AddMailKit(config => {

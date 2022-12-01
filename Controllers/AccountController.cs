@@ -110,8 +110,24 @@ namespace JobPortal.Controllers
                             await _userManager.AddToRoleAsync(user, "Employer");
                         }
 
-                        //await _signManager.SignInAsync(user, false);
-                        return RedirectToAction("Index", "Home");
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                        var confirmationLink = Url.Action("ConfirmEmail", "Account",
+                            new { userId = user.Id, token = token }, Request.Scheme);
+
+                        _logger.Log(LogLevel.Warning, confirmationLink);
+
+                        if (_signManager.IsSignedIn(User) && User.IsInRole("Employee"))
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
+                        //ViewBag.ErrorTitle = "Registration successful";
+                        //ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
+                        //        "email, by clicking on the confirmation link we have emailed you";
+                        ModelState.AddModelError("Email", "Registration successful");
+                        ModelState.AddModelError("Email", "Before you can Login, please confirm your email, by clicking on the confirmation link we have emailed you");
+                        return View("EmailVerification");
                     }
                 }
                 else
@@ -348,6 +364,50 @@ namespace JobPortal.Controllers
                 await _context.SaveChangesAsync();
             }
             return RedirectToActionPermanent("EditProfile", "Account");
+        }
+
+        [HttpGet]
+        [Route("change-password")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("change-password")]
+
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                if (user == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                // ChangePasswordAsync changes the user password
+                var result = await _userManager.ChangePasswordAsync(user,
+                    model.Password, model.NewPassword);
+                // The new password did not meet the complexity rules or
+                // the current password is incorrect. Add these errors to
+                // the ModelState and rerender ChangePassword view
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View();
+                }
+
+                // Upon successfully changing the password refresh sign-in cookie
+                await _signManager.RefreshSignInAsync(user);
+                return View("ChangePasswordConfirmation");
+            }
+
+            return View(model);
         }
 
         [HttpGet]

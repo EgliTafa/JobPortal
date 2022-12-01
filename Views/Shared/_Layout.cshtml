@@ -89,10 +89,11 @@
                                 <div aria-labelledby="clientZone" class="dropdown-menu">
                                     <a asp-controller="Dashboard" asp-action="Index" class="dropdown-item">Dashboard</a>
                                     <a asp-controller="Account" asp-action="EditProfile" class="dropdown-item">Edit Profile</a>
-                                    @*<a asp-controller="Dashboard" asp-action="Applicants" class="dropdown-item">Applicants </a>
-                                        <a asp-controller="Job" asp-action="Create" class="dropdown-item">
-                                            Post a new job
-                                        </a>*@
+                                    
+                                    <a class="dropdown-item" asp-controller="Account"
+                                       asp-action="ChangePassword">
+                                        Change Password
+                                    </a>
                                     <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">Logout</a>
                                 </div>
                             </li>
@@ -113,6 +114,10 @@
                                 </a>
                                 <div aria-labelledby="clientZone" class="dropdown-menu">
                                     <a asp-controller="Account" asp-action="EditProfile" class="dropdown-item">Edit Profile</a>
+                                    <a class="dropdown-item" asp-controller="Account"
+                                       asp-action="ChangePassword">
+                                        Change Password
+                                    </a>
                                     <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit();">Logout</a>
                                 </div>
                             </li>
@@ -160,7 +165,6 @@
         @RenderBody()
     </div>
 
-    <!-- Remove the container if you want to extend the Footer to full width. -->
     <div class=" ">
 
         <!-- Footer -->
@@ -235,39 +239,6 @@
         <!-- Footer -->
 
     </div>
-    <!-- End of .container -->
-    @*<footer class="footer">
-        <div class="footer__block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 mb-5">
-                        <h3 style="color:snow;">About Us</h3>
-                        <ul>
-
-                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-
-
-                            <li><a asp-controller="Jobs" asp-action="Index">All Jobs</a></li>
-
-
-                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer__copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-md-left text-center">
-                        <p>&copy;2022</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>*@
-
     <script src="~/vendor/jquery/jquery.min.js"></script>
     <script src="~/vendor/popper.js/umd/popper.min.js"></script>
     <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>

@@ -1,0 +1,46 @@
+﻿
+.hiddenRow {
+    padding: 0 !important;
+}
+
+.ellipsis {
+    max-width: 300px;
+    max-height: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.fade-in {
+    animation: fadeIn 2s;
+    -webkit-animation: fadeIn 2s;
+    -moz-animation: fadeIn 2s;
+    -o-animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.badge{
+    display:none;
+}
+
+#pagingDropDownMenuBtn{
+    display:none;
+}
+
+.removed{
+    display:none;
+}
+
+tr:hover {
+    background-color: #ebebeb;
+    text-decoration:underline;
+}

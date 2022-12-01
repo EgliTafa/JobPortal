@@ -3,98 +3,52 @@
 @{ ViewBag.Title = "title"; Layout = "_Layout"; } 
 
 <head>
-    <style>
-        .remove-cell{
-            visibility:hidden;
-        }
-
-        @@media screen and (max-width: 600px){
-            .remove-cell{
-                visibility:visible
-            }
-        }
-
-        @@media screen and (max-width: 600px) {
-            .remove-frame {
-                display: none;
-            }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/ApplicantByJob.css" />
 </head>
 
-<section>
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <h1 class="heading">Applicants for the <span class="accent">@Model.Job.Title</span> position </h1>
-        </div>
-    </div>
+<section class="bg-light">
     <div class="container">
-        @if (Model.Applicants.Any())
-        {
-            @foreach (var applicant in Model.Applicants)
-            {
-                <div class="row">
-                    <div class="col-lg-6">
-                        <br /><br /><br /><br />
-                        <table style="width:100%;" class="table table-striped table-responsive-xxl">
-                            <tr>
-                                <td style="white-space:nowrap;"><strong>First Name: </strong></td>
-                                <th></th>
-                                <th style="text-transform:capitalize;">@applicant.User.FirstName</th>
-                            </tr>
-                            <tr>
-                                <td style="white-space:nowrap;"><strong>Last Name: </strong></td>
-                                <th></th>
-                                <th style="text-transform:capitalize;">@applicant.User.LastName</th>
-                            </tr>
-                            <tr>
-                                <td style="white-space:nowrap;"><strong>Gender: </strong></td>
-                                <th></th>
-                                <th style="text-transform:capitalize;">@applicant.User.Gender</th>
-                            </tr>
-                            <tr>
-                                <td style="white-space:nowrap;"><strong>E-Mail: </strong></td>
-                                <th></th>
-                                <th style="text-transform:capitalize;"><email>@applicant.User.Email</email></th>
-                            </tr>
-                            <tr>
-                                <td><strong>Phone Number</strong></td>
-                                <th></th>
-                                <th style="text-transform:capitalize;"><a href="tel:@applicant.User.PhoneNumber">@applicant.User.PhoneNumber</a></th>
-                            </tr>
-                            <tr>
-                                <td><strong>Applied At:</strong></td>
-                                <th></th>
-                                <th style="text-transform:capitalize;">@applicant.Job.Title</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Applied:</strong></td>
-                                <th></th>
-                                <th style="text-transform:capitalize;">@applicant.CreatedAt.Humanize()</th>
-                            </tr>
-                            <tr class="remove-cell">
-                                <td><strong>Applicant CV:</strong></td>
-                                <th></th>
-                                <th><a href="@applicant.CVPath">View CV</a></th>
-                            </tr>
-                        </table>
-                    </div>
+        <div class="row">
+            <div class="col-lg-12 mb-4 mb-sm-5">
+                <div class="card card-style1 border-0">
+                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                        <div class="row align-items-center">
+                            @if (Model.Applicants.Any())
+                            {
+                                @foreach (var applicant in Model.Applicants)
+                                {
+                                    @*<div class="col-lg-6 mb-4 mb-lg-0">
+                                        <iframe style="width:100%; height:600px;" id="iframepdf" src="@applicant.CVPath"></iframe>
+                                    </div>*@
 
-                    <div class="col-lg-6 remove-frame">
-                        <div class="col">
-                            <div class="box-image applicant">
-                                <iframe style="width:100%; height:450px;" id="iframepdf" src="@applicant.CVPath"></iframe>
-                                <div class="d-flex justify-content-between">
-                                    <p class="intro"></p>
-                                </div>
-                            </div>
+                                    <div class="col-lg-6 px-xl-10">
+                                        <div class="bg-secondary d-lg-inline-block mb-1-9 ml-1 rounded" style="width:100%;">
+                                            <br />
+                                            <h3 class="h2 text-white m-1 mb-0">@applicant.User.FirstName @applicant.User.LastName</h3>
+                                            <br />
+                                            @*<span class="text-primary">Coach</span>*@
+                                        </div>
+                                        <br />
+                                        <ul class=" mb-1-9">
+                                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Gender:</span> <span>@applicant.User.Gender</span></li>
+                                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone Number:</span> <span><a href="tel:@applicant.User.PhoneNumber">@applicant.User.PhoneNumber</a></span></li>
+                                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> <span><email>@applicant.User.Email</email></span></li>
+                                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Applicant CV:</span> <span><a href="@applicant.CVPath" target="_blank">View CV</a></span></li>
+                                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Applied At:</span> <span>@applicant.Job.Title</span></li>
+                                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Applied:</span> <span style="text-transform:capitalize;">@applicant.CreatedAt.Humanize()</span></li>
+                                        </ul>
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-6 mb-4 mb-lg-0" style="display:flex; justify-content:center;">
+                                        <img style="width:300px; height:300px;" src="@applicant.User.ImagePath" />
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
-
                 </div>
-                <hr />
-            }
-        }
-
+            </div>
+        </div>
     </div>
 </section>
