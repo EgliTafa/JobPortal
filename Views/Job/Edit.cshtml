@@ -6,7 +6,7 @@
 <section>
     <div class="container rounded bg-white mt-5 mb-5">
         
-        <form asp-action="Edit" asp-controller="Job" enctype="multipart/form-data">
+        <form name="form1" asp-action="Edit" asp-controller="Job" enctype="multipart/form-data">
             @*<div>
                 <a asp-action="Index">Back to List</a>
             </div>*@
@@ -154,7 +154,6 @@
     </div>
 </section>
 <hr />
-    
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
