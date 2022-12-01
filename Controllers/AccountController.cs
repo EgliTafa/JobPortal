@@ -315,7 +315,6 @@ namespace JobPortal.Controllers
             await _signManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-        int nothing = -;
         //[Authorize(Roles = "Employee")]
         [HttpGet]
         [Route("employee/edit-profile")]
