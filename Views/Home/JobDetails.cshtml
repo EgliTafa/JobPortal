@@ -43,11 +43,11 @@
 
 
 <section>
-    <div class="container">
+    <div class="container order-container">
         <div class="row">
             <div class="col-md-5">
                 <h3 style="text-align:center;">Job Details</h3>
-                <div class="project-info-box">
+                <div class="project-info-box one">
                     <p style="text-transform:capitalize;"><b>Category:</b> @Model.Job.Category</p>
                     <p><b>Last Date:</b> @Model.Job.LastDate.ToString("dd/MM/yyyy")</p>
                     <p><b>Salary:</b> @Model.Job.Salary LEK</p>
@@ -57,14 +57,14 @@
                 </div>
                 <br />
                 <h3 style="text-align:center;">Company Details</h3>
-                <div class="project-info-box">
+                <div class="project-info-box two">
                     <p style="text-transform:capitalize;"><b>Employer:</b> @Model.Job.CompanyName</p>
                     <p><b>Employer Website:</b> <a href="@Model.Job.Website" target="_blank">@Model.Job.CompanyName Website</a></p>
                     <p class="mb-0" style="text-transform:capitalize; white-space:pre-line;"><b>Company Description: </b> @Model.Job.CompanyDescription</p>
                 </div>
 
                 @*<h3 style="text-align:center;">Apply Now</h3>*@
-                <div class="project-info-box">
+                <div class="project-info-box three">
                     <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
                         @if (SignInManager.IsSignedIn(User))
                         {

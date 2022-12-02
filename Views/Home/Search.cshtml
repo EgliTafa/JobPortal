@@ -6,6 +6,10 @@
     Layout = "_Layout";
 }
 
+<head>
+    <link rel="stylesheet" href="~/css/Jobs-Index.css" />
+</head>
+
 <section class="job-form-section job-form-section--compressed">
     <div class="container">
         <h4 class="heading">Find a <span class="accent">job </span> you will <span class="accent">love</span></h4>
@@ -56,24 +60,30 @@
                                      alt="Ipsioou " class="img-fluid">
                             </div>
                             <div class="col-10">
-                                <h4 class="job__title">
+                                <h4 class="job__title move-left-mobile">
                                     <a href="/jobs/@job.Id/details">
                                         >
                                         @job.Title
                                     </a>
                                 </h4>
-                                <p class="job__company">
+                                <span class="job__company" style="display:none;">
                                     @job.CompanyName
-                                </p>
+                                </span>
+                                <span class="job__company col-md-5" style="text-transform:capitalize;">
+                                    Profesioni: <span style="font-weight:bold;"> @job.Category</span>
+                                </span>
+                                <span class="col-md-5">
+                                    Education: <span style="font-weight:bold; font-size:13px;"> @job.Education</span>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="col-10 col-md-3 col-lg-2 ml-auto">
-                        <i class="fa fa-map-marker job__location"></i>
+                        <i class="fa fa-map-marker job__location" style="margin-left:5%;"></i>
                         @job.Location
                     </div>
                     <div class="col-10 col-md-3 col-lg-3 ml-auto">
-                        <p>Posted @job.CreatedAt.Humanize()</p>
+                        <p style="margin-left:5%;">Posted @job.CreatedAt.Humanize()</p>
                     </div>
                 </div>
             </div>

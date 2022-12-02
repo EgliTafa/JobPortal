@@ -1,0 +1,15 @@
+﻿.inline{
+	display:inline;
+}
+
+.jobCategorySpan{
+	text-transform: capitalize;
+	font-weight: bold;
+}
+
+@media screen and (max-width: 480px) {
+	.move-left-mobile {
+		margin-left: 15%;
+		border:none;
+	}
+}
