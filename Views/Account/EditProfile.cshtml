@@ -147,6 +147,7 @@
                                         <div> <label>Change Profile Picture</label></div>
                                         <div>
                                             <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
+                                            <input asp-for="ImagePath" type="hidden" value="@Model.ImagePath" />
                                         </div>
                                     </div>
                                 </div>

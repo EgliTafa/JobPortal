@@ -15,7 +15,6 @@ namespace JobPortal.Models
         //public string Email { get; set; }
         [Required]
         public string CVPath { get; set; }
-
         public string ProfilePicture { get; set; }
         public DateTime CreatedAt { get; set; }
     }
