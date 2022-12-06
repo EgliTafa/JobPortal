@@ -418,9 +418,7 @@ b, strong {
     font-weight: 700 !important;
 }
 
-@media screen and (max-width: 531px) {
-    .container {
-        display: flex;
-        flex-flow: column-reverse;
-    }
+.right {
+    display: flex;
+    float: right;
 }

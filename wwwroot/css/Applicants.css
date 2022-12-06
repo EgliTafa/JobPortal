@@ -10,13 +10,13 @@
     visibility: hidden;
 }
 
-@@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .remove-cell {
         visibility: visible
     }
 }
 
-@@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .remove-frame {
         display: none;
     }

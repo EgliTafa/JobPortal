@@ -14,57 +14,77 @@
     <link rel="stylesheet" href="~/css/JobDetails.css" />
     <link rel="stylesheet" href="~/css/ApplyJobPopup.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+       .center{
+           display:flex;
+           justify-content:center;
+       }
+
+       .left{
+           display:flex;
+           justify-content:end;
+       }
+        @@media screen and (max-width: 600px){
+            .row {
+                display: flex;
+                flex-direction: row;
+            }
+
+                .row :nth-child(1) {
+                    order: 3;
+                }
+
+                .row :nth-child(2) {
+                    order: 1;
+                }
+
+                .row :nth-child(3) {
+                    order: 2;
+                }
+        }
+    </style>
 </head>
 
-<section class="bg-light-gray">
-    <div class="container">
-        <h2 class="heading">
-            @Model.Job.Title<br>
-            <small>at <a href=""> @Model.Job.CompanyName</a></small>
-        </h2>
-        <div class="job-detail-description">
-            <i class="fa fa-map-marker job__location"> </i>
-            @Model.Job.Location | Posted @Model.Job.CreatedAt.Humanize() |
-            @if (Model.Job.Type == "Full time")
-            {
-                <span class="badge featured-badge badge-success">Full time</span>
-            }
-            else if (Model.Job.Type == "Part time")
-            {
-                <span class="badge featured-badge badge-primary">Part time</span>
-            }
-            else
-            {
-                <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
-            }
-        </div>
-    </div>
-</section>
-
-
 <section>
-    <div class="container order-container">
+    <div class="container ">
+
+        <div>
+            <div class="container">
+                <h3 style="text-align:center;">
+                    @Model.Job.Title
+                </h3>
+                <sub class="center">
+                    <i class="fa fa-map-marker job__location"> </i>
+                    @Model.Job.Location | Posted @Model.Job.CreatedAt.Humanize() |
+                </sub>
+            </div>
+            <div class="center">
+                <img style="max-width: 100%; height: auto; -webkit-backface-visibility: hidden; width:650px; height:400px;" src="@Model.Job.PosterImageURl" alt="project-image" class="rounded img-details">
+
+            </div>
+        </div>
+        <br />
         <div class="row">
             <div class="col-md-5">
-                <h3 style="text-align:center;">Job Details</h3>
-                <div class="project-info-box one">
+                <br />
+                @*<h3 style="text-align:center;">Job Details</h3>*@
+                <div class="project-info-box container" id="c">
                     <p style="text-transform:capitalize;"><b>Category:</b> @Model.Job.Category</p>
                     <p><b>Last Date:</b> @Model.Job.LastDate.ToString("dd/MM/yyyy")</p>
                     <p><b>Salary:</b> @Model.Job.Salary LEK</p>
+                    <p><b>Job Type: </b>@Model.Job.Type</p>
                     <p style="text-transform:capitalize;"><b>Education:</b> @Model.Job.Education</p>
                     <p style="text-transform:capitalize;"><b>Preferred Age:</b> @Model.Job.PreferredAge</p>
                     <p class="mb-0" style="text-transform:capitalize;"><b>View Count: </b> @Model.Job.ViewCount</p>
                 </div>
                 <br />
                 <h3 style="text-align:center;">Company Details</h3>
-                <div class="project-info-box two">
+                <div class="project-info-box container hidden" id="a">
                     <p style="text-transform:capitalize;"><b>Employer:</b> @Model.Job.CompanyName</p>
                     <p><b>Employer Website:</b> <a href="@Model.Job.Website" target="_blank">@Model.Job.CompanyName Website</a></p>
                     <p class="mb-0" style="text-transform:capitalize; white-space:pre-line;"><b>Company Description: </b> @Model.Job.CompanyDescription</p>
-                </div>
 
-                @*<h3 style="text-align:center;">Apply Now</h3>*@
-                <div class="project-info-box three">
                     <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -92,7 +112,7 @@
                                         <br />
                                     </div>
 
-                                </div> 
+                                </div>
 
                                 <input style="width:100%;" type="button" id="myBtn" class="btn btn-outline-white-primary"
                                        value="Apply Now" />
@@ -102,12 +122,13 @@
                     </form>
                     <br />
                     <a style="width:100%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi Kompaninë</a>
-                </div>
 
+                </div>
+                
             </div>
 
-            <div class="col-md-7">
-                <img style="max-width: 100%; height: auto; -webkit-backface-visibility: hidden; width:650px; height:400px;" src="@Model.Job.PosterImageURl" alt="project-image" class="rounded img-details">
+            <div class="col-md-7 container" id="a">
+                <br />
                 <div class="project-info-box">
                     <p style=" white-space: pre-line;">@Model.Job.Description</p>
                 </div>
