@@ -13,3 +13,66 @@
 		border:none;
 	}
 }
+
+.icon {
+	display: flex;
+	justify-content: center;
+	background-color: white;
+	color: black;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+}
+
+.card-body {
+	width: 100%;
+	display: inline;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.card:hover {
+	border-color: orange;
+	color: black;
+}
+
+.card-title:hover {
+	color: orange;
+}
+
+a {
+	text-decoration: none;
+	color: lightgray;
+}
+
+.newJobPosting {
+	display: flex;
+	justify-content: end;
+	color: white;
+	font-weight: bolder;
+}
+
+.newText {
+	background-color: darkred;
+}
+
+.go-left {
+	margin: 0 auto;
+	margin-left: 90px;
+}
+
+.card-image {
+	width: 100px;
+	height: 80px;
+	margin: 5px;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+	margin-left: 80px;
+}

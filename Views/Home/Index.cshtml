@@ -42,7 +42,18 @@
 
         a{
             text-decoration:none;
-            color:black;
+            color:lightgray;
+        }
+
+        .newJobPosting{
+            display:flex;
+            justify-content:end;
+            color:white;
+            font-weight:bolder;
+        }
+
+        .newText{
+            background-color:darkred;
         }
     </style>
 </head>
@@ -129,52 +140,6 @@
         </div>
     </section>
 
-    @*<section class="">
-        <div class="container">
-            <h3 class="heading">Most Popular Jobs</h3>
-            <div class="row featured align-items-stretch table-responsive-lg">
-                <table class="table  bg-gradient">
-                    <tr>
-                        <th class="ellipsis removed" scope="col"></th>
-                        <th class="removed" scope="col"></th>
-                        <th class="removed" scope="col"></th>
-                        <th class="removed" scope="col"></th>
-                        <th class="removed" scope="col"></th>
-                        <th class="removed" scope="col"></th>
-                    </tr>
-
-                    @foreach (var job in Model.JobList)
-                    {
-                        <tr>
-                            <td>
-                                <div class="top">
-                                    <a href="#">
-                                        <div class="bg"></div>
-                                        <div class="logo">
-                                            <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
-                                                <img class="ellipsis" src="@job.PosterImageURl" alt="" style="max-width: 100px;">
-                                            </a>
-                                        </div>
-                                    </a>
-                                </div>
-                            </td>
-                            <td><a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">@job.Title</a></td>
-                            <td class="ellipsis text-capitalize">@job.Category</td>
-                            <td class="ellipsis">@job.Description</td>
-                            <td>@job.Salary LEK</td>
-                            <td>@job.Location</td>
-                        </tr>
-
-                    }
-                </table>
-                <paging total-records="Model.TotalRecords"
-                        page-no="Model.P"
-                        page-size="Model.S">
-                </paging>
-            </div>
-        </div>
-    </section>*@
-
     <section class="">
         <div class="container" >
             <div class="row">
@@ -185,15 +150,31 @@
                             <div class="card">
                                 <div class="row no-gutters w-100 h-75">
                                     <div class="">
-                                        <img class="card-img" src="@job.PosterImageURl" style="width:100px; height:80px; margin:5px;">
+                                        <img class="card-img rounded-1" src="@job.PosterImageURl" style="width:100px; height:80px; margin:5px;">
                                     </div>
                                     <div class="text-left">
                                         <div class="card-body" style="position:absolute; right:0;">
                                             <h5 class="card-title" style="display:flex; justify-content:center; margin-left:80px;">@job.Category</h5>
-                                            
+
                                             <span style="margin:0 auto; margin-left:90px;"><i class="fa fa-map-marker"></i> @job.Location</span>
-                                            
+
+                                            <span style="margin:0 auto;"><i class="fa fa-eye"></i> @job.ViewCount</span>
+
                                             <span style="text-transform: capitalize; text-align: right; "><i class="fa fa-clock-o"></i>  @job.CreatedAt.Humanize()</span>
+
+                                            @if ((DateTime.Now - job.CreatedAt).TotalDays < 7)
+                                            {
+                                                <div class="newJobPosting">
+                                                    <div class="newText">
+                                                        <i class="fa fa-star"></i>E Re &nbsp;
+                                                    </div>
+                                                </div>
+                                            }
+                                            <div class="newJobPosting" style="visibility:hidden;">
+                                                <div class="newText">
+                                                    <i class="fa fa-star"></i>E Re &nbsp;
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -203,31 +184,6 @@
                     }
                 </div>
             </div>
-            <br />
-            @*<div class="row">
-                <div class="col-md">
-                    <img src="~/demo.png" />
-                </div>
-                <div class="col-md">
-                    <img src="~/demo.png" />
-                </div>
-                <div class="col-md-2">
-                    <img src="~/demo.png" />
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md">
-                    <img src="~/demo.png" />
-                </div>
-                <div class="col-md">
-                    <img src="~/demo.png" />
-                </div>
-                <div class="col-md-2">
-                    <img src="~/demo.png" />
-                </div>
-            </div>*@
-            <br />
         </div>
     </section>
 </body>

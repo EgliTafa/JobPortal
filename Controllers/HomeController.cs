@@ -35,7 +35,8 @@ namespace JobPortal.Controllers
                 .ToList();
 
             JobList = await _context.Jobs
-                        .OrderByDescending(x => x.ViewCount)
+                        //.OrderByDescending(x => x.ViewCount)
+                        .OrderByDescending(x => x.CreatedAt)
                         //.Skip((p - 1) * s)
                         //.Take(s)
                         .ToListAsync();

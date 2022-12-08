@@ -8,6 +8,71 @@
 
 <head>
     <link rel="stylesheet" href="~/css/Jobs-Index.css" />
+
+    <style>
+        .icon {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            color: black;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-body {
+            width: 100%;
+            display: inline;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .card:hover {
+            border-color: orange;
+            color: black;
+        }
+
+        .card-title:hover {
+            color: orange;
+        }
+
+        a {
+            text-decoration: none;
+            color: lightgray;
+        }
+
+        .newJobPosting {
+            display: flex;
+            justify-content: end;
+            color: white;
+            font-weight: bolder;
+        }
+
+        .newText {
+            background-color: darkred;
+        }
+
+        .go-left {
+            margin: 0 auto;
+            margin-left: 90px;
+        }
+
+        .card-image {
+            width: 100px;
+            height: 80px;
+            margin: 5px;
+        }
+
+        .title {
+            display: flex;
+            justify-content: center;
+            margin-left: 80px;
+        }
+    </style>
 </head>
 
 <section class="job-form-section job-form-section--compressed">
@@ -51,42 +116,41 @@
         <h3 class="heading">We have found <span class="accent">@Model.Count()</span> jobs</h3>
         @foreach (var job in Model)
         {
-            <div class="job-listing  ">
-                <div class="row">
-                    <div class="col-md-12 col-lg-6">
-                        <div class="row">
-                            <div class="col-2">
-                                <img style="max-width:80px;" src="@job.PosterImageURl"
-                                     alt="Ipsioou " class="img-fluid">
-                            </div>
-                            <div class="col-10">
-                                <h4 class="job__title move-left-mobile">
-                                    <a href="/jobs/@job.Id/details">
-                                        >
-                                        @job.Title
-                                    </a>
-                                </h4>
-                                <span class="job__company" style="display:none;">
-                                    @job.CompanyName
-                                </span>
-                                <span class="job__company col-md-5" style="text-transform:capitalize;">
-                                    Profesioni: <span style="font-weight:bold;"> @job.Category</span>
-                                </span>
-                                <span class="col-md-5">
-                                    Education: <span style="font-weight:bold; font-size:13px;"> @job.Education</span>
-                                </span>
+            <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
+                <div class="card">
+                    <div class="row no-gutters w-100 h-75">
+                        <div class="">
+                            <img class="card-img rounded-1 card-image" src="@job.PosterImageURl">
+                        </div>
+                        <div class="text-left">
+                            <div class="card-body" style="position:absolute; right:0;">
+                                <h5 class="card-title title">@job.Category</h5>
+
+                                <span class="go-left"><i class="fa fa-map-marker"></i> @job.Location</span>
+
+                                <span><i class="fa fa-eye"></i> @job.ViewCount</span>
+
+                                <span style="text-transform: capitalize; "><i class="fa fa-clock-o"></i>  @job.CreatedAt.Humanize()</span>
+
+                                @if ((DateTime.Now - job.CreatedAt).TotalDays < 7)
+                                {
+                                    <div class="newJobPosting">
+                                        <div class="newText">
+                                            <i class="fa fa-star"></i>E Re &nbsp;
+                                        </div>
+                                    </div>
+                                }
+                                <div class="newJobPosting" style="visibility:hidden;">
+                                    <div class="newText">
+                                        <i class="fa fa-star"></i>E Re &nbsp;
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-10 col-md-3 col-lg-2 ml-auto">
-                        <i class="fa fa-map-marker job__location" style="margin-left:5%;"></i>
-                        @job.Location
-                    </div>
-                    <div class="col-10 col-md-3 col-lg-3 ml-auto">
-                        <p style="margin-left:5%;">Posted @job.CreatedAt.Humanize()</p>
-                    </div>
                 </div>
-            </div>
+            </a>
+            <br />
         }
     </div>
 </section>
