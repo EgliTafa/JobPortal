@@ -18,16 +18,11 @@
                             {
                                 @foreach (var applicant in Model.Applicants)
                                 {
-                                    @*<div class="col-lg-6 mb-4 mb-lg-0">
-                                        <iframe style="width:100%; height:600px;" id="iframepdf" src="@applicant.CVPath"></iframe>
-                                    </div>*@
-
                                     <div class="col-lg-6 px-xl-10">
                                         <div class="bg-secondary d-lg-inline-block mb-1-9 ml-1 rounded" style="width:100%;">
                                             <br />
                                             <h3 class="h2 text-white m-1 mb-0">@applicant.User.FirstName @applicant.User.LastName</h3>
                                             <br />
-                                            @*<span class="text-primary">Coach</span>*@
                                         </div>
                                         <br />
                                         <ul class=" mb-1-9">

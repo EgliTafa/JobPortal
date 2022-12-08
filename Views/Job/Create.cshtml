@@ -52,10 +52,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6 form-group @Html.AddClassIfPropertyInError(x => x.PreferredAge, "is-invalid")">
+                            <div class="col-lg-6 form-group">
                                 @Html.LabelFor(c => c.PreferredAge)
-                                @Html.TextBoxFor(m => m.PreferredAge, new { @class = "form-control" })
-                                <span class="help-inline">@Html.ValidationMessageFor(x => x.PreferredAge)</span>
+                                <select id="type" name="PreferredAge" placeholder="Preferred Age"
+                                        class="form-control">
+                                    <option value="18-21">18-21</option>
+                                    <option value="21-25">21-25</option>
+                                    <option value="25-30">25-30</option>
+                                    <option value="30-35">30-35</option>
+                                </select>
                             </div>
                             <div class="col-lg-6 form-group">
                                 @Html.LabelFor(c => c.Education)
@@ -90,7 +95,7 @@
                             <div class="col-lg-6 form-group">
                                 @Html.LabelFor(c => c.Type)
                                 <select id="type" name="Type" placeholder="Choose job type"
-                                        class="form-control select2">
+                                        class="form-control">
                                     <option value="Full time">Full time</option>
                                     <option value="Part time">Part time</option>
                                     <option value="Internship">Internship</option>
@@ -100,7 +105,7 @@
                                 <label for="category">Category</label>
                                 @*@Html.LabelFor(c => c.Categoy)*@
                                 <select id="category" name="category" placeholder="Choose category"
-                                        class="form-control select2">
+                                        class="form-control">
                                     <option value="web-design">Web design</option>
                                     <option value="graphic-design">Graphic design</option>
                                     <option value="web-development">Web development</option>

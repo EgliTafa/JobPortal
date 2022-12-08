@@ -35,7 +35,7 @@
                             <div class="row">
                                 <div class="form-outline col-md-6 mb-4 form-group">
                                     @Html.LabelFor(c => c.Email)
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email" ,@required = "required" })
                                 </div>
 
                                 <div class="form-outline col-md-6 mb-4 form-group">
@@ -55,13 +55,6 @@
                                     @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
                                 </div>
                             </div>
-
-                            @*<div class="row">
-                                <div class="form-outline col-md-12 mb-4 form-group">
-                                    @Html.LabelFor(c => c.Description)
-                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-                                </div>
-                            </div>*@
 
                             <div>
                                 <div> <label asp-for="Photo"></label></div>

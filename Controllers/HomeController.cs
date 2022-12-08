@@ -36,8 +36,8 @@ namespace JobPortal.Controllers
 
             JobList = await _context.Jobs
                         .OrderByDescending(x => x.ViewCount)
-                        .Skip((p - 1) * s)
-                        .Take(s)
+                        //.Skip((p - 1) * s)
+                        //.Take(s)
                         .ToListAsync();
 
             var model = new TrendingJobViewModel

@@ -2,33 +2,71 @@
 @using Humanizer
 @using Microsoft.AspNetCore.Mvc.RazorPages;
 @{
-        ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/Home-Index.css" />
+
+    <style>
+        .icon {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            color: black;
+        }
+
+        .center{
+            display:flex;
+            justify-content:center;
+        }
+
+        .card-body{
+            width:100%;
+            display:inline;
+        }
+
+        .text-left{
+            text-align:left;
+        }
+
+        .card:hover{
+            border-color:orange;
+            color:black;
+        }
+
+        .card-title:hover {
+            color: orange;
+        }
+
+        a{
+            text-decoration:none;
+            color:black;
+        }
+    </style>
 </head>
 
-<section class="job-form-section job-form-section--image">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="job-form-box">
-                    <h2 class="heading">
-                        Find a <span class="accent">job</span> you will
-                        <span class="accent">love</span>.
-                    </h2>
-                    <form id="job-main-form" method="get" asp-controller="Home" asp-action="Search" class="job-main-form">
-                        <div class="controls">
-                            <div class="row align-items-center">
-                                <div class="col-md-5">
-                                    <div class="form-group fade-in">
-                                        <input type="text" id="profession" name="SearchString"
-                                               placeholder="Search by Keyword" class="form-control rounded-lg">
+<body>
+    <section class="job-form-section job-form-section--image">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="job-form-box">
+                        <h2 class="heading">
+                            Find a <span class="accent">job</span> you will
+                            <span class="accent">love</span>.
+                        </h2>
+                        <form id="job-main-form" method="get" asp-controller="Home" asp-action="Search" class="job-main-form">
+                            <div class="controls">
+                                <div class="row align-items-center">
+                                    <div class="col-md-5">
+                                        <div class="form-group fade-in">
+                                            <input type="text" id="profession" name="SearchString"
+                                                   placeholder="Search by Keyword" class="form-control rounded-lg">
+                                        </div>
                                     </div>
-                                </div>
-                                  <div class="col-md-5 fade-in">
+                                    <div class="col-md-5 fade-in">
                                         <div class="form-group">
                                             <select typeof="text" name="searchCategory" class="form-control rounded-lg" id="location">
                                                 <option value="" disabled selected>Select By Category</option>
@@ -41,62 +79,155 @@
                                             </select>
                                         </div>
                                     </div>
-                                <div class="col-md-2 fade-in" style="margin-bottom:30px">
-                                    <button type="submit"
-                                            class="btn btn-outline-white-primary job-main-form__button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                                    <div class="col-md-2 fade-in" style="margin-bottom:30px">
+                                        <button type="submit"
+                                                class="btn btn-outline-white-primary job-main-form__button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="bg-light-gray">
-    <div class="container">
-        <h3 class="heading">Most Popular Jobs</h3>
-        <div class="row featured align-items-stretch table-responsive-lg">
-            <table class="table  bg-gradient">
-                <tr>
-                    <th class="ellipsis removed" scope="col"></th>
-                    <th class="removed" scope="col"></th>
-                    <th class="removed" scope="col"></th>
-                    <th class="removed" scope="col"></th>
-                    <th class="removed" scope="col"></th>
-                    <th class="removed" scope="col"></th>
-                </tr>
+    </section>
 
-                @foreach (var job in Model.JobList)
-                {
-            <tr>
-                <td>
-                    <div class="top">
-                        <a href="#">
-                            <div class="bg"></div>
-                            <div class="logo">
-                                <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
-                                    <img class="ellipsis" src="@job.PosterImageURl" alt="" style="max-width: 100px;">
-                                </a>
+    <!-- Features section-->
+    <section class="py-5 border-bottom" id="features">
+        <div class="container px-5 my-5">
+            <div class="row gx-5">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    @*<div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa fa-building"></i></div>*@
+                    <h2 class="h4 fw-bolder center">Featured title</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    @*<a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="bi bi-arrow-right"></i>
+                        </a>*@
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    @*<div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa fa-building"></i></div>*@
+                    <h2 class="h4 fw-bolder center">Featured title</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    @*<a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="bi bi-arrow-right"></i>
+                        </a>*@
+                </div>
+                <div class="col-lg-4">
+                    @*<div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa fa-building"></i></div>*@
+                    <h2 class="h4 fw-bolder center">Featured title</h2>
+                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                    @*<a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="fa fa-arrow-circle-o-right"></i>
+                        </a>*@
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*<section class="">
+        <div class="container">
+            <h3 class="heading">Most Popular Jobs</h3>
+            <div class="row featured align-items-stretch table-responsive-lg">
+                <table class="table  bg-gradient">
+                    <tr>
+                        <th class="ellipsis removed" scope="col"></th>
+                        <th class="removed" scope="col"></th>
+                        <th class="removed" scope="col"></th>
+                        <th class="removed" scope="col"></th>
+                        <th class="removed" scope="col"></th>
+                        <th class="removed" scope="col"></th>
+                    </tr>
+
+                    @foreach (var job in Model.JobList)
+                    {
+                        <tr>
+                            <td>
+                                <div class="top">
+                                    <a href="#">
+                                        <div class="bg"></div>
+                                        <div class="logo">
+                                            <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
+                                                <img class="ellipsis" src="@job.PosterImageURl" alt="" style="max-width: 100px;">
+                                            </a>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                            <td><a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">@job.Title</a></td>
+                            <td class="ellipsis text-capitalize">@job.Category</td>
+                            <td class="ellipsis">@job.Description</td>
+                            <td>@job.Salary LEK</td>
+                            <td>@job.Location</td>
+                        </tr>
+
+                    }
+                </table>
+                <paging total-records="Model.TotalRecords"
+                        page-no="Model.P"
+                        page-size="Model.S">
+                </paging>
+            </div>
+        </div>
+    </section>*@
+
+    <section class="">
+        <div class="container" >
+            <div class="row">
+                <div class="col-md">
+                    @foreach (var job in Model.JobList)
+                    {
+                        <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
+                            <div class="card">
+                                <div class="row no-gutters w-100 h-75">
+                                    <div class="">
+                                        <img class="card-img" src="@job.PosterImageURl" style="width:100px; height:80px; margin:5px;">
+                                    </div>
+                                    <div class="text-left">
+                                        <div class="card-body" style="position:absolute; right:0;">
+                                            <h5 class="card-title" style="display:flex; justify-content:center; margin-left:80px;">@job.Category</h5>
+                                            
+                                            <span style="margin:0 auto; margin-left:90px;"><i class="fa fa-map-marker"></i> @job.Location</span>
+                                            
+                                            <span style="text-transform: capitalize; text-align: right; "><i class="fa fa-clock-o"></i>  @job.CreatedAt.Humanize()</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </a>
-                    </div>
-                </td>
-                <td><a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">@job.Title</a></td>
-                <td class="ellipsis text-capitalize">@job.Category</td>
-                <td class="ellipsis">@job.Description</td>
-                <td>@job.Salary LEK</td>
-                <td>@job.Location</td>
-            </tr>
-
-                }
-            </table>  
-            <paging total-records="Model.TotalRecords"
-                    page-no="Model.P"
-                    page-size="Model.S">
-            </paging>
+                        <br />
+                    }
+                </div>
+            </div>
+            <br />
+            @*<div class="row">
+                <div class="col-md">
+                    <img src="~/demo.png" />
+                </div>
+                <div class="col-md">
+                    <img src="~/demo.png" />
+                </div>
+                <div class="col-md-2">
+                    <img src="~/demo.png" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md">
+                    <img src="~/demo.png" />
+                </div>
+                <div class="col-md">
+                    <img src="~/demo.png" />
+                </div>
+                <div class="col-md-2">
+                    <img src="~/demo.png" />
+                </div>
+            </div>*@
+            <br />
         </div>
-    </div>
-</section>
+    </section>
+</body>

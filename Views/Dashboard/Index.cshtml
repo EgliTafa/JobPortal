@@ -5,125 +5,169 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h1 class="heading">dashboard</h1>
-                <p class="lead text-center">All created jobs</p>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        .inline {
+            display:inline;
+            justify-content:end;
+        }
+
+        table td{
+            white-space:nowrap;
+        }
+
+
+
+        @@media screen and (max-width: 600px) {
+            .btn-sm {
+                width:30%;
+                white-space:nowrap;
+                overflow:hidden;
+            }
+
+            .col-10 {
+                width: 150%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="heading">dashboard</h2>
+                    <p class="lead text-center">All created jobs</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-right mb-5">
-                <a asp-controller="Job"
-                   asp-action="Create"
-                   class="btn btn-outline-white-primary">
-                    <i class="fa fa-plus"></i>Add new position
-                </a>
-            </div>
-            <div class="col-lg-12">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-client-dashboard">
-                        <thead>
-                            <tr>
-                                <th>Job title</th>
-                                <th>Position filled</th>
-                                <th>Date posted</th>
-                                <th>Date expiring</th>
-                                <th>Applicants</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var job in Model)
-                            {
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <a asp-controller="Job"
+                       asp-action="Create"
+                       class="btn btn-outline-white-primary">
+                        <i class="fa fa-plus"></i>Add new position
+                    </a>
+                </div>
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-light table-hover ">
+                            <thead>
                                 <tr>
-                                    <th>
-                                        <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">@job.Title</a>
-                                    </th>
-                                    <td>
-                                        @if (job.Filled)
-                                        {
-                                            <span class="badge badge-success">Filled</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-secondary">Not Filled</span>
-                                        }
-                                    </td>
-                                    <td>@job.CreatedAt</td>
-                                    <td>@job.LastDate</td>
-                                    <td>
-                                        <a asp-controller="Dashboard"
-                                           asp-action="ApplicantsByJob"
-                                           asp-route-id="@job.Id"
-                                           class="btn btn-success">
-                                            <i class="fa fa-users"></i>@job.Applicants.Count()
-                                            <span class="hidden-xs hidden-sm">Applicants</span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a asp-controller="Job"
-                                           asp-action="Edit"
-                                           asp-route-id="@job.Id"
-                                           class="btn btn-outline-white-secondary">
-                                            <i class="fa fa-edit"></i>Edit
-                                        </a>
-                                        <br>
-                                        @if (job.Filled)
-                                        {
-                                            <a href="#"
-                                               class="btn btn-outline-white-secondary">
-                                                <i class="fa fa-check-circle-o"></i>
-                                                <span class="hidden-xs hidden-sm">Filled</span>
-                                            </a><br>
-                                        }
-                                        else
-                                        {
+                                    <th style="display:flex; width:390px; justify-content:center;">Job title</th>
+                                    <th style="white-space: nowrap;">Position filled</th>
+                                    <th>Date posted</th>
+                                    @*<th>Date expiring</th>*@
+                                    <th>Applicants</th>
+                                    @*<th>Actions</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var job in Model)
+                                {
+                                    <tr>
+                                        <th>
+                                            <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">@job.Title</a>
+                                            <br />
+                                            <br />
                                             <a asp-controller="Job"
-                                               asp-action="MarkAsFilled"
+                                               asp-action="Edit"
+                                               asp-route-id="@job.Id"
+                                               class="btn btn-sm btn-outline-warning">
+                                                <i class="fa fa-edit"></i>Edit
+                                            </a>
+
+                                            @if (job.Filled)
+                                            {
+                                                <a href="#"
+                                                   class="btn btn-sm btn-outline-success">
+                                                    <i class="fa fa-check-circle-o"></i>
+                                                    <span class="hidden-xs hidden-sm">Filled</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Job"
+                                                   asp-action="MarkAsFilled"
+                                                   asp-route-id="@job.Id"
+                                                   class="btn btn-sm btn-outline-success">
+                                                    <i class="fa fa-check-circle-o"></i>
+                                                    <span class="hidden-xs hidden-sm">Fill </span>
+                                                </a>
+
+                                            }
+                                            <form class="inline" asp-controller="Job" asp-action="Delete" method="post" asp-route-id="@job.Id">
+                                                <button class="btn btn-sm btn-outline-danger" type="submit">
+                                                    <i class="fa fa-times-circle-o"></i>Delete
+                                                </button>
+                                            </form>
+                                        </th>
+                                        <td>
+                                            @if (job.Filled)
+                                            {
+                                                <span class="badge badge-success">Filled</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-secondary">Not Filled</span>
+                                            }
+                                        </td>
+                                        <td>@job.CreatedAt</td>
+                                        @*<td>@job.LastDate</td>*@
+                                        <td>
+                                            <a asp-controller="Dashboard"
+                                               asp-action="ApplicantsByJob"
+                                               asp-route-id="@job.Id"
+                                               class="btn btn-sm btn-success">
+                                                <i class="fa fa-users"></i>@job.Applicants.Count()
+                                                <span class="hidden-xs hidden-sm">Applicants</span>
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                            <a asp-controller="Job"
+                                               asp-action="Edit"
                                                asp-route-id="@job.Id"
                                                class="btn btn-outline-white-secondary">
-                                                <i class="fa fa-check-circle-o"></i>
-                                                <span class="hidden-xs hidden-sm">Mark as </span>filled
-                                            </a><br>
-                                        }
-                                        <form asp-controller="Job" asp-action="Delete" method="post" asp-route-id="@job.Id">
-                                            <button class="btn btn-outline-white-secondary" type="submit">
-                                                <i class="fa fa-times-circle-o"></i>Delete
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                                                <i class="fa fa-edit"></i>Edit
+                                            </a>
+                                            <br>
+                                            @if (job.Filled)
+                                            {
+                                                <a href="#"
+                                                   class="btn btn-outline-white-secondary">
+                                                    <i class="fa fa-check-circle-o"></i>
+                                                    <span class="hidden-xs hidden-sm">Filled</span>
+                                                </a><br>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Job"
+                                                   asp-action="MarkAsFilled"
+                                                   asp-route-id="@job.Id"
+                                                   class="btn btn-outline-white-secondary">
+                                                    <i class="fa fa-check-circle-o"></i>
+                                                    <span class="hidden-xs hidden-sm">Mark as </span>filled
+                                                </a><br>
+                                            }
+                                            <form asp-controller="Job" asp-action="Delete" method="post" asp-route-id="@job.Id">
+                                                <button class="btn btn-outline-white-secondary" type="submit">
+                                                    <i class="fa fa-times-circle-o"></i>Delete
+                                                </button>
+                                            </form>
+                                        </td>*@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                @*<div class="pages">
-                    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4 mb-4">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a href="#" aria-label="Previous" class="page-link">
-                                    <span aria-hidden="true">«</span><span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item">
-                                <a href="#" aria-label="Next" class="page-link">
-                                    <span aria-hidden="true">»</span><span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>*@
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</body>

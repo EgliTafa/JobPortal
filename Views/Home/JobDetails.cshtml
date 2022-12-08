@@ -16,16 +16,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <style>
-       .center{
-           display:flex;
-           justify-content:center;
-       }
+        .center {
+            display: flex;
+            justify-content: center;
+        }
 
-       .left{
-           display:flex;
-           justify-content:end;
-       }
-        @@media screen and (max-width: 600px){
+        .left {
+            display: flex;
+            justify-content: end;
+        }
+
+        @@media screen and (max-width: 600px) {
             .row {
                 display: flex;
                 flex-direction: row;
@@ -43,22 +44,31 @@
                     order: 2;
                 }
         }
+
+        @@media screen and (max-width: 600px) {
+            .job-title {
+                width:100%;
+                word-wrap: break-word;
+            }
+        }
     </style>
 </head>
 
 <section>
     <div class="container ">
-
+        <input type="button" value="Go back!" class="btn btn-sm btn-outline-info" onclick="history.back()">
+        <br /><br />
         <div>
             <div class="container">
-                <h3 style="text-align:center;">
+                <h3 class="lead job-title" style="text-align:center;">
                     @Model.Job.Title
                 </h3>
                 <sub class="center">
-                    <i class="fa fa-map-marker job__location"> </i>
-                    @Model.Job.Location | Posted @Model.Job.CreatedAt.Humanize() |
+                    <i class="fa fa-map-marker job__location center"> </i>
+                    <span style="margin-top:5px;">@Model.Job.Location | Posted @Model.Job.CreatedAt.Humanize() |</span>
                 </sub>
             </div>
+            <br />
             <div class="center">
                 <img style="max-width: 100%; height: auto; -webkit-backface-visibility: hidden; width:650px; height:400px;" src="@Model.Job.PosterImageURl" alt="project-image" class="rounded img-details">
 
@@ -83,7 +93,7 @@
                 <div class="project-info-box container hidden" id="a">
                     <p style="text-transform:capitalize;"><b>Employer:</b> @Model.Job.CompanyName</p>
                     <p><b>Employer Website:</b> <a href="@Model.Job.Website" target="_blank">@Model.Job.CompanyName Website</a></p>
-                    <p class="mb-0" style="text-transform:capitalize; white-space:pre-line;"><b>Company Description: </b> @Model.Job.CompanyDescription</p>
+                    @*<p class="mb-0" style="text-transform:capitalize; white-space:pre-line;"><b>Company Description: </b> @Model.Job.CompanyDescription</p>*@
 
                     <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
                         @if (SignInManager.IsSignedIn(User))
@@ -124,7 +134,7 @@
                     <a style="width:100%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi Kompaninë</a>
 
                 </div>
-                
+
             </div>
 
             <div class="col-md-7 container" id="a">

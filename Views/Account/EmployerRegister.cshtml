@@ -35,7 +35,7 @@
                             <div class="row">
                                 <div class="form-outline col-md-6 mb-4 form-group">
                                     @Html.LabelFor(c => c.Email, "Email")
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type="email" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type="email", @required="required"  })
                                 </div>
 
                                 <div class="form-outline col-md-6 mb-4 form-group">
