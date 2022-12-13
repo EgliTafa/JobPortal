@@ -25,7 +25,7 @@ namespace JobPortal.Controllers
         }
 
         [Route("employer/dashboard")]
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> Index(int page = 1)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);

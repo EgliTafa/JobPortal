@@ -48,14 +48,14 @@ namespace JobPortal.Controllers
         }
 
         [Route("jobs/create")]
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer,Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [Route("jobs/save")]
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer,Admin")]
         [HttpPost]
         public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl","PreferredAge","Education","CompanyPhoneNumber")]
                                                 Job model, IFormFile upload)
@@ -180,7 +180,7 @@ namespace JobPortal.Controllers
         }
 
         [Route("mark-as-filled/{id}")]
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> MarkAsFilled(int id)
         {
             var job = _context.Jobs.SingleOrDefault(x => x.Id == id);
@@ -191,7 +191,7 @@ namespace JobPortal.Controllers
             return RedirectToActionPermanent("Index", "Dashboard");
         }
         
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -239,7 +239,7 @@ namespace JobPortal.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Employer")]
+        [Authorize(Roles = "Employer,Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,IFormFile upload, Job model, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl", "PreferredAge", "Education","CompanyPhoneNumber")] Job job)
         {

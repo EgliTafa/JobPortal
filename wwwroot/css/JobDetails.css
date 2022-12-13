@@ -44,13 +44,12 @@ body {
     margin: 15px 0;
     background-color: #fff;
     padding: 30px 40px;
-    border-radius: 5px;
 }
 
     .project-info-box p {
         margin-bottom: 15px;
         padding-bottom: 15px;
-        border-bottom: 1px solid #d5dadb;
+        text-align:center;
     }
 
         .project-info-box p:last-child {

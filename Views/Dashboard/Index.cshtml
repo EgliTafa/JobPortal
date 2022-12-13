@@ -61,8 +61,8 @@
                             <thead>
                                 <tr>
                                     <th style="display:flex; width:390px; justify-content:center;">Job title</th>
-                                    <th style="white-space: nowrap;">Position filled</th>
-                                    <th>Date posted</th>
+                                    @*<th style="white-space: nowrap;">Position filled</th>
+                                    <th>Date posted</th>*@
                                     @*<th>Date expiring</th>*@
                                     <th>Applicants</th>
                                     @*<th>Actions</th>*@
@@ -108,7 +108,7 @@
                                                 </button>
                                             </form>
                                         </th>
-                                        <td>
+                                        @*<td>
                                             @if (job.Filled)
                                             {
                                                 <span class="badge badge-success">Filled</span>
@@ -118,7 +118,7 @@
                                                 <span class="badge badge-secondary">Not Filled</span>
                                             }
                                         </td>
-                                        <td>@job.CreatedAt</td>
+                                        <td>@job.CreatedAt</td>*@
                                         @*<td>@job.LastDate</td>*@
                                         <td>
                                             <a asp-controller="Dashboard"

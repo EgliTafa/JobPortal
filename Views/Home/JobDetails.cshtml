@@ -1,5 +1,6 @@
 ﻿@model JobPortal.ViewModels.Home.JobDetailsViewModel
 
+
 @using Humanizer
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
@@ -14,7 +15,7 @@
     <link rel="stylesheet" href="~/css/JobDetails.css" />
     <link rel="stylesheet" href="~/css/ApplyJobPopup.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <style>
         .center {
             display: flex;
@@ -26,7 +27,7 @@
             justify-content: end;
         }
 
-        @@media screen and (max-width: 600px) {
+        /* @@media screen and (max-width: 600px) {
             .row {
                 display: flex;
                 flex-direction: row;
@@ -43,135 +44,229 @@
                 .row :nth-child(3) {
                     order: 2;
                 }
-        }
+        }*/
 
         @@media screen and (max-width: 600px) {
             .job-title {
-                width:100%;
+                width: 100%;
                 word-wrap: break-word;
             }
+        }
+
+        .tag-name {
+            text-transform: capitalize;
+            margin-right: 15%;
+        }
+
+        .tag-data {
+            display: inline;
+            text-transform: capitalize;
+            width:120%;
+        }
+
+        .job-name-category {
+            font: 16px roboto;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .section-padding {
+            padding-top: 5%;
+            padding-bottom: 5%;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .icons-style {
+            margin: 5px;
+            width: 30px;
+            height: 30px;
+        }
+
+        .job-tags{
+            text-transform:capitalize;
+            margin:5px;
+        }
+
+        .job-image {
+            width: 150px;
+            height: 150px;
+            border-radius:5px;
         }
     </style>
 </head>
 
-<section>
-    <div class="container ">
-        <input type="button" value="Go back!" class="btn btn-sm btn-outline-info" onclick="history.back()">
-        <br /><br />
-        <div>
-            <div class="container">
-                <h3 class="lead job-title" style="text-align:center;">
-                    @Model.Job.Title
-                </h3>
-                <sub class="center">
-                    <i class="fa fa-map-marker job__location center"> </i>
-                    <span style="margin-top:5px;">@Model.Job.Location | Posted @Model.Job.CreatedAt.Humanize() |</span>
-                </sub>
-            </div>
-            <br />
-            <div class="center">
-                <img style="max-width: 100%; height: auto; -webkit-backface-visibility: hidden; width:650px; height:400px;" src="@Model.Job.PosterImageURl" alt="project-image" class="rounded img-details">
+<body>
 
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md-5">
-                <br />
-                @*<h3 style="text-align:center;">Job Details</h3>*@
-                <div class="project-info-box container" id="c">
-                    <p style="text-transform:capitalize;"><b>Category:</b> @Model.Job.Category</p>
-                    <p><b>Last Date:</b> @Model.Job.LastDate.ToString("dd/MM/yyyy")</p>
-                    <p><b>Salary:</b> @Model.Job.Salary LEK</p>
-                    <p><b>Job Type: </b>@Model.Job.Type</p>
-                    <p style="text-transform:capitalize;"><b>Education:</b> @Model.Job.Education</p>
-                    <p style="text-transform:capitalize;"><b>Preferred Age:</b> @Model.Job.PreferredAge</p>
-                    <p class="mb-0" style="text-transform:capitalize;"><b>View Count: </b> @Model.Job.ViewCount</p>
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col" style="padding-right:0;">
+                    <img src="@Model.Job.PosterImageURl" class="job-image" />
                 </div>
-                <br />
-                <h3 style="text-align:center;">Company Details</h3>
-                <div class="project-info-box container hidden" id="a">
-                    <p style="text-transform:capitalize;"><b>Employer:</b> @Model.Job.CompanyName</p>
-                    <p><b>Employer Website:</b> <a href="@Model.Job.Website" target="_blank">@Model.Job.CompanyName Website</a></p>
-                    @*<p class="mb-0" style="text-transform:capitalize; white-space:pre-line;"><b>Company Description: </b> @Model.Job.CompanyDescription</p>*@
 
-                    <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
-                        @if (SignInManager.IsSignedIn(User))
+                <div class="col" style="padding-left:0; margin-right:35px;">
+                    <h1 class="job-name-category" style="padding-bottom:60px;">@Model.Job.Category</h1>
+                    <h4 class="job-name-category">@Model.Job.CompanyName</h4>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="col tag-name">
+                    <span>Category:</span><br />
+                    <span>Last Date:</span><br />
+                    <span>Salary: </span><br />
+                    <span>Job Type: </span><br />
+                    <span style="text-transform:capitalize;">Education: </span><br />
+                    <span style="text-transform:capitalize;">Preferred Age: </span><br />
+                    <span class="mb-0" style="text-transform:capitalize;">View Count:  </span>
+                </div>
+
+                <div class="col tag-data font-weight-bold">
+                    <span>@Model.Job.Category</span><br />
+                    <span>@Model.Job.LastDate.ToString("dd/MM/yyyy")</span><br />
+                    <span>@Model.Job.Salary LEK</span><br />
+                    <span>@Model.Job.Type</span><br />
+                    <span>@Model.Job.Education</span><br />
+                    <span>@Model.Job.PreferredAge</span><br />
+                    <span>@Model.Job.ViewCount</span>
+                </div>
+            </div>
+            <div class="row bg-white social-buttons">
+                <div class="social-buttons">
+                    <a href="#">
+                        <img src="~/img/social-buttons/facebook (1).svg" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/messenger-icon.png" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/viber-icon.png" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/whatspp.png" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/envelopes.svg" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/url-link-round-ui-href-share.png" class="icons-style" />
+                    </a>
+                </div>
+            </div>
+            <div class="row bg-white">
+                <div class="container" id="a">
+                    <br />
+                    <div class="font-weight-bold">
+                        <p class="font-weight-bold" style=" white-space: pre-line;">@Model.Job.Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row bg-white justify-content-center">
+                <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        if (Model.IsApplied)
                         {
-                            if (Model.IsApplied)
-                            {
-                                <input style="width:100%;" type="button" class="btn btn-outline-white-primary" value="Already applied" /><br />
-                            }
-                            else
-                            {
-                                <!-- The Modal -->
-                                <div id="myModal" class="modal">
+                            <input style="width:100%;" type="button" class="btn btn-outline-white-primary" value="Already applied" /><br />
+                        }
+                        else
+                        {
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal">
 
-                                    <!-- Modal content -->
-                                    <div class="modal-content mt-5 ml-auto mr-auto card col-sm-3">
+                                <!-- Modal content -->
+                                <div class="modal-content mt-5 ml-auto mr-auto card col-sm-3">
 
-                                        <div class="modal-body">
-                                            <span class="close">&times;</span>
-                                            <h4>Upload Your CV</h4>
-                                            <input required type="file" name="upload" accept="application/pdf" class="form-control" />
-                                            <input type="hidden" name="job" value="{{ job.id }}">
-                                            <br />
-                                            <input style="width:100%;" type="submit" class="btn btn-outline-white-primary"
-                                                   value="Apply Now" />
-                                            <br />
-                                        </div>
+                                    <div class="modal-body">
+                                        <span class="close">&times;</span>
+                                        <h4>Upload Your CV</h4>
+                                        <input required type="file" name="upload" accept="application/pdf" class="form-control" />
+                                        <input type="hidden" name="job" value="{{ job.id }}">
+                                        <br />
+                                        <input style="width:100%;" type="submit" class="btn btn-outline-white-primary"
+                                               value="Apply Now" />
                                         <br />
                                     </div>
-
+                                    <br />
                                 </div>
 
-                                <input style="width:100%;" type="button" id="myBtn" class="btn btn-outline-white-primary"
-                                       value="Apply Now" />
+                            </div>
 
-                            }
+                            <input style="width:100%;" type="button" id="myBtn" class="btn btn-outline-white-primary"
+                                   value="Apply Now" />
                         }
-                    </form>
-                    <br />
-                    <a style="width:100%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi Kompaninë</a>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-7 container" id="a">
+                    }
+                </form>
                 <br />
-                <div class="project-info-box">
-                    <p style=" white-space: pre-line;">@Model.Job.Description</p>
+                <br />
+                <div class="container justify-content-center m-2" style="display:flex; justify-content:center;">
+                    <a style="width:70%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi Kompaninë</a>
                 </div>
             </div>
+            @*<div class="row bg-white social-buttons">
+                <div class="social-buttons" style="margin-top:20px;">
+                    <a href="#">
+                        <img src="~/img/social-buttons/facebook (1).svg" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/messenger-icon.png" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/viber-icon.png" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/whatspp.png" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/envelopes.svg" class="icons-style" />
+                    </a>
+                    <a href="#">
+                        <img src="~/img/social-buttons/url-link-round-ui-href-share.png" class="icons-style" />
+                    </a>
+                </div>
+            </div>*@
         </div>
-    </div>
-</section>
+    </section>
+
+    @*<section class="section-padding">
+            <div class="container">
+                <div class="row bg-white" style="display:flex; justify-content:center;">
+                        <h2 class="font-weight-light">Similiar Jobs</h2>
+                </div>
+                <div class="row bg-white">
+                </div>
+
+            </div>
+        </section>*@
+</body>
 
 <script>
-// Get the modal
-var modal = document.getElementById("myModal");
+    // Get the modal
+    var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
