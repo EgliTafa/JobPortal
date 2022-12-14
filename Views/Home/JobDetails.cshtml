@@ -115,13 +115,13 @@
             </div>
             <div class="row bg-white">
                 <div class="col tag-name">
-                    <span>Category:</span><br />
-                    <span>Last Date:</span><br />
-                    <span>Salary: </span><br />
-                    <span>Job Type: </span><br />
-                    <span style="text-transform:capitalize;">Education: </span><br />
-                    <span style="text-transform:capitalize;">Preferred Age: </span><br />
-                    <span class="mb-0" style="text-transform:capitalize;">View Count:  </span>
+                    <span>Kategoria:</span><br />
+                    <span>Afati :</span><br />
+                    <span>Rroga: </span><br />
+                    <span>Orari: </span><br />
+                    <span style="text-transform:capitalize;">Edukimi: </span><br />
+                    <span style="text-transform:capitalize;">Mosha e Preferuar: </span><br />
+                    <span class="mb-0" style="text-transform:capitalize;">Shikime:  </span>
                 </div>
 
                 <div class="col tag-data font-weight-bold">
@@ -170,7 +170,7 @@
                     {
                         if (Model.IsApplied)
                         {
-                            <input style="width:100%;" type="button" class="btn btn-outline-white-primary" value="Already applied" /><br />
+                            <input style="width:100%;" type="button" class="btn btn-outline-white-primary" value="Aplikuar" /><br />
                         }
                         else
                         {
@@ -182,12 +182,12 @@
 
                                     <div class="modal-body">
                                         <span class="close">&times;</span>
-                                        <h4>Upload Your CV</h4>
+                                        <h4>Ngarko CV-në</h4>
                                         <input required type="file" name="upload" accept="application/pdf" class="form-control" />
                                         <input type="hidden" name="job" value="{{ job.id }}">
                                         <br />
                                         <input style="width:100%;" type="submit" class="btn btn-outline-white-primary"
-                                               value="Apply Now" />
+                                               value="Apliko Tani" />
                                         <br />
                                     </div>
                                     <br />
@@ -196,14 +196,14 @@
                             </div>
 
                             <input style="width:100%;" type="button" id="myBtn" class="btn btn-outline-white-primary"
-                                   value="Apply Now" />
+                                   value="Apliko Tani" />
                         }
                     }
                 </form>
                 <br />
                 <br />
                 <div class="container justify-content-center m-2" style="display:flex; justify-content:center;">
-                    <a style="width:70%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi Kompaninë</a>
+                    <a style="width:70%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi<br />Kompaninë</a>
                 </div>
             </div>
             @*<div class="row bg-white social-buttons">

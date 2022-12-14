@@ -14,7 +14,7 @@
                          class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
                          alt="Sample photo">
                     <div style="background-color:whitesmoke;" class="card-body p-4 p-md-5">
-                        <h4 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Employers Registration Info</h4>
+                        <h4 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Regjistrohuni si PunëMarrës</h4>
 
                         <form class="px-md-2" method="post" enctype="multipart/form-data" asp-controller="Account" asp-action="EmployeeRegister">
                             <div asp-validation-summary="ModelOnly"></div>
@@ -22,49 +22,49 @@
 
                             <div class="row">
                                 <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.FirstName, "Company Name")
-                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Company Name" })
+                                    @Html.LabelFor(c => c.FirstName, "Emri I Kompanisë")
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Emri I Kompanisë" })
                                 </div>
 
                                 <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.LastName, "Company Address")
-                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Company Address" })
+                                    @Html.LabelFor(c => c.LastName, "Adresa e Kompanisë")
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Adresa e Kompanisë" })
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.Email, "Email")
+                                    @Html.LabelFor(c => c.Email, "E-Mail")
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type="email", @required="required"  })
                                 </div>
 
                                 <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.PhoneNumber)
-                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @type = "tel" })
+                                    @Html.LabelFor(c => c.PhoneNumber, "Numri i Telefonit")
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @type = "tel", @placeholder= "Numri i Telefonit" })
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.Password)
-                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder="Password", @type = "password" })
+                                    @Html.LabelFor(c => c.Password, "Fjalëkalimi")
+                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder= "Fjalëkalimi", @type = "password" })
                                 </div>
 
                                 <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.ConfirmPassword)
-                                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password",@type = "password" })
+                                    @Html.LabelFor(c => c.ConfirmPassword, "Konfirmoni Fjalëkalimin")
+                                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Konfirmoni Fjalëkalimin", @type = "password" })
                                 </div>
                             </div>
 
-                            <div class="row">
+                            @*<div class="row">
                                 <div class="form-outline col-md-12 mb-4 form-group">
                                     <label>Company Description</label>
                                     @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
                                 </div>
-                            </div>
+                            </div>*@
 
                             <div>
-                                <div> <label asp-for="Photo"></label></div>
+                                <div> <label asp-for="Photo">Vendosni foton e profilit</label></div>
                                 <div>
                                     <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
                                 </div>
@@ -73,7 +73,7 @@
                             @Html.AntiForgeryToken()
                             <div class="text-center">
                                 <button type="submit" value="submit" class="btn btn-outline-white-primary">
-                                    <i class="fa fa-user-md"></i> Register
+                                    <i class="fa fa-user-md"></i> Regjistrohuni
                                 </button>
                             </div>
                         </form>

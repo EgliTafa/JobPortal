@@ -43,13 +43,13 @@
         <div class="container rounded bg-white mt-5 mb-5">
             <form id="job-main-form" method="post" asp-controller="Job" asp-action="Save" class="job-add-form" enctype="multipart/form-data">
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                <a asp-action="Index">Back to List</a>
+                <a asp-action="Index">Kthehu Pas</a>
                 <div class="row">
                     <div class="col-md-3 border-right">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                             <div class="col-lg-12 form-group">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="text-center">Upload Image</h4>
+                                    <h4 class="text-center">Shto një Imazh</h4>
                                 </div>
                                 <div>
                                     <label for="file-input" asp-for="PosterImageURl">
@@ -64,19 +64,19 @@
                     <div class="col-md-5 border-right">
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-center">Add a new position</h4>
+                                <h4 class="text-center">Shto një pozicion të ri</h4>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 form-group @Html.AddClassIfPropertyInError(x => x.Title, "is-invalid")">
-                                    @Html.LabelFor(c => c.Title)
-                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                                    @Html.LabelFor(c => c.Title,"Titulli I Punës")
+                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @placeholder="Titulli I Punës" })
                                     <span class="help-inline">@Html.ValidationMessageFor(x => x.Title)</span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 form-group">
-                                    @Html.LabelFor(c => c.PreferredAge)
-                                    <select id="type" name="PreferredAge" placeholder="Preferred Age"
+                                    @Html.LabelFor(c => c.PreferredAge,"Mosha E Preferuar")
+                                    <select id="type" name="PreferredAge" placeholder="Mosha E Preferuar"
                                             class="form-control">
                                         <option value="18-21">18-21</option>
                                         <option value="21-25">21-25</option>
@@ -85,38 +85,38 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 form-group">
-                                    @Html.LabelFor(c => c.Education)
-                                    <select id="type" name="Education" placeholder="Education"
+                                    @Html.LabelFor(c => c.Education, "Edukimi")
+                                    <select id="type" name="Education" placeholder="Edukimi"
                                             class="form-control">
-                                        <option value="High-School Degree">High-School Degree</option>
-                                        <option value="Bachelors Degree">Bachelors Degree</option>
-                                        <option value="Masters Degree">Masters Degree</option>
+                                        <option value="High-School Degree">Gjimnaz</option>
+                                        <option value="Bachelors Degree">Bachelor</option>
+                                        <option value="Masters Degree">Master</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 form-group">
-                                    @Html.LabelFor(c => c.Description)
-                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 5 })
+                                    @Html.LabelFor(c => c.Description, "Përshkimi i Punës")
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 5 , @placeholder= "Përshkimi i Punës" })
                                     <span class="help-inline">@Html.ValidationMessageFor(x => x.Description)</span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 form-group">
-                                    @Html.LabelFor(c => c.Salary)
-                                    @Html.TextBoxFor(m => m.Salary, new { @class = "form-control", type = "number" })
+                                    @Html.LabelFor(c => c.Salary,"Rroga")
+                                    @Html.TextBoxFor(m => m.Salary, new { @class = "form-control", type = "number", @placeholder="Rroga" })
                                     <span class="help-inline">@Html.ValidationMessageFor(x => x.Salary)</span>
                                 </div>
                                 <div class="col-lg-6 form-group">
-                                    @Html.LabelFor(c => c.Location)
-                                    @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+                                    @Html.LabelFor(c => c.Location, "Vendndodhja")
+                                    @Html.TextBoxFor(m => m.Location, new { @class = "form-control", @placeholder= "Vendndodhja" })
                                     <span class="help-inline">@Html.ValidationMessageFor(x => x.Location)</span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 form-group">
                                     @Html.LabelFor(c => c.Type)
-                                    <select id="type" name="Type" placeholder="Choose job type"
+                                    <select id="type" name="Type" placeholder="Orari I Punës"
                                             class="form-control">
                                         <option value="Full time">Full time</option>
                                         <option value="Part time">Part time</option>
@@ -124,9 +124,9 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 form-group">
-                                    <label for="category">Category</label>
+                                    <label for="category">Kategoria</label>
                                     @*@Html.LabelFor(c => c.Categoy)*@
-                                    <select id="category" name="category" placeholder="Choose category"
+                                    <select id="category" name="category" placeholder="Zgjidh kategorinë"
                                             class="form-control">
                                         <option value="web-design">Web design</option>
                                         <option value="graphic-design">Graphic design</option>
@@ -138,7 +138,7 @@
                                 </div>
                             </div>
                             <div class="mt-5 text-center">
-                                <button type="submit" class="btn btn-primary profile-button" type="button">Save And Publish</button>
+                                <button type="submit" class="btn btn-primary profile-button" type="button">Ruaj dhe Publiko</button>
                             </div>
                         </div>
                     </div>
@@ -147,25 +147,25 @@
                             <div class="d-flex justify-content-between align-items-center experience">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h4>Company details</h4>
+                                        <h4>Detajet E Kompanisë</h4>
                                     </div>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-lg-12 form-group">
-                                    @Html.LabelFor(c => c.CompanyName, "Company Name")
-                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
+                                    @Html.LabelFor(c => c.CompanyName, "Emri I Kompanisë")
+                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" , @placeholder= "Emri I Kompanisë" })
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 form-group">
-                                    <label asp-for="Website" class="control-label">Company Website</label>
+                                    <label asp-for="Website" class="control-label">Faqja e Kompanisë</label>
                                     <input asp-for="Website" class="form-control" />
                                     <span class="help-inline">@Html.ValidationMessageFor(x => x.Website)</span>
                                 </div>
                                 <div class="col-lg-6 form-group">
-                                    @Html.LabelFor(c => c.LastDate, "Validity of the post")
+                                    @Html.LabelFor(c => c.LastDate, "Afati I Postimit")
                                     @Html.TextBoxFor(m => m.LastDate, new { @class = "form-control", @type = "date" })
                                 </div>
                             </div>

@@ -40,8 +40,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h2 class="heading">dashboard</h2>
-                    <p class="lead text-center">All created jobs</p>
+                    <h4 class="heading">Të gjitha punët e krijuara</h4>
+                    @*<p class="lead text-center">Të gjitha punët e krijuara</p>*@
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                     <a asp-controller="Job"
                        asp-action="Create"
                        class="btn btn-outline-white-primary">
-                        <i class="fa fa-plus"></i>Add new position
+                        <i class="fa fa-plus"></i>Shto një punë të re
                     </a>
                 </div>
                 <div class="col-lg-12">
@@ -60,12 +60,10 @@
                         <table class="table table-light table-hover ">
                             <thead>
                                 <tr>
-                                    <th style="display:flex; width:390px; justify-content:center;">Job title</th>
+                                    <th style="display:flex; width:400px; justify-content:center;">Titulli I Punës</th>
                                     @*<th style="white-space: nowrap;">Position filled</th>
                                     <th>Date posted</th>*@
-                                    @*<th>Date expiring</th>*@
-                                    <th>Applicants</th>
-                                    @*<th>Actions</th>*@
+                                   <th>Aplikantët</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,7 +78,7 @@
                                                asp-action="Edit"
                                                asp-route-id="@job.Id"
                                                class="btn btn-sm btn-outline-warning">
-                                                <i class="fa fa-edit"></i>Edit
+                                                <i class="fa fa-edit"></i>Ndrysho
                                             </a>
 
                                             @if (job.Filled)
@@ -88,7 +86,7 @@
                                                 <a href="#"
                                                    class="btn btn-sm btn-outline-success">
                                                     <i class="fa fa-check-circle-o"></i>
-                                                    <span class="hidden-xs hidden-sm">Filled</span>
+                                                    <span class="hidden-xs hidden-sm"> E Zënë</span>
                                                 </a>
                                             }
                                             else
@@ -98,69 +96,25 @@
                                                    asp-route-id="@job.Id"
                                                    class="btn btn-sm btn-outline-success">
                                                     <i class="fa fa-check-circle-o"></i>
-                                                    <span class="hidden-xs hidden-sm">Fill </span>
+                                                    <span class="hidden-xs hidden-sm">E Lirë </span>
                                                 </a>
 
                                             }
                                             <form class="inline" asp-controller="Job" asp-action="Delete" method="post" asp-route-id="@job.Id">
                                                 <button class="btn btn-sm btn-outline-danger" type="submit">
-                                                    <i class="fa fa-times-circle-o"></i>Delete
+                                                    <i class="fa fa-times-circle-o"></i>Fshij
                                                 </button>
                                             </form>
                                         </th>
-                                        @*<td>
-                                            @if (job.Filled)
-                                            {
-                                                <span class="badge badge-success">Filled</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge badge-secondary">Not Filled</span>
-                                            }
-                                        </td>
-                                        <td>@job.CreatedAt</td>*@
-                                        @*<td>@job.LastDate</td>*@
                                         <td>
                                             <a asp-controller="Dashboard"
                                                asp-action="ApplicantsByJob"
                                                asp-route-id="@job.Id"
                                                class="btn btn-sm btn-success">
                                                 <i class="fa fa-users"></i>@job.Applicants.Count()
-                                                <span class="hidden-xs hidden-sm">Applicants</span>
+                                                <span class="hidden-xs hidden-sm">Aplikantë</span>
                                             </a>
                                         </td>
-                                        @*<td>
-                                            <a asp-controller="Job"
-                                               asp-action="Edit"
-                                               asp-route-id="@job.Id"
-                                               class="btn btn-outline-white-secondary">
-                                                <i class="fa fa-edit"></i>Edit
-                                            </a>
-                                            <br>
-                                            @if (job.Filled)
-                                            {
-                                                <a href="#"
-                                                   class="btn btn-outline-white-secondary">
-                                                    <i class="fa fa-check-circle-o"></i>
-                                                    <span class="hidden-xs hidden-sm">Filled</span>
-                                                </a><br>
-                                            }
-                                            else
-                                            {
-                                                <a asp-controller="Job"
-                                                   asp-action="MarkAsFilled"
-                                                   asp-route-id="@job.Id"
-                                                   class="btn btn-outline-white-secondary">
-                                                    <i class="fa fa-check-circle-o"></i>
-                                                    <span class="hidden-xs hidden-sm">Mark as </span>filled
-                                                </a><br>
-                                            }
-                                            <form asp-controller="Job" asp-action="Delete" method="post" asp-route-id="@job.Id">
-                                                <button class="btn btn-outline-white-secondary" type="submit">
-                                                    <i class="fa fa-times-circle-o"></i>Delete
-                                                </button>
-                                            </form>
-                                        </td>*@
                                     </tr>
                                 }
                             </tbody>

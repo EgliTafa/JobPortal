@@ -26,9 +26,9 @@
                                 <h6 class="user-email">@Model.Email</h6>
                             </div>
                             @*<div class="about">
-                                <h5>About</h5>
-                                <p>@Model.Description</p>
-                            </div>*@
+                                    <h5>About</h5>
+                                    <p>@Model.Description</p>
+                                </div>*@
                         </div>
                     </div>
                 </div>
@@ -41,35 +41,35 @@
                             @Html.AntiForgeryToken()
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <h6 class="mb-2 text-primary">Profile Details</h6>
+                                    <h6 class="mb-2 text-primary">Profili Im</h6>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(c => c.FirstName, "First Name")
+                                        @Html.LabelFor(c => c.FirstName, "Emri")
                                         @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(c => c.LastName, "Last Name")
+                                        @Html.LabelFor(c => c.LastName, "Mbiemri")
                                         @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(c => c.PhoneNumber)
+                                        @Html.LabelFor(c => c.PhoneNumber, "Numri i Telefonit")
                                         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(c => c.Email)
+                                        @Html.LabelFor(c => c.Email, "E-Mali")
                                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <div> <label>Change Profile Picture</label></div>
+                                        <div> <label>Ndryshoni foton e profilit</label></div>
                                         <div>
                                             <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
                                             <input asp-for="ImagePath" type="hidden" value="@Model.ImagePath" />
@@ -78,14 +78,14 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label>Gender</label><br />
+                                        <label>Gjinia</label><br />
                                         <div class="form-check form-check-inline">
-                                            @Html.RadioButtonFor(x => x.Gender, "Male", new { @class = "form-check-input", id = "male", @checked = "checked" })
-                                            @Html.LabelFor(x => x.Gender, "Male", new { @class = "form-check-label" })
+                                            @Html.RadioButtonFor(x => x.Gender, "Mashkull", new { @class = "form-check-input", id = "male", @checked = "checked" })
+                                            @Html.LabelFor(x => x.Gender, "Mashkull", new { @class = "form-check-label" })
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            @Html.RadioButtonFor(x => x.Gender, "Female", new { @class = "form-check-input", id = "female" })
-                                            @Html.LabelFor(x => x.Gender, "Female", new { @class = "form-check-label" })
+                                            @Html.RadioButtonFor(x => x.Gender, "Femër", new { @class = "form-check-input", id = "female" })
+                                            @Html.LabelFor(x => x.Gender, "Femër", new { @class = "form-check-label" })
                                         </div>
                                     </div>
                                 </div>
@@ -93,8 +93,8 @@
                             <div class="row gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="text-right">
-                                        <button type="submit" asp-controller="Home" asp-action="Index" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" asp-controller="Home" asp-action="Index" id="submit" name="submit" class="btn btn-secondary">Anullo</button>
+                                        <button type="submit" id="submit" name="submit" class="btn btn-primary">Përditso</button>
                                     </div>
                                 </div>
                             </div>

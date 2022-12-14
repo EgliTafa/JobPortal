@@ -13,14 +13,15 @@
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Log In</p>
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Identifikohu</p>
 
                                 <form class="mx-1 mx-md-4" method="post" asp-controller="Account" asp-action="Login">
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fa fa-envelope fa-lg mb-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0 form-group">
-                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type = "email" })                                            <label class="form-label" for="form3Example3c">Email</label>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type = "email" })                                            
+                                            <label class="form-label" for="form3Example3c">E-Mail</label>
                                         </div>
                                     </div>
 
@@ -28,18 +29,18 @@
                                         <i class="fa  fa-lock fa-lg mb-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0 form-group">
                                             @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Password", @type = "password" })
-                                            <label class="form-label" for="form3Example4c">Password</label>
+                                            <label class="form-label" for="form3Example4c">Fjalëkalimi</label>
                                         </div>
                                     </div>
 
                                     @Html.AntiForgeryToken()
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-outline-white-primary">
-                                            <i class="fa fa-user-md"></i> Login
+                                            <i class="fa fa-user-md"></i> Hyni
                                         </button>
                                     </div>
                                     <div>
-                                        <a asp-action="ForgotPassword">Forgot Password?</a>
+                                        <a asp-action="ForgotPassword">Keni harruar fjalëkalimin?</a>
                                     </div>
                                 </form>
 

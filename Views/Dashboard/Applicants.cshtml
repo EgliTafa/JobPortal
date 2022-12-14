@@ -12,17 +12,17 @@
 </head>
 
 <section>
-    <h3 style="text-align:center;">All Applicants On Your Jobs</h3>
+    <h3 style="text-align:center;">Të gjithë aplikantët</h3>
     <div style="overflow-x:auto;">
         <table class="table align-middle mb-0 bg-white">
             <thead class="bg-light">
                 <tr>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Phone Number</th>
-                    <th>Applied At</th>
-                    <th>Applied</th>
-                    <th>Applicant CV</th>
+                    <th>Emri</th>
+                    <th>Gjinia</th>
+                    <th>Numri i Telefonit</th>
+                    <th>Aplikant në</th>
+                    <th>Koha e aplikimit</th>
+                    <th>CV-ja e Aplikantit</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +54,7 @@
                             <p style="text-transform:capitalize;">@applicant.CreatedAt.Humanize()</p>
                         </td>
                         <td>
-                            <a href="@applicant.CVPath" id="trig1" target="_blank">View CV</a>
+                            <a href="@applicant.CVPath" id="trig1" target="_blank">Shiko CV-në</a>
                         </td>
                     </tr>
                 }
