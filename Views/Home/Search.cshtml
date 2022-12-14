@@ -116,7 +116,7 @@
 </section>
 <section>
     <div class="container">
-        <h3 class="heading">We have found <span class="accent">@Model.Count()</span> jobs</h3>
+        <h3 class="heading">U gjetën <span class="accent">@Model.Count()</span> punë sipas kërkimit</h3>
         @foreach (var job in Model)
         {
             <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
