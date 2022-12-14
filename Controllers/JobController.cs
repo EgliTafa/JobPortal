@@ -68,8 +68,6 @@ namespace JobPortal.Controllers
                 var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
 
                 model.PosterImageURl = updatedFilePath;
-                //_context.Users.Add(model);
-                //_context.SaveChanges();
 
                 using (var fileSrteam = new FileStream(filePath, FileMode.Create))
                 {
@@ -81,7 +79,6 @@ namespace JobPortal.Controllers
             {
                 TempData["type"] = "success";
                 TempData["message"] = "Job posted successfully";
-                //_logger.LogInformation(model.ToString());
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 model.User = user;
                 model.CompanyDescription = user.Description;
@@ -98,7 +95,6 @@ namespace JobPortal.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Employee")]
         public async Task<IActionResult> Apply(int id, IFormFile upload,
             [Bind("User", "Job", "CVPath", "CreatedAt")]
              JobApplicantsViewModel model ,[FromServices] IFluentEmail mailer)
@@ -116,8 +112,6 @@ namespace JobPortal.Controllers
 
                 model.CVPath = updatedFilePath;
                 model.Gender = user.Gender;
-                //_context.Users.Add(model);
-                //_context.SaveChanges();
 
                 using (var fileSrteam = new FileStream(filePath, FileMode.Create))
                 {
@@ -141,7 +135,6 @@ namespace JobPortal.Controllers
             {
                 User = user,
                 Job = job,
-                //Email = user.Email,
                 CVPath = model.CVPath,
                 CreatedAt = DateTime.Now,
             };
@@ -274,7 +267,6 @@ namespace JobPortal.Controllers
                     job.CompanyDescription = user.Description;
                     job.PosterImageURl = model.PosterImageURl;
                     _context.Update(job);
-                    //_context.Entry(job).Property(x => x.PosterImageURl).IsModified = false;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

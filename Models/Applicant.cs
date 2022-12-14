@@ -12,7 +12,6 @@ namespace JobPortal.Models
         public int Id { get; set; }
         public User User { get; set; }
         public Job Job { get; set; }
-        //public string Email { get; set; }
         [Required]
         public string CVPath { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -19,7 +19,7 @@ namespace JobPortal.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password",
-            ErrorMessage = "Password and Confirm Password must match")]
+            ErrorMessage = "Fjalëkalimet nuk janë njësoj. Jepni fjalëkalimin e duhur.")]
         public string ConfirmPassword { get; set; }
 
         public string Token { get; set; }

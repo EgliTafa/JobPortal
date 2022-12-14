@@ -59,8 +59,6 @@ namespace JobPortal.Controllers
                 var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
 
                 model.ImagePath = updatedFilePath;
-                //_context.Users.Add(model);
-                //_context.SaveChanges();
 
                 using (var fileSrteam = new FileStream(filePath, FileMode.Create))
                 {
@@ -90,7 +88,6 @@ namespace JobPortal.Controllers
                     ImagePath = model.ImagePath
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
-                //IdentityResult roleResult = await _roleManager.CreateAsync(new IdentityRole("Employee"));
 
                 if (!_context.Users.Any(u => u.Email == user.Email))
                 {
@@ -122,9 +119,6 @@ namespace JobPortal.Controllers
                             return RedirectToAction("Index", "Home");
                         }
                         await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
-                        //ViewBag.ErrorTitle = "Registration successful";
-                        //ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
-                        //        "email, by clicking on the confirmation link we have emailed you";
                         ModelState.AddModelError("Email", "Registration successful");
                         ModelState.AddModelError("Email", "Before you can Login, please confirm your email, by clicking on the confirmation link we have emailed you");
                         return View("EmailVerification");
@@ -163,8 +157,6 @@ namespace JobPortal.Controllers
                 var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
 
                 model.ImagePath = updatedFilePath;
-                //_context.Users.Add(model);
-                //_context.SaveChanges();
 
                 using (var fileSrteam = new FileStream(filePath, FileMode.Create))
                 {
@@ -172,7 +164,6 @@ namespace JobPortal.Controllers
                 }
             }
 
-            //model.User.ProfilePicture = photo.FileName;
 
             var email = _context.Users.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
 
@@ -191,12 +182,10 @@ namespace JobPortal.Controllers
                     Email = model.Email,
                     Description = model.Description,
                     PhoneNumber = model.PhoneNumber,
-                    //ProfilePicture = model.User.ProfilePicture,
                     ImagePath = model.ImagePath
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
-                //IdentityResult roleResult = await _roleManager.CreateAsync(new IdentityRole("Employee"));
 
                 if (result.Succeeded)
                 {
@@ -226,9 +215,6 @@ namespace JobPortal.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                     await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
-                    //ViewBag.ErrorTitle = "Registration successful";
-                    //ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
-                    //        "email, by clicking on the confirmation link we have emailed you";
                     return View("EmailVerification");
                 }
                 foreach (var error in result.Errors)
@@ -338,8 +324,6 @@ namespace JobPortal.Controllers
                 var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
 
                 model.ImagePath = updatedFilePath;
-                //_context.Users.Add(model);
-                //_context.SaveChanges();
 
                 using (var fileSrteam = new FileStream(filePath, FileMode.Create))
                 {
@@ -349,7 +333,6 @@ namespace JobPortal.Controllers
 
             if (ModelState.IsValid)
             {
-                //_logger.LogError(model.Gender.ToString());
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
@@ -357,8 +340,6 @@ namespace JobPortal.Controllers
                 user.Description = model.Description;
                 user.PhoneNumber = model.PhoneNumber;
                 user.ImagePath = model.ImagePath;
-                //user.ProfilePicture = model.ProfilePicture;
-                //user.ImageLocation = model.ImageLocation;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
             }

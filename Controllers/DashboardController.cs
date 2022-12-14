@@ -30,7 +30,6 @@ namespace JobPortal.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var jobs = _context.Jobs.Where(x => x.User == user).Include(x => x.Applicants).ToList();
-            //var model = await PagingList.CreateAsync(jobs, 2, page);
 
             return View(jobs);
         }
@@ -54,7 +53,6 @@ namespace JobPortal.Controllers
                 .Include(x => x.Applicants)
                     .ThenInclude(x => x.User)
                 .SingleOrDefault(x => x.Id == id);
-//            _logger.LogInformation(job.Title);
             var model = new JobApplicantsViewModel
             {
                 Job = job,

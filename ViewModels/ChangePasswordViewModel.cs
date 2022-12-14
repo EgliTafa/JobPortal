@@ -21,7 +21,7 @@ namespace JobPortal.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage =
-            "The new password and confirmation password do not match.")]
+            "Fjalëkalimet nuk janë njësoj. Jepni fjalëkalimin e duhur.")]
         public string ConfirmPassword { get; set; }
     }
 }
