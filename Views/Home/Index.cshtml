@@ -55,6 +55,7 @@
         .newText {
             background-color: darkred;
         }
+
     </style>
 </head>
 
@@ -66,18 +67,18 @@
                     <div class="job-form-box">
                         <h2 class="heading">
                             Gjeni<span class="accent"> punën</span> që
-                                   <span class="accent">dëshironi</span>.
+                                   <span class="accent">dëshironi</span>
                         </h2>
                         <form id="job-main-form" method="get" asp-controller="Home" asp-action="Search" class="job-main-form">
                             <div class="controls">
                                 <div class="row align-items-center">
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
                                         <div class="form-group fade-in">
                                             <input type="text" id="profession" name="SearchString"
                                                    placeholder="Kërkoni sipas titullit" class="form-control rounded-lg">
                                         </div>
                                     </div>
-                                    <div class="col-md-5 fade-in">
+                                    <div class="col-md-4 fade-in">
                                         <div class="form-group">
                                             <select typeof="text" name="searchCategory" class="form-control rounded-lg" id="location">
                                                 <option value="" disabled selected>Kërkoni sipas kategorisë</option>
@@ -87,6 +88,17 @@
                                                 <option value="human-resource">Human Resources</option>
                                                 <option value="support">Support</option>
                                                 <option value="android">Android</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 fade-in">
+                                        <div class="form-group">
+                                            <select typeof="text" name="searchShifts" class="form-control rounded-lg" id="location">
+                                                <option value="" disabled selected>Kërkoni sipas orarit</option>
+                                                <option value="Full time">Full time</option>
+                                                <option value="Part time">Part time</option>
+                                                <option value="Internship">Internship</option>
                                             </select>
                                         </div>
                                     </div>
@@ -143,6 +155,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md">
+                    <h3 class="heading">
+                        Postimet<span class="accent"> më</span> të
+                        <span class="accent">fundit</span>
+                    </h3>
                     @foreach (var job in Model.JobList)
                     {
                         <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">

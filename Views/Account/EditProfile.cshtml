@@ -1,4 +1,11 @@
-﻿@model User
+﻿@using Microsoft.AspNetCore.Identity
+@model User
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
 
 @{
     ViewBag.Title = "User Profile";
@@ -51,8 +58,16 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        @Html.LabelFor(c => c.LastName, "Mbiemri")
-                                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                                        @if (this.User.IsInRole("Employer") && SignInManager.IsSignedIn(User))
+                                        {
+                                            @Html.LabelFor(c => c.LastName, "Adresa")
+                                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                                        }
+                                        else
+                                        {
+                                            @Html.LabelFor(c => c.LastName, "Mbiemri")
+                                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">

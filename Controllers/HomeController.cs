@@ -76,16 +76,32 @@ namespace JobPortal.Controllers
         }
 
         [Route("search")]
-        public async Task<IActionResult> Search(string searchString, string searchCategory, int? id)
+        public async Task<IActionResult> Search(string searchString, string searchCategory,string searchShifts, int? id)
         {
             //creates a LINQ Query to select jobs
             var job = from j in _context.Jobs
                       select j;
 
             //checks if empty and get matching data
-            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchCategory))
+
+            if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchCategory) && !String.IsNullOrEmpty(searchShifts))
+            {
+                job = job.Where(s => s.Title!.Contains(searchString) && s.Category!.Contains(searchCategory) && s.Type!.Contains(searchShifts));
+            }
+
+            else if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchCategory))
             {
                 job = job.Where(s => s.Title!.Contains(searchString) && s.Category!.Contains(searchCategory));
+            }
+
+            else if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchShifts))
+            {
+                job = job.Where(s => s.Title!.Contains(searchString) && s.Type!.Contains(searchShifts));
+            }
+
+            else if (!String.IsNullOrEmpty(searchCategory) && !String.IsNullOrEmpty(searchShifts))
+            {
+                job = job.Where(s => s.Category!.Contains(searchCategory) && s.Type!.Contains(searchShifts));
             }
 
             else if (!String.IsNullOrEmpty(searchString))
@@ -96,6 +112,11 @@ namespace JobPortal.Controllers
             else if (!String.IsNullOrEmpty(searchCategory))
             {
                 job = job.Where(s => s.Category!.Contains(searchCategory));
+            }
+
+            else if (!String.IsNullOrEmpty(searchShifts))
+            {
+                job = job.Where(s => s.Type!.Contains(searchShifts));
             }
 
             return View(await job.ToListAsync());
