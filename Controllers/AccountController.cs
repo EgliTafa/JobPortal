@@ -70,7 +70,7 @@ namespace JobPortal.Controllers
 
             if (email != null)
             {
-                ModelState.AddModelError("Email", "Email Already Exist!");
+                ModelState.AddModelError("Email", "Adresa email ekziston. Ju lutem përdorni një adresë tjetër!");
             }
 
             var companyDescription = job.CompanyDescription;
@@ -169,7 +169,7 @@ namespace JobPortal.Controllers
 
             if (email != null)
             {
-                ModelState.AddModelError("Email", "Email Already Exist!");
+                ModelState.AddModelError("Email", "Adresa email ekziston. Ju lutem përdorni një adresë tjetër!");
             }
 
             if (ModelState.IsValid && model != null)

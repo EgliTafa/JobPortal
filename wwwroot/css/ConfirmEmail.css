@@ -6,7 +6,7 @@ footer{
     display:none;
 }
 
-<style type="text/css" >
+
 @media screen {
     @font-face {
         font-family: 'Lato';
@@ -48,8 +48,8 @@ a {
 
 table,
 td {
-    mso-table-lspace: 0pt;
-    mso-table-rspace: 0pt;
+    -mso-table-lspace: 0pt;
+    -mso-table-rspace: 0pt;
 }
 
 img {
@@ -99,4 +99,3 @@ div[style*="margin: 16px 0;"] {
     margin: 0 !important;
 }
 
-</style >

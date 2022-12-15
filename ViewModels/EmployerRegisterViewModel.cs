@@ -12,23 +12,23 @@ namespace JobPortal.ViewModels
         [MaxLength(60)]
         public string UserName { get; set; }
 
-        [Required, MaxLength(20)]
+        [Required(ErrorMessage = "Emri nuk mundet të jetë bosh."), MaxLength(20)]
         public string FirstName { get; set; }
 
-        [Required, MaxLength(60)]
+        [Required(ErrorMessage = "Adresa nuk mundet të jetë bosh."), MaxLength(60)]
         public string LastName { get; set; }
 
-        [Required, MaxLength(60)]
+        [Required(ErrorMessage = "E-Mail nuk mundet të jetë bosh."), MaxLength(60)]
         [EmailAddress]
         public string Email { get; set; }
 
         [MaxLength(200), Display(Name = "Description", Prompt = "Description")]
         public string Description { get; set; }
 
-        [Required, DataType(DataType.Password)]
+        [Required(ErrorMessage = "Fjalëkalimi nuk mundet të jetë bosh."), DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required, MaxLength(60), Display(Name = "Phone Number", Prompt = "Phone Number")]
+        [Required(ErrorMessage = "Numri I Telefonit nuk mundet të jetë bosh."), MaxLength(60), Display(Name = "Phone Number", Prompt = "Phone Number")]
         [Phone]
         public string PhoneNumber { get; set; }
 
@@ -37,7 +37,8 @@ namespace JobPortal.ViewModels
 
         public string ImagePath { get; set; }
 
-        [DataType(DataType.Password), Compare(nameof(Password))]
+        [DataType(DataType.Password), Compare(nameof(Password), ErrorMessage =
+            "Fjalëkalimet nuk janë njësoj. Jepni fjalëkalimin e duhur.")]
         public string ConfirmPassword { get; set; }
     }
 }
