@@ -41,22 +41,22 @@ namespace JobPortal
 
             services.AddIdentity<User, IdentityRole>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = false;
-                options.User.RequireUniqueEmail = true;
-                options.Tokens.AuthenticatorIssuer = "JWT";
-                options.Password = new PasswordOptions
-                {
-                    RequireDigit = true,
-                    RequiredLength = 8,
-                    RequireLowercase = true,
-                    RequireUppercase = true,
-                    RequireNonAlphanumeric = false,
-                };
+                //options.SignIn.RequireConfirmedAccount = false;
+                //options.User.RequireUniqueEmail = true;
+                //options.Tokens.AuthenticatorIssuer = "JWT";
+                //options.Password = new PasswordOptions
+                //{
+                //    RequireDigit = true,
+                //    RequiredLength = 8,
+                //    RequireLowercase = true,
+                //    RequireUppercase = true,
+                //    RequireNonAlphanumeric = false,
+                //};
 
-                // Add this line for Email confirmation
-                options.SignIn.RequireConfirmedEmail = true;
+                //// Add this line for Email confirmation
+                //options.SignIn.RequireConfirmedEmail = true;
 
-            }).AddDefaultTokenProviders()
+            })//.AddDefaultTokenProviders()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
             var mailKitOptions = Configuration.GetSection("Email").Get<MailKitOptions>();
