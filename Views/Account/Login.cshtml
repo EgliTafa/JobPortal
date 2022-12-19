@@ -20,7 +20,7 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fa fa-envelope fa-lg mb-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0 form-group">
-                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type = "email" })                                            
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type = "email" })
                                             <label class="form-label" for="form3Example3c">E-Mail</label>
                                         </div>
                                     </div>
@@ -39,8 +39,14 @@
                                             <i class="fa fa-user-md"></i> Hyni
                                         </button>
                                     </div>
-                                    <div>
-                                        <a asp-action="ForgotPassword">Keni harruar fjalëkalimin?</a>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <a asp-action="ForgotPassword">Keni harruar fjalëkalimin?</a>
+                                        </div>
+                                        <div class="col">
+                                            <a asp-action="EmployeeRegister">Regjistrohuni</a>
+                                        </div>
                                     </div>
                                 </form>
 

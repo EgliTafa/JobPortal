@@ -107,21 +107,21 @@ namespace JobPortal.Controllers
                             await _userManager.AddToRoleAsync(user, "Employer");
                         }
 
-                        //var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                        //var confirmationLink = Url.Action("ConfirmEmail", "Account",
-                        //    new { userId = user.Id, token = token }, Request.Scheme);
+                        var confirmationLink = Url.Action("ConfirmEmail", "Account",
+                            new { userId = user.Id, token = token }, Request.Scheme);
 
-                        //_logger.Log(LogLevel.Warning, confirmationLink);
+                        _logger.Log(LogLevel.Warning, confirmationLink);
 
                         if (_signManager.IsSignedIn(User) && User.IsInRole("Employee"))
                         {
                             return RedirectToAction("Index", "Home");
                         }
-                        //await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
-                        //ModelState.AddModelError("Email", "Registration successful");
-                        //ModelState.AddModelError("Email", "Before you can Login, please confirm your email, by clicking on the confirmation link we have emailed you");
-                        //return View("EmailVerification");
+                        await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
+                        ModelState.AddModelError("Email", "Registration successful");
+                        ModelState.AddModelError("Email", "Before you can Login, please confirm your email, by clicking on the confirmation link we have emailed you");
+                        return View("EmailVerification");
                     }
                 }
                 else
@@ -214,7 +214,7 @@ namespace JobPortal.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                    //await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
+                    await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
                     return View("EmailVerification");
                 }
                 foreach (var error in result.Errors)
