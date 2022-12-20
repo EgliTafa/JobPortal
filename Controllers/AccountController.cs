@@ -56,7 +56,7 @@ namespace JobPortal.Controllers
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
 
-                var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
+                var updatedFilePath = filePath.Substring(filePath.IndexOf("/img"));
 
                 model.ImagePath = updatedFilePath;
 
@@ -154,7 +154,7 @@ namespace JobPortal.Controllers
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
 
-                var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
+                var updatedFilePath = filePath.Substring(filePath.IndexOf("/img"));
 
                 model.ImagePath = updatedFilePath;
 
@@ -321,7 +321,7 @@ namespace JobPortal.Controllers
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
 
-                var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
+                var updatedFilePath = filePath.Substring(filePath.IndexOf("/img"));
 
                 model.ImagePath = updatedFilePath;
 

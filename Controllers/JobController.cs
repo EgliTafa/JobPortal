@@ -65,7 +65,7 @@ namespace JobPortal.Controllers
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
 
-                var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
+                var updatedFilePath = filePath.Substring(filePath.IndexOf("/img"));
 
                 model.PosterImageURl = updatedFilePath;
 
@@ -108,7 +108,7 @@ namespace JobPortal.Controllers
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
 
-                var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
+                var updatedFilePath = filePath.Substring(filePath.IndexOf("/uploads"));
 
                 model.CVPath = updatedFilePath;
                 model.Gender = user.Gender;
@@ -241,7 +241,7 @@ namespace JobPortal.Controllers
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
 
-                var updatedFilePath = filePath.Substring(filePath.IndexOf("/"));
+                var updatedFilePath = filePath.Substring(filePath.IndexOf("/uploads"));
                 model.PosterImageURl = updatedFilePath;
                 //_context.Users.Add(model);
                 //_context.SaveChanges();
