@@ -48,14 +48,14 @@ namespace JobPortal.Controllers
         }
 
         [Route("jobs/create")]
-        [Authorize(Roles = "Employer,Admin")]
+        [Authorize(Roles = "Employer")]
         public IActionResult Create()
         {
             return View();
         }
 
         [Route("jobs/save")]
-        [Authorize(Roles = "Employer,Admin")]
+        [Authorize(Roles = "Employer")]
         [HttpPost]
         public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl","PreferredAge","Education","CompanyPhoneNumber")]
                                                 Job model, IFormFile upload)

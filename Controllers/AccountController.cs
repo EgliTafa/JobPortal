@@ -47,11 +47,10 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Route("employer/register")]
         public async Task<IActionResult> EmployerRegister(IFormFile upload,
-            [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword", "ImagePath", "PhoneNumber","Description","CompanyDescription")]
-            EmployerRegisterViewModel model, Job job)
+            [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword","ImagePath", "PhoneNumber","Gender","Description")]
+            EmployerRegisterViewModel model)
         {
-            //Profile Picture
-            if (upload != null && upload.Length > 0 && upload.ContentType.Contains("image"))
+            if (upload != null && upload.Length > 0)
             {
                 var fileName = Path.GetFileName(upload.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", fileName);
@@ -66,6 +65,7 @@ namespace JobPortal.Controllers
                 }
             }
 
+
             var email = _context.Users.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
 
             if (email != null)
@@ -73,9 +73,7 @@ namespace JobPortal.Controllers
                 ModelState.AddModelError("Email", "Adresa email ekziston. Ju lutem përdorni një adresë tjetër!");
             }
 
-            var companyDescription = job.CompanyDescription;
-
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model != null)
             {
                 var user = new User
                 {
@@ -87,49 +85,42 @@ namespace JobPortal.Controllers
                     PhoneNumber = model.PhoneNumber,
                     ImagePath = model.ImagePath
                 };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
 
-                if (!_context.Users.Any(u => u.Email == user.Email))
+                if (result.Succeeded)
                 {
-                    if (result.Succeeded)
+                    bool checkRole = await _roleManager.RoleExistsAsync("Employer");
+                    if (!checkRole)
                     {
-                        bool checkRole = await _roleManager.RoleExistsAsync("Employer");
-                        if (!checkRole)
-                        {
-                            var role = new IdentityRole();
-                            role.Name = "Employer";
-                            await _roleManager.CreateAsync(role);
+                        var role = new IdentityRole();
+                        role.Name = "Employer";
+                        await _roleManager.CreateAsync(role);
 
-                            await _userManager.AddToRoleAsync(user, "Employer");
-                        }
-                        else
-                        {
-                            await _userManager.AddToRoleAsync(user, "Employer");
-                        }
-
-                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-                        var confirmationLink = Url.Action("ConfirmEmail", "Account",
-                            new { userId = user.Id, token = token }, Request.Scheme);
-
-                        _logger.Log(LogLevel.Warning, confirmationLink);
-
-                        if (_signManager.IsSignedIn(User) && User.IsInRole("Employee"))
-                        {
-                            return RedirectToAction("Index", "Home");
-                        }
-                        await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
-                        ModelState.AddModelError("Email", "Registration successful");
-                        ModelState.AddModelError("Email", "Before you can Login, please confirm your email, by clicking on the confirmation link we have emailed you");
-                        return View("EmailVerification");
+                        await _userManager.AddToRoleAsync(user, "Employer");
                     }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Employer");
+                    }
+
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    var confirmationLink = Url.Action("ConfirmEmail", "Account",
+                        new { userId = user.Id, token = token }, Request.Scheme);
+
+                    _logger.Log(LogLevel.Warning, confirmationLink);
+
+                    if (_signManager.IsSignedIn(User) && User.IsInRole("Employer"))
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
+                    return View("EmailVerification");
                 }
-                else
+                foreach (var error in result.Errors)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                    ModelState.AddModelError("", error.Description);
                 }
             }
 
