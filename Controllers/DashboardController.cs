@@ -61,5 +61,13 @@ namespace JobPortal.Controllers
 
             return View(model);
         }
+
+        [Route("employer/all-employers")]
+        public async Task<IActionResult> AllEmployers()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            return View(user);
+        }
     }
 }
