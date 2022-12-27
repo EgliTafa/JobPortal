@@ -130,14 +130,24 @@ namespace JobPortal.Controllers
         }
 
         [Route("employer/all-employers")]
-        public async Task<IActionResult> AllEmployers()
+        public async Task<IActionResult> AllEmployers(int employerJobCount,string id, User user)
         {
             var employer = await _userManager.GetUsersInRoleAsync("Employer");
-
             EmployersList = employer.ToList();
-                
 
-            return View(EmployersList);
+            //var jobsCount = _context.Jobs.Where(x => x.User.Id == id).ToList().Count();
+
+            //user.JobCount = jobsCount;
+            //_context.Update(user);
+            await _context.SaveChangesAsync();
+
+            var model = new EmployerViewModel
+            {
+                Employers = EmployersList,
+                //JobCount = jobsCount
+            };
+
+            return View(model);
         }
 
         [Route("employer/{id}/details")]

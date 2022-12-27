@@ -21,7 +21,7 @@ namespace JobPortal.Models
         public string Description { get; set; }
 
         public override string PhoneNumber { get; set; }
-
+        public int JobCount { get; set; }
         public string ImagePath { get; set; }
     }
 }

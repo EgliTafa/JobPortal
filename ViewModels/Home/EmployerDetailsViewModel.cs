@@ -15,6 +15,5 @@ namespace JobPortal.ViewModels.Home
         public string CompanyDescription { get; set; }
         public string CompanyName { get; set; }
         public string PosterImageUrl { get; set; }
-        public int ViewCounter { get; set; }
     }
 }
