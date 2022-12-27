@@ -12,42 +12,116 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="~/css/Home-Index.css" />
+
     <style>
-        footer {
-            display: none;
+        .icon {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            color: black;
         }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-body {
+            width: 100%;
+            display: inline;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .card:hover {
+            border-color: orange;
+            color: black;
+        }
+
+        .card-title:hover {
+            color: orange;
+        }
+
+        a {
+            text-decoration: none;
+            color: lightgray;
+        }
+
+        .newJobPosting {
+            display: flex;
+            justify-content: end;
+            color: white;
+            font-weight: bolder;
+        }
+
+        .newText {
+            background-color: darkred;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <br />
-        <div class="row">
-            <div class="col">
-                <div class="card shadow p-3 mb-5 bg-white rounded" id="card-hover">
-                    <img class="card-img-top" src="@Model.CurrentEmployer.ImagePath" alt="Card image cap">
-                </div>
-            </div>
-            <div class="col-8">
 
-                    <div style="text-align:center;">
-                        <h2>Përshkrimi i kompanisë</h2>
-                        <p>
-                            @Model.CurrentEmployer.Description
-                        </p>
-                    </div>
+        <div class="card custom" style="margin:5%;">
+            <img class="card-img-top" src="@Model.CurrentEmployer.ImagePath" alt="Card image cap">
+            <div class="card-body" style="text-align:center;">
+                <h3 class="card-title">@Model.CurrentEmployer.FirstName</h3>
+                <h4 class="card-title">Numri i Telefonit: <br />@Model.CurrentEmployer.PhoneNumber</h4>
+                <h4 class="card-title">Numri i punëve aktive:<br /> *active jobs*</h4>
+            </div>
+            <hr />
+            <div class="card-body" style="text-align:center;">
+                <h4 class="card-title">Përshkrimi i kompanisë</h4>
+                <p>@Model.CurrentEmployer.Description</p>
             </div>
         </div>
+        <br />
+        <h3 style="text-align:center;">Punët aktive</h3>
         <div class="row">
-            
-                <div class="col" style="padding-left: 0; margin-right: 35px; text-align: center">
-                    <h4 class="job-name-category">@Model.CurrentEmployer.FirstName</h4>
-                    <h4 class="job-name-category">@Model.CurrentEmployer.PhoneNumber</h4>
-                    <h4 class="job-name-category">*view counter*</h4>
-                    <h4 class="job-name-category">*active jobs*</h4>
-                </div>
-            
+            <div class="col-12">
+                @foreach (var job in Model.Job)
+                {
+                    <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
+                        <div class="card">
+                            <div class="row no-gutters w-100 h-75">
+                                <div class="">
+                                    <img class="card-img rounded-1" src="@job.PosterImageURl" style="width:100px; height:80px; margin:5px;">
+                                </div>
+                                <div class="text-left">
+                                    <div class="card-body" style="position:absolute; right:0;">
+                                        <h5 class="card-title" style="display:flex; justify-content:center; margin-left:80px;">@job.Category</h5>
 
-            <div class="col-8" style="visibility:hidden;">2 of 2</div>
+                                        <span style="margin:0 auto; margin-left:90px;"><i class="fa fa-map-marker"></i> @job.Location</span>
+
+                                        <span style="margin:0 auto;"><i class="fa fa-eye"></i> @job.ViewCount</span>
+
+                                        <span style="text-transform: capitalize; text-align: right; "><i class="fa fa-clock-o"></i>  @job.CreatedAt.Humanize()</span>
+
+                                        @if ((DateTime.Now - job.CreatedAt).TotalDays < 7)
+                                        {
+                                            <div class="newJobPosting">
+                                                <div class="newText">
+                                                    <i class="fa fa-star"></i>E Re &nbsp;
+                                                </div>
+                                            </div>
+                                        }
+                                        <div class="newJobPosting" style="visibility:hidden;">
+                                            <div class="newText">
+                                                <i class="fa fa-star"></i>E Re &nbsp;
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <br />
+                }
+            </div>
         </div>
     </div>
 </body>

@@ -147,11 +147,11 @@ namespace JobPortal.Controllers
             EmployersList = employer.ToList();
             var currentEmployers = EmployersList.FirstOrDefault(x => x.Id == id);
 
-            var job = _context.Jobs.FirstOrDefault(x => x.Id == jobId);
+            var jobByEmployer = _context.Jobs.Where(g => g.User.Id == id).ToList();
 
             var model = new EmployerDetailsViewModel
             {
-                Job = job,
+                Job = jobByEmployer,
                 Employers = EmployersList,
                 CurrentEmployer = currentEmployers,
                 //CompanyPhoneNumber = job.User.PhoneNumber,
