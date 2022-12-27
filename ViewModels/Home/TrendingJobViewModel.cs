@@ -16,7 +16,7 @@ namespace JobPortal.ViewModels.Home
         public int S { get; set; } 
         public IList<Job> JobList { get; set; }
         public List<Job> Trendings { get; set; }
-
+        public List<User> Employer { get; set; }
         public int TotalRecords { get; set; } 
     }
 }

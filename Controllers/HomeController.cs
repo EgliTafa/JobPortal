@@ -8,12 +8,14 @@ using JobPortal.Models;
 using JobPortal.ViewModels.Home;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace JobPortal.Controllers
 {
     public class HomeController : Controller
     {
         public IList<Job> JobList { get; set; }
+        public IList<User> EmployersList { get; set; }
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
 
@@ -125,6 +127,39 @@ namespace JobPortal.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [Route("employer/all-employers")]
+        public async Task<IActionResult> AllEmployers()
+        {
+            var employer = await _userManager.GetUsersInRoleAsync("Employer");
+
+            EmployersList = employer.ToList();
+                
+
+            return View(EmployersList);
+        }
+
+        [Route("employer/{id}/details")]
+        public async Task<IActionResult> EmployerDetails(int jobId,string id ,int count = 0)
+        {
+            var employer = await _userManager.GetUsersInRoleAsync("Employer");
+            EmployersList = employer.ToList();
+            var currentEmployers = EmployersList.FirstOrDefault(x => x.Id == id);
+
+            var job = _context.Jobs.FirstOrDefault(x => x.Id == jobId);
+
+            var model = new EmployerDetailsViewModel
+            {
+                Job = job,
+                Employers = EmployersList,
+                CurrentEmployer = currentEmployers,
+                //CompanyPhoneNumber = job.User.PhoneNumber,
+                //CompanyDescription = job.User.Description,
+                //CompanyName = job.User.FirstName
+            };
+
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

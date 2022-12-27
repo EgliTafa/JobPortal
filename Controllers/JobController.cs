@@ -145,7 +145,7 @@ namespace JobPortal.Controllers
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 Port = 587,
-                Credentials = new NetworkCredential("mymicrowaveisdry@gmail.com", "lzuscmmoiwejyvvt")
+                Credentials = new NetworkCredential("#", "#")
                 //DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
                 //PickupDirectoryLocation = @"C:\emails"
             });
