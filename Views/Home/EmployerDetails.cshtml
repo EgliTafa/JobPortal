@@ -1,0 +1,54 @@
+﻿@model JobPortal.ViewModels.Home.EmployerDetailsViewModel
+
+
+@using Humanizer
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        footer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br />
+        <div class="row">
+            <div class="col">
+                <div class="card shadow p-3 mb-5 bg-white rounded" id="card-hover">
+                    <img class="card-img-top" src="@Model.CurrentEmployer.ImagePath" alt="Card image cap">
+                </div>
+            </div>
+            <div class="col-8">
+
+                    <div style="text-align:center;">
+                        <h2>Përshkrimi i kompanisë</h2>
+                        <p>
+                            @Model.CurrentEmployer.Description
+                        </p>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            
+                <div class="col" style="padding-left: 0; margin-right: 35px; text-align: center">
+                    <h4 class="job-name-category">@Model.CurrentEmployer.FirstName</h4>
+                    <h4 class="job-name-category">@Model.CurrentEmployer.PhoneNumber</h4>
+                    <h4 class="job-name-category">*view counter*</h4>
+                    <h4 class="job-name-category">*active jobs*</h4>
+                </div>
+            
+
+            <div class="col-8" style="visibility:hidden;">2 of 2</div>
+        </div>
+    </div>
+</body>
+</html>

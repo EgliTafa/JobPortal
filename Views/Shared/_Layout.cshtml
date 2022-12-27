@@ -59,6 +59,8 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav nav-fill text-light">
                     <a class="nav-link nav-fill" asp-controller="Jobs" asp-action="Index">Postimet</a>
+                    <a class="nav-link nav-fill" asp-controller="Home" asp-action="AllEmployers">Kompanitë</a>
+
                     @if (this.User.IsInRole("Employer") && SignInManager.IsSignedIn(User))
                     {
                         <a class="nav-link nav-fill" asp-controller="Job" asp-action="Create">Krijoni një postim të ri</a>
