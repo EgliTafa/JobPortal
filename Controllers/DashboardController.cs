@@ -62,9 +62,5 @@ namespace JobPortal.Controllers
 
             return View(model);
         }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     }
 }
