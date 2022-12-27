@@ -61,8 +61,17 @@
             background-color: darkred;
         }
 
+        .phone-number{
+            color:black;
+            text-decoration:none;
+            font-size:16px;
+            display:inline;
+            font-weight:bold
+        }
+
     </style>
 </head>
+
 <body>
     <div class="container">
 
@@ -70,8 +79,10 @@
             <img class="card-img-top" src="@Model.CurrentEmployer.ImagePath" alt="Card image cap">
             <div class="card-body" style="text-align:center;">
                 <h3 class="card-title">@Model.CurrentEmployer.FirstName</h3>
-                <h4 class="card-title">Numri i Telefonit: <br />@Model.CurrentEmployer.PhoneNumber</h4>
-                <h4 class="card-title">Numri i punëve aktive:<br /> *active jobs*</h4>
+                <h4 class="card-title" style="display:inline">Numri i Telefonit: </h4><a class="phone-number" href="tel:@Model.CurrentEmployer.PhoneNumber">@Model.CurrentEmployer.PhoneNumber</a>
+                <h4 class="card-title">
+                    Numri i punëve aktive: @Model.Job.Count()
+                </h4>
             </div>
             <hr />
             <div class="card-body" style="text-align:center;">

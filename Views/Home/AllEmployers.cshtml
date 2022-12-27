@@ -1,4 +1,5 @@
-﻿@using Humanizer
+﻿@model JobPortal.ViewModels.Home.EmployerViewModel
+@using Humanizer
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -51,14 +52,14 @@
     <section>
         <div class="container">
             <div class="row">
-                 @foreach (var employer in Model)
+                 @foreach (var employer in Model.Employers)
                  {
                     <div class="col-sm">
-                        <a asp-controller="Home" asp-action="EmployerDetails" asp-route-id="@employer.Id" target="_blank">
+                        <a asp-controller="Home" asp-action="EmployerDetails" asp-route-id="@employer.Id">
                             <div class="card shadow p-3 mb-5 bg-white rounded" id="card-hover">
                                 <img class="card-img-top" src="@employer.ImagePath" alt="Card image cap">
                                 <div class="number-of-jobs rounded-1">
-                                    <span>3</span>
+                                    <span>@Model.Job.Count()</span>
                                 </div>
                             </div>
                         </a>

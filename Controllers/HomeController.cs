@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using JobPortal.Models;
-using JobPortal.ViewModels.Home;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using JobPortal.ViewModels;
+using JobPortal.ViewModels.Home;
 
 namespace JobPortal.Controllers
 {
@@ -130,14 +131,20 @@ namespace JobPortal.Controllers
         }
 
         [Route("employer/all-employers")]
-        public async Task<IActionResult> AllEmployers()
+        public async Task<IActionResult> AllEmployers(string id)
         {
             var employer = await _userManager.GetUsersInRoleAsync("Employer");
-
             EmployersList = employer.ToList();
-                
 
-            return View(EmployersList);
+            var jobByEmployer = _context.Jobs.Where(g => g.User.Id == id).ToList();
+
+            var model = new EmployerViewModel
+            {
+                Employers = EmployersList,
+                Job = jobByEmployer
+            };
+
+            return View(model);
         }
 
         [Route("employer/{id}/details")]
