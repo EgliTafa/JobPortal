@@ -421,3 +421,163 @@ b, strong {
     display: flex;
     float: right;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.left {
+    display: flex;
+    justify-content: end;
+}
+
+@media screen and (max-width: 600px) {
+    .job-title {
+        width: 100%;
+        word-wrap: break-word;
+    }
+}
+
+.tag-name {
+    text-transform: capitalize;
+    margin-right: 15%;
+}
+
+.tag-data {
+    display: inline;
+    text-transform: capitalize;
+    width: 120%;
+}
+
+.job-name-category {
+    font: 16px roboto;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.section-padding {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.icons-style {
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.job-tags {
+    text-transform: capitalize;
+    margin: 5px;
+}
+
+.job-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+}
+
+body {
+    margin-top: 0px;
+}
+
+.please-login {
+    text-decoration: none;
+    font-family: roboto,sans-serif;
+    border: 2px solid black;
+    font-weight: 500;
+}
+
+.signInBtn, .profleBuildBtn {
+    position: relative;
+    float: left;
+    line-height: 40px;
+    text-align: center;
+    color: #FFF;
+    background-color: #746EA9;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+}
+
+.inputFieldBtnBackBtnCnt .profleBuildBtn {
+    float: right;
+    width: calc(100% - 55px);
+}
+
+.signInBtn:hover, .profleBuildBtn:hover {
+    background-color: #535383;
+    font-weight: bold;
+    color: white;
+}
+
+.profleBuildBtnSkip, .profleBuildBtnSkip:hover {
+    background-color: #FFF;
+    border: none;
+    margin-top: 20px;
+    font-size: 16px;
+    text-decoration: underline;
+    color: #333333
+}
+
+.appliedBtn {
+    position: relative;
+    float: left;
+    line-height: 20px;
+    text-align: center;
+    color: #FFF;
+    background-color: #4432a8;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+}
+
+.applyBtn {
+    position: relative;
+    float: left;
+    line-height: 20px;
+    text-align: center;
+    color: #FFF;
+    background-color: #746EA9;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+}
+
+    .applyBtn:hover {
+        position: relative;
+        float: left;
+        line-height: 20px;
+        text-align: center;
+        color: #FFF;
+        background-color: #6632a8;
+        border-radius: 5px;
+        cursor: pointer;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -webkit-transition: all 100ms ease-in-out;
+        -moz-transition: all 100ms ease-in-out;
+        -o-transition: all 100ms ease-in-out;
+        transition: all 100ms ease-in-out;
+    }

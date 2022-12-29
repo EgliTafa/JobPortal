@@ -4,63 +4,128 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="vh-100" style="background-color: #eee;">
-    <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-12 col-xl-11">
-                <div class="card text-black" style="border-radius: 25px;">
-                    <div class="card-body p-md-5">
-                        <div class="row justify-content-center">
-                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Identifikohu</p>
+    <style>
+        .registerBtn {
+            position: relative;
+            float: left;
+            line-height: 20px;
+            text-align: center;
+            color: #FFF;
+            background-color: #746EA9;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-transition: all 100ms ease-in-out;
+            -moz-transition: all 100ms ease-in-out;
+            -o-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
 
-                                <form class="mx-1 mx-md-4" method="post" asp-controller="Account" asp-action="Login">
+            .registerBtn:hover {
+                position: relative;
+                float: left;
+                line-height: 20px;
+                text-align: center;
+                color: #FFF;
+                background-color: #6632a8;
+                border-radius: 5px;
+                cursor: pointer;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                -webkit-transition: all 100ms ease-in-out;
+                -moz-transition: all 100ms ease-in-out;
+                -o-transition: all 100ms ease-in-out;
+                transition: all 100ms ease-in-out;
+            }
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fa fa-envelope fa-lg mb-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0 form-group">
-                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type = "email" })
-                                            <label class="form-label" for="form3Example3c">E-Mail</label>
-                                        </div>
-                                    </div>
+        .loginBtn {
+            position: relative;
+            line-height: 20px;
+            text-align: center;
+            color: #FFF;
+            background-image: linear-gradient(to right, #4e42f5, #8742f5);
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-transition: all 100ms ease-in-out;
+            -moz-transition: all 100ms ease-in-out;
+            -o-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
+    </style>
+</head>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fa  fa-lock fa-lg mb-3 fa-fw"></i>
-                                        <div class="form-outline flex-fill mb-0 form-group">
-                                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Fjalëkalimi", @type = "password" })
-                                            <label class="form-label" for="form3Example4c">Fjalëkalimi</label>
-                                        </div>
-                                    </div>
+<body>
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
 
-                                    @Html.AntiForgeryToken()
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-outline-white-primary">
-                                            <i class="fa fa-user-md"></i> Logohuni
-                                        </button>
-                                    </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <a asp-action="ForgotPassword">Keni harruar fjalëkalimin?</a>
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                    <span style="font-weight:bold; display:inline;">Nuk keni llogari? Regjistrohuni si: </span>
+                                    <div class="row justify-content-center">
+                                        <div class="col">
+                                            <a class="btn registerBtn" asp-controller="Account" asp-action="EmployeeRegister">punëmarrës</a>
                                         </div>
                                         <div class="col">
-                                            <a asp-action="EmployeeRegister">Regjistrohuni</a>
+                                            <a class="btn registerBtn" asp-controller="Account" asp-action="EmployerRegister">punëdhënës</a>
                                         </div>
                                     </div>
-                                </form>
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Identifikohu</p>
 
-                            </div>
-                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                    <form class="mx-1 mx-md-4" method="post" asp-controller="Account" asp-action="Login">
 
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                                     class="img-fluid" alt="Sample image">
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fa fa-envelope fa-lg mb-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0 form-group">
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email@example.com", @type = "email" })
+                                                <label class="form-label" for="form3Example3c">E-Mail</label>
+                                            </div>
+                                        </div>
 
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fa  fa-lock fa-lg mb-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0 form-group">
+                                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Fjalëkalimi", @type = "password" })
+                                                <label class="form-label" for="form3Example4c">Fjalëkalimi</label>
+                                            </div>
+                                        </div>
+
+                                        @Html.AntiForgeryToken()
+                                        <div class="text-center justify-content-center">
+                                            <button type="submit" class="btn loginBtn">
+                                                <i class="fa fa-user-md"></i> Logohuni
+                                            </button>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col">
+                                                Keni harruar fjalëkalimin?&nbsp;<a asp-action="ForgotPassword"> Rivendosni fjalëkalimin</a>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                         class="img-fluid" alt="Sample image">
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+</body>

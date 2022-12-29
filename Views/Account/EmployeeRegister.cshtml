@@ -5,75 +5,104 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="h-100 h-custom" style="background-color: white;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-8 col-xl-6">
-                <div class="card rounded-3">
-                    <img src="~/img/employees.jpg"
-                         class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
-                         alt="Sample photo">
-                    <div style="background-color:whitesmoke;" class="card-body p-4 p-md-5">
-                        <h4 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Regjistrohuni si PunëMarrës</h4>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .registerBtn, .profleBuildBtn {
+            position: relative;
+            float: inherit;
+            line-height: 20px;
+            text-align: center;
+            color: #FFF;
+            background-color: #4e42f5;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-transition: all 100ms ease-in-out;
+            -moz-transition: all 100ms ease-in-out;
+            -o-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
 
-                        <form class="px-md-2" method="post" enctype="multipart/form-data" asp-controller="Account" asp-action="EmployeeRegister">
-                            <div asp-validation-summary="ModelOnly"></div>
-                            @Html.ValidationSummary()
+            .registerBtn:hover {
+                background-color: #8742f5;
+            }
+    </style>
+</head>
 
-                            <div class="row">
-                                <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.FirstName, "Emri")
-                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Emri" })
+<body>
+    <section class="h-100 h-custom" style="background-color: white;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="card rounded-3">
+                        <img src="~/img/employees.jpg"
+                             class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                             alt="Sample photo">
+                        <div style="background-color:whitesmoke;" class="card-body p-4 p-md-5">
+                            <h4 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Regjistrohuni si PunëMarrës</h4>
+
+                            <form class="px-md-2" method="post" enctype="multipart/form-data" asp-controller="Account" asp-action="EmployeeRegister">
+                                <div asp-validation-summary="ModelOnly"></div>
+                                @Html.ValidationSummary()
+
+                                <div class="row">
+                                    <div class="form-outline col-md-6 mb-4 form-group">
+                                        @Html.LabelFor(c => c.FirstName, "Emri")
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Emri" })
+                                    </div>
+
+                                    <div class="form-outline col-md-6 mb-4 form-group">
+                                        @Html.LabelFor(c => c.LastName, "Mbiemri")
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Mbiemri" })
+                                    </div>
                                 </div>
 
-                                <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.LastName, "Mbiemri")
-                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder="Mbiemri" })
-                                </div>
-                            </div>
+                                <div class="row">
+                                    <div class="form-outline col-md-6 mb-4 form-group">
+                                        @Html.LabelFor(c => c.Email, "E-Maili")
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", @required = "required", @placeholder = "E-Mail" })
+                                    </div>
 
-                            <div class="row">
-                                <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.Email, "E-Maili")
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email" ,@required = "required", @placeholder = "E-Mail" })
-                                </div>
-
-                                <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.PhoneNumber, "Numri i Telefonit")
-                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @type = "tel", @placeholder = "Numri i Telefonit" })
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.Password, "Fjalëkalimi")
-                                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password", @placeholder = "Fjalëkalimi" })
+                                    <div class="form-outline col-md-6 mb-4 form-group">
+                                        @Html.LabelFor(c => c.PhoneNumber, "Numri i Telefonit")
+                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @type = "tel", @placeholder = "Numri i Telefonit" })
+                                    </div>
                                 </div>
 
-                                <div class="form-outline col-md-6 mb-4 form-group">
-                                    @Html.LabelFor(c => c.ConfirmPassword, "Konfirmoni Fjalëkalimin")
-                                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password", @placeholder = "Konfirmoni Fjalëkalimin" })
-                                </div>
-                            </div>
+                                <div class="row">
+                                    <div class="form-outline col-md-6 mb-4 form-group">
+                                        @Html.LabelFor(c => c.Password, "Fjalëkalimi")
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password", @placeholder = "Fjalëkalimi" })
+                                    </div>
 
-                            <div>
-                                <div> <label asp-for="Photo">Vendosni foton e profilit</label></div>
+                                    <div class="form-outline col-md-6 mb-4 form-group">
+                                        @Html.LabelFor(c => c.ConfirmPassword, "Konfirmoni Fjalëkalimin")
+                                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password", @placeholder = "Konfirmoni Fjalëkalimin" })
+                                    </div>
+                                </div>
+
                                 <div>
-                                    <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
+                                    <div> <label asp-for="Photo">Vendosni foton e profilit</label></div>
+                                    <div>
+                                        <input type="file" name="upload" accept="image/png, image/gif, image/jpeg" class="form-control" />
+                                    </div>
                                 </div>
-                            </div>
-                            <br />
-                            @Html.AntiForgeryToken()
-                            <div class="text-center">
-                                <button type="submit" value="submit" class="btn btn-outline-white-primary">
-                                    <i class="fa fa-user-md"></i> Regjistrohuni
-                                </button>
-                            </div>
-                        </form>
-                        
+                                <br />
+                                @Html.AntiForgeryToken()
+                                <div class="text-center">
+                                    <button type="submit" value="submit" class="btn registerBtn">
+                                        <i class="fa fa-user-md"></i> Regjistrohuni
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+</body>

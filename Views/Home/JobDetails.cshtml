@@ -81,6 +81,110 @@
         body{
             margin-top:0px;
         }
+
+        .please-login {
+            text-decoration: none;
+            font-family: roboto,sans-serif;
+            border:2px solid black;
+            font-weight:500;
+        }
+
+        .signInBtn, .profleBuildBtn {
+            position: relative;
+            float: left;
+            line-height: 25px;
+            text-align: center;
+            color: #FFF;
+            background-color: #746EA9;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-transition: all 100ms ease-in-out;
+            -moz-transition: all 100ms ease-in-out;
+            -o-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
+
+        .inputFieldBtnBackBtnCnt .profleBuildBtn {
+            float: right;
+            width: calc(100% - 55px);
+        }
+
+        .signInBtn:hover, .profleBuildBtn:hover {
+            background-color: #535383;
+            font-weight:bold;
+            color:white;
+        }
+
+        .profleBuildBtnSkip, .profleBuildBtnSkip:hover {
+            background-color: #FFF;
+            border: none;
+            margin-top: 20px;
+            font-size: 16px;
+            text-decoration: underline;
+            color: #333333
+        }
+
+        .appliedBtn {
+            position: relative;
+            float: left;
+            line-height: 20px;
+            text-align: center;
+            color: #FFF;
+            background-color: #4432a8;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-transition: all 100ms ease-in-out;
+            -moz-transition: all 100ms ease-in-out;
+            -o-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
+
+        .applyBtn {
+            position: relative;
+            float: left;
+            line-height: 20px;
+            text-align: center;
+            color: #FFF;
+            background-color: #746EA9;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-transition: all 100ms ease-in-out;
+            -moz-transition: all 100ms ease-in-out;
+            -o-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
+
+        .applyBtn:hover {
+            position: relative;
+            float: left;
+            line-height: 20px;
+            text-align: center;
+            color: #FFF;
+            background-color: #6632a8;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-transition: all 100ms ease-in-out;
+            -moz-transition: all 100ms ease-in-out;
+            -o-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
+
+        .notLogInText {
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            font-size: small;
+            padding-top: 10px;
+        }
     </style>
 </head>
 
@@ -145,87 +249,68 @@
                 <div class="container" id="a">
                     <br />
                     <div class="font-weight-bold">
-                        <p class="font-weight-bold" style=" white-space: pre-line;">@Model.Job.Description</p>
+                        <h5 style="text-align:center; font-weight:bold;">@Model.Job.Title</h5>
+                        <p style=" white-space: pre-line;">@Model.Job.Description</p>
                     </div>
                 </div>
             </div>
             <div class="row bg-white justify-content-center">
                 <form asp-controller="Job" asp-action="Apply" asp-route-id="@Model.Job.Id" method="post" enctype="multipart/form-data">
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        if (Model.IsApplied)
+                    @{
+                        if (SignInManager.IsSignedIn(User))
                         {
-                            <input style="width:100%;" type="button" class="btn btn-outline-white-primary" value="Aplikuar" /><br />
+                            if (User.IsInRole("Employee"))
+                            {
+                                if (Model.IsApplied)
+                                {
+                                    <input style="width:100%;" type="button" class="btn appliedBtn" value="Aplikuar" /><br />
+                                }
+                                else
+                                {
+                                    <div id="myModal" class="modal">
+
+                                        <div class="modal-content mt-5 ml-auto mr-auto card col-sm-3">
+
+                                            <div class="modal-body">
+                                                <span class="close">&times;</span>
+                                                <h4>Ngarko CV-në</h4>
+                                                <input required type="file" name="upload" accept="application/pdf" class="form-control" />
+                                                <input type="hidden" name="job" value="{{ job.id }}">
+                                                <br />
+                                                <input style="width:100%;" type="submit" class="btn applyBtn"
+                                                       value="Apliko Tani" />
+                                                <br />
+                                            </div>
+                                            <br />
+                                        </div>
+
+                                    </div>
+
+                                    <input style="width:100%;" type="button" id="myBtn" class="btn applyBtn"
+                                           value="Apliko Tani" />
+                                }
+                            }
+                            else
+                            {
+                                <a class="btn signInBtn" style="line-height:14px;" asp-action="Login" asp-controller="Account">
+                                    <p class="notLogInText">Logohuni si punonjës për të aplikuar</p>
+                                </a>
+                            }
                         }
+
                         else
                         {
-                            <!-- The Modal -->
-                            <div id="myModal" class="modal">
-
-                                <!-- Modal content -->
-                                <div class="modal-content mt-5 ml-auto mr-auto card col-sm-3">
-
-                                    <div class="modal-body">
-                                        <span class="close">&times;</span>
-                                        <h4>Ngarko CV-në</h4>
-                                        <input required type="file" name="upload" accept="application/pdf" class="form-control" />
-                                        <input type="hidden" name="job" value="{{ job.id }}">
-                                        <br />
-                                        <input style="width:100%;" type="submit" class="btn btn-outline-white-primary"
-                                               value="Apliko Tani" />
-                                        <br />
-                                    </div>
-                                    <br />
-                                </div>
-
-                            </div>
-
-                            <input style="width:100%;" type="button" id="myBtn" class="btn btn-outline-white-primary"
-                                   value="Apliko Tani" />
+                            <a class="btn signInBtn" style="line-height:10px;" asp-action="Login" asp-controller="Account" ><p class="notLogInText">Logohuni për të aplikuar</p></a>
                         }
                     }
+
                 </form>
-                <br />
-                <br />
                 <div class="container justify-content-center m-2" style="display:flex; justify-content:center;">
-                    <a style="width:70%;" class="btn btn-success btn-outline-success" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi<br />Kompaninë</a>
+                    <a style="width:70%;" class="btn signInBtn" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi Kompaninë</a>
                 </div>
             </div>
-            @*<div class="row bg-white social-buttons">
-                <div class="social-buttons" style="margin-top:20px;">
-                    <a href="#">
-                        <img src="~/img/social-buttons/facebook (1).svg" class="icons-style" />
-                    </a>
-                    <a href="#">
-                        <img src="~/img/social-buttons/messenger-icon.png" class="icons-style" />
-                    </a>
-                    <a href="#">
-                        <img src="~/img/social-buttons/viber-icon.png" class="icons-style" />
-                    </a>
-                    <a href="#">
-                        <img src="~/img/social-buttons/whatspp.png" class="icons-style" />
-                    </a>
-                    <a href="#">
-                        <img src="~/img/social-buttons/envelopes.svg" class="icons-style" />
-                    </a>
-                    <a href="#">
-                        <img src="~/img/social-buttons/url-link-round-ui-href-share.png" class="icons-style" />
-                    </a>
-                </div>
-            </div>*@
         </div>
     </section>
-
-    @*<section class="section-padding">
-            <div class="container">
-                <div class="row bg-white" style="display:flex; justify-content:center;">
-                        <h2 class="font-weight-light">Similiar Jobs</h2>
-                </div>
-                <div class="row bg-white">
-                </div>
-
-            </div>
-        </section>*@
 </body>
 
 <script>

@@ -136,7 +136,7 @@ namespace JobPortal.Controllers
             var employer = await _userManager.GetUsersInRoleAsync("Employer");
             EmployersList = employer.ToList();
 
-            var jobByEmployer = _context.Jobs.Where(g => g.User.Id == id).ToList();
+            var jobByEmployer = _context.Jobs.OrderBy(x => x.User.Id).ToList();
 
             var model = new EmployerViewModel
             {
