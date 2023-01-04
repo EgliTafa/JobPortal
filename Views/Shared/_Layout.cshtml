@@ -225,6 +225,21 @@
                             <li class="nav-item" style="color: #fff">
                                 <a class="nav-link nav-fill appearOnMobile" style="text-align:center;" asp-controller="Dashboard" asp-action="Applicants">Aplikantët </a>
                             </li>
+                            <li class="nav-item" style="color: #fff">
+                                <a class="nav-link nav-fill onlyOnPC link-style" asp-controller="Home" asp-action="AllEmployers">Kompanitë</a>
+                            </li>
+                            <li class="nav-item" style="color: #fff; float:left;">
+                                <a asp-controller="Account" asp-action="EditProfile" class=" nav-link nav-fill onlyOnPC link-style">Profili Im</a>
+                            </li>
+                            <li class="nav-item" style="color: #fff; float:left;">
+                                <a class=" nav-link nav-fill onlyOnPC link-style" asp-controller="Account"
+                                   asp-action="ChangePassword">
+                                    Ndryshoni Fjalëkalimin
+                                </a>
+                            </li>
+                            <li class="nav-item" style="color: #fff; float:left;">
+                                <a href="#" class=" nav-link nav-fill onlyOnPC link-style" onclick="document.getElementById('logout-form').submit();">Dil</a>
+                            </li>
                         }
                         <li class="nav-item" style="color: #fff">
                             <a class="nav-link nav-fill appearOnMobile" style="text-align:center;" asp-controller="Home" asp-action="AllEmployers">Kompanitë</a>
@@ -262,10 +277,7 @@
                     {
                     <ul class="navbar-nav">
                         <li class="nav-item" style="color: #fff">
-                            <a class="nav-link nav-fill onlyOnPC link-style" asp-controller="Job" asp-action="Create">Krijoni një postim të ri</a>
-                        </li>
-                        <li class="nav-item" style="color: #fff; float:left;">
-                            <a class="nav-link nav-fill" asp-controller="Dashboard" asp-action="Applicants">Aplikantët </a>
+                            <a class="nav-link nav-fill onlyOnPC link-style" asp-controller="Home" asp-action="AllEmployers">Kompanitë</a>
                         </li>
                         <li class="nav-item" style="color: #fff; float:left;">
                             <a asp-controller="Account" asp-action="EditProfile" class=" nav-link nav-fill onlyOnPC link-style">Profili Im</a>
