@@ -60,6 +60,7 @@ namespace JobPortal.Controllers
         public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl","PreferredAge","Education","CompanyPhoneNumber")]
                                                 Job model, IFormFile upload)
         {
+
             if (upload != null && upload.Length > 0)
             {
                 var fileName = Path.GetFileName(upload.FileName);
