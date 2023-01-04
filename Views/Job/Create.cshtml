@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="~/vendor/bootstrap-select/css/bootstrap-select.min.css">
 }
 
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
 <head>
     <link rel="stylesheet" href="~/css/Job-Create.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -148,46 +157,58 @@
                             </div>
                         </div>
                     </div>
-                    @*<div class="col-md-4">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center experience">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Detajet E Kompanisë</h4>
+                    <div class="col-md-4" style="display:none;">
+                        <div class="p-3 py-5">
+                            <div class="d-flex justify-content-between align-items-center experience">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4>Detajet E Kompanisë</h4>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-12 form-group">
-                            @Html.LabelFor(c => c.CompanyName, "Emri I Kompanisë")
-                            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" , @placeholder= "Emri I Kompanisë" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 form-group">
-                            <label asp-for="Website" class="control-label">Faqja e Kompanisë</label>
-                            <input asp-for="Website" class="form-control" />
-                            <span class="help-inline">@Html.ValidationMessageFor(x => x.Website)</span>
-                        </div>
-                        <div class="col-lg-6 form-group">
-                            @Html.LabelFor(c => c.LastDate, "Afati I Postimit")
-                            @Html.TextBoxFor(m => m.LastDate, new { @class = "form-control", @type = "date" })
-                        </div>
-                    </div>
-                    <div class="row" style="display:none">
-                        <div class="col-lg-12">
-                            <hr>
-                            <div class="checkbox text-center">
-                                <label>
-                                    <input type="checkbox"> I agree with the <a href="#">Terms and conditions</a>.
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-6 form-group">
+                                    @Html.LabelFor(c => c.CompanyName)
+                                    <select id="type" name="CompanyName" placeholder="Orari I Punës"
+                                            class="form-control">
+                                        <option value="@user.FirstName">Full time</option>
+                                    </select>
+                                </div>
+                                <!--<div class="col-lg-12 form-group">
+                                    @Html.LabelFor(c => c.CompanyName, "Emri I Kompanisë")
+                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "Emri I Kompanisë", @Value = @user.FirstName })
+                                    <div class="col-lg-6 form-group">
+                                        <label for="category">Kategoria</label>-->
+                                        @*@Html.LabelFor(c => c.Categoy)*@
 
-                </div>
-            </div>*@
+                                    <!--</div>
+                                </div>-->
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 form-group">
+                                    <label asp-for="Website" class="control-label">Faqja e Kompanisë</label>
+                                    <input asp-for="Website" class="form-control" />
+                                    <span class="help-inline">@Html.ValidationMessageFor(x => x.Website)</span>
+                                </div>
+                                <div class="col-lg-6 form-group">
+                                    @Html.LabelFor(c => c.LastDate, "Afati I Postimit")
+                                    @Html.TextBoxFor(m => m.LastDate, new { @class = "form-control", @type = "date" })
+                                </div>
+                            </div>
+                            <div class="row" style="display:none">
+                                <div class="col-lg-12">
+                                    <hr>
+                                    <div class="checkbox text-center">
+                                        <label>
+                                            <input type="checkbox"> I agree with the <a href="#">Terms and conditions</a>.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
             </form>
