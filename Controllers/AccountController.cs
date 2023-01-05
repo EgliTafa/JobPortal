@@ -67,6 +67,8 @@ namespace JobPortal.Controllers
 
 
             var email = _context.Users.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+            Random rnd = new Random();
+            string randomNumber = rnd.Next(1, 100000).ToString();
 
             if (email != null)
             {
@@ -75,9 +77,11 @@ namespace JobPortal.Controllers
 
             if (ModelState.IsValid && model != null)
             {
+                string usr = model.FirstName + randomNumber;
+                usr = usr.Replace(" ", "");
                 var user = new User
                 {
-                    UserName = model.FirstName,
+                    UserName = usr,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
@@ -157,6 +161,8 @@ namespace JobPortal.Controllers
 
 
             var email = _context.Users.FirstOrDefault(u => u.Email.ToLower() == model.Email.ToLower());
+            Random rnd = new Random();
+            string randomNumber = rnd.Next(1, 100000).ToString();
 
             if (email != null)
             {
@@ -165,9 +171,12 @@ namespace JobPortal.Controllers
 
             if (ModelState.IsValid && model != null)
             {
+                string usr = model.FirstName + randomNumber;
+                usr = usr.Replace(" ", "");
+
                 var user = new User
                 {
-                    UserName = model.FirstName,
+                    UserName = usr,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,

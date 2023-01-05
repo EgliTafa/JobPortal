@@ -44,6 +44,7 @@ namespace JobPortal
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
                 options.Tokens.AuthenticatorIssuer = "JWT";
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+/ ";
                 options.Password = new PasswordOptions
                 {
                     RequireDigit = true,
