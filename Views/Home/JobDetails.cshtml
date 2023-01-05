@@ -17,6 +17,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        p {
+            font-family: sans-serif !important;
+        }
+
         .center {
             display: flex;
             justify-content: center;
@@ -188,7 +192,7 @@
     </style>
 </head>
 
-<body>
+<body >
     @*<a href="#" onclick="history.back()"><i class="fa fa-arrow-circle-left fa-2x arror-hover" style="color:mediumpurple;"></i></a>*@
 
     <section class="section-padding">
@@ -253,7 +257,7 @@
                     <br />
                     <div class="font-weight-bold">
                         <h5 style="text-align:center; font-weight:bold;">@Model.Job.Title</h5>
-                        <p style=" white-space: pre-line;">@Model.Job.Description</p>
+                        <p style=" white-space: pre-line; font-family: 'Lato', sans-serif !important;">@Model.Job.Description</p>
                     </div>
                 </div>
             </div>

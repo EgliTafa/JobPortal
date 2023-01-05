@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        @@media screen and (max-width: 600px) {
+        /*@@media screen and (max-width: 600px) {
             .row {
                 display: flex;
                 flex-direction: row;
@@ -43,6 +43,25 @@
                 .row :nth-child(3) {
                     order: 2;
                 }
+        }*/
+
+        .appearOnPc {
+            display: inherit;
+        }
+
+        .appearOnMobile {
+            display: none;
+        }
+
+        @@media screen and (max-width: 600px) {
+            .appearOnPc {
+                display: none;
+            }
+
+            .appearOnMobile {
+                display: flex;
+
+            }
         }
     </style>
 </head>
@@ -109,13 +128,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row">
+                            @*<div class="row">
                                 <div class="col-lg-12 form-group">
                                     @Html.LabelFor(c => c.Description, "Përshkimi i Punës")
                                     @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 5, @placeholder = "Përshkimi i Punës" })
                                     <span class="help-inline">@Html.ValidationMessageFor(x => x.Description)</span>
                                 </div>
-                            </div>
+                            </div>*@
                             <div class="row">
                                 <div class="col-lg-6 form-group">
                                     @Html.LabelFor(c => c.Salary, "Rroga")
@@ -152,61 +171,41 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mt-5 text-center">
-                                <button type="submit" class="btn btn-primary profile-button" type="button">Ruaj dhe Publiko</button>
+                            <div class="mt-5 text-center appearOnPc">
+                                <button type="submit" class="btn btn-primary profile-button" >Ruaj dhe Publiko</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4" style="display:none;">
+                    <div class="col-md-4" >
                         <div class="p-3 py-5">
                             <div class="d-flex justify-content-between align-items-center experience">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h4>Detajet E Kompanisë</h4>
+                                        <h4>Përshkimi i Punës</h4>
                                     </div>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-lg-6 form-group">
+                                <div class="col-lg-6 form-group" style="display:none;">
                                     @Html.LabelFor(c => c.CompanyName)
                                     <select id="type" name="CompanyName" placeholder="Orari I Punës"
                                             class="form-control">
                                         <option value="@user.FirstName">Full time</option>
                                     </select>
                                 </div>
-                                <!--<div class="col-lg-12 form-group">
-                                    @Html.LabelFor(c => c.CompanyName, "Emri I Kompanisë")
-                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "Emri I Kompanisë", @Value = @user.FirstName })
-                                    <div class="col-lg-6 form-group">
-                                        <label for="category">Kategoria</label>-->
-                                        @*@Html.LabelFor(c => c.Categoy)*@
-
-                                    <!--</div>
-                                </div>-->
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 form-group">
-                                    <label asp-for="Website" class="control-label">Faqja e Kompanisë</label>
-                                    <input asp-for="Website" class="form-control" />
-                                    <span class="help-inline">@Html.ValidationMessageFor(x => x.Website)</span>
-                                </div>
-                                <div class="col-lg-6 form-group">
-                                    @Html.LabelFor(c => c.LastDate, "Afati I Postimit")
-                                    @Html.TextBoxFor(m => m.LastDate, new { @class = "form-control", @type = "date" })
-                                </div>
-                            </div>
-                            <div class="row" style="display:none">
-                                <div class="col-lg-12">
-                                    <hr>
-                                    <div class="checkbox text-center">
-                                        <label>
-                                            <input type="checkbox"> I agree with the <a href="#">Terms and conditions</a>.
-                                        </label>
+                                <div class="row">
+                                    <div class="col form-group" style="text-align:center">
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 15, cols = 60, @placeholder = "Përshkimi i Punës" })
+                                        <span class="help-inline">@Html.ValidationMessageFor(x => x.Description)</span>
                                     </div>
-                                </div>
-                            </div>
 
+                                </div>
+
+                            </div>
+                            <div class="justify-content-center text-center appearOnMobile">
+                                <button type="submit" class="btn btn-primary profile-button">Ruaj dhe Publiko</button>
+                            </div>
                         </div>
                     </div>
                 </div>
