@@ -58,5 +58,7 @@ namespace JobPortal.Models
         [ Display(Name = "Company Phone Number", Prompt = "Company Phone Number")]
         public string CompanyPhoneNumber { get; set; }
         public int ViewCount { get; set; }
+        //public int Rating { get; set; }
+
     }
 }
