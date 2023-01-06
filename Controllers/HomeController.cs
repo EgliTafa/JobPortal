@@ -61,6 +61,13 @@ namespace JobPortal.Controllers
         {
             //ViewBag.message = "You can't do this action";
             var job = _context.Jobs.FirstOrDefault(x => x.Id == id);
+
+            JobList = await _context.Jobs
+                        //.OrderByDescending(x => x.ViewCount)
+                        .OrderByDescending(x => x.CreatedAt)
+                        .Take(10)
+                        .ToListAsync();
+
             count++;
             job.ViewCount = job.ViewCount + count;
              _context.Update(job);
@@ -73,6 +80,7 @@ namespace JobPortal.Controllers
             var model = new JobDetailsViewModel
             {
                 Job = job,
+                JobList = JobList,
                 IsApplied = applied
             };
             return View(model);

@@ -11,6 +11,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{ 
+    var postCategory = Model.Job.Category;
+    var postId = Model.Job.Id;
+}
 
 <head>
     <link rel="stylesheet" href="~/css/JobDetails.css" />
@@ -36,6 +40,52 @@
     <style>
         p {
             font-family: sans-serif !important;
+        }
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            color: black;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-body {
+            width: 100%;
+            display: inline;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .card:hover {
+            border-color: orange;
+            color: black;
+        }
+
+        .card-title:hover {
+            color: orange;
+        }
+
+        a {
+            text-decoration: none;
+            color: lightgray;
+        }
+
+        .newJobPosting {
+            display: flex;
+            justify-content: end;
+            color: white;
+            font-weight: bolder;
+        }
+
+        .newText {
+            background-color: darkred;
         }
 
         .caption-badge {
@@ -253,16 +303,16 @@
             </div>
             <div class="row bg-white social-buttons">
                 <div class="social-buttons">
-                    <a href="#">
+                    <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=https://localhost:44389/jobs/@Model.Job.Id/details"  target="_blank">
                         <img src="~/img/social-buttons/facebook (1).svg" class="icons-style" />
                     </a>
-                    <a href="#">
+                    <a href="fb-messenger://share/?link= https://localhost:44389/jobs/@Model.Job.Id/details" target="_blank">
                         <img src="~/img/social-buttons/messenger-icon.png" class="icons-style" />
                     </a>
                     <a href="#">
                         <img src="~/img/social-buttons/viber-icon.png" class="icons-style" />
                     </a>
-                    <a href="#">
+                    <a href="https://api.whatsapp.com/send?text=https://localhost:44389/jobs/@Model.Job.Id/details" data-action="share/whatsapp/share" target="_blank">
                         <img src="~/img/social-buttons/whatspp.png" class="icons-style" />
                     </a>
                     <a href="#">
@@ -344,6 +394,53 @@
 
                 </form>
             </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <h4 class="card-title" style="text-align:center;">Njoftime Të Ngjashme</h4>
+
+            @foreach (var job in Model.JobList)
+            {
+                if (String.Equals(job.Category, postCategory) && !String.Equals(job.Id, postId))
+                {
+                    <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
+                        <div class="card">
+                            <div class="row no-gutters w-100 h-75">
+                                <div class="">
+                                    <img class="card-img rounded-1" src="@job.PosterImageURl" style="width:100px; height:80px; margin:5px;">
+                                </div>
+                                <div class="text-left">
+                                    <div class="card-body" style="position:absolute; right:0;">
+                                        <h5 class="card-title" style="display:flex; justify-content:center; margin-left:80px;">@job.Category</h5>
+
+                                        <span style="margin:0 auto; margin-left:90px;"><i class="fa fa-map-marker"></i> @job.Location</span>
+
+                                        <span style="margin:0 auto;"><i class="fa fa-eye"></i> @job.ViewCount</span>
+
+                                        <span style="text-transform: capitalize; text-align: right; font-size:13px;"><i class="fa fa-clock-o"></i>  @job.CreatedAt.Humanize()</span>
+
+                                        @if ((DateTime.Now - job.CreatedAt).TotalDays < 7)
+                                        {
+                                            <div class="newJobPosting">
+                                                <div class="newText">
+                                                    <i class="fa fa-star"></i>E Re &nbsp;
+                                                </div>
+                                            </div>
+                                        }
+                                        <div class="newJobPosting" style="visibility:hidden;">
+                                            <div class="newText">
+                                                <i class="fa fa-star"></i>E Re &nbsp;
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <br />
+                }
+            }
         </div>
     </section>
 </body>

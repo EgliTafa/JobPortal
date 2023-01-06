@@ -9,6 +9,7 @@ namespace JobPortal.ViewModels.Home
 {
     public class JobDetailsViewModel
     {
+        public IList<Job> JobList { get; set; }
         public Job Job { get; set; }
         public IFormFile MyPdf { set; get; }
         public bool IsApplied { get; set; }
