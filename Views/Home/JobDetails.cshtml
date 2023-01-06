@@ -303,26 +303,27 @@
             </div>
             <div class="row bg-white social-buttons">
                 <div class="social-buttons">
-                    <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=https://localhost:44389/jobs/@Model.Job.Id/details"  target="_blank">
+                    <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=https://localhost:44389/jobs/@Model.Job.Id/details" target="_blank">
                         <img src="~/img/social-buttons/facebook (1).svg" class="icons-style" />
                     </a>
-                    <a href="fb-messenger://share/?link= https://localhost:44389/jobs/@Model.Job.Id/details" target="_blank">
+                    @*<a href="fb-messenger://share/?link= https://localhost:44389/jobs/@Model.Job.Id/details" target="_blank">
                         <img src="~/img/social-buttons/messenger-icon.png" class="icons-style" />
-                    </a>
-                    <a href="#">
+                    </a>*@
+                    @*<a href="#">
                         <img src="~/img/social-buttons/viber-icon.png" class="icons-style" />
-                    </a>
+                    </a>*@
                     <a href="https://api.whatsapp.com/send?text=https://localhost:44389/jobs/@Model.Job.Id/details" data-action="share/whatsapp/share" target="_blank">
                         <img src="~/img/social-buttons/whatspp.png" class="icons-style" />
                     </a>
                     <a href="#">
                         <img src="~/img/social-buttons/envelopes.svg" class="icons-style" />
                     </a>
-                    <a href="#">
+                    <a href="#" onclick="copyToClipboard()">
                         <img src="~/img/social-buttons/url-link-round-ui-href-share.png" class="icons-style" />
                     </a>
                 </div>
             </div>
+            <input type="text" value="https://localhost:44389/jobs/@Model.Job.Id/details" id="myInput" style="display:none;">
             <div class="row bg-white">
                 <div class="container" id="a">
                     <br />
@@ -396,8 +397,7 @@
             </div>
         </div>
     </section>
-    <section>
-        <div class="container">
+            <div class="container">
             <h4 class="card-title" style="text-align:center;">Njoftime Të Ngjashme</h4>
 
             @foreach (var job in Model.JobList)
@@ -442,7 +442,7 @@
                 }
             }
         </div>
-    </section>
+
 </body>
 
 <script>
@@ -481,4 +481,19 @@
             alert(ratingValue);
         });
     });
+
+    function copyToClipboard() {
+        // Get the text field
+        var copyText = document.getElementById("myInput");
+
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        // Alert the copied text
+        alert("Adresa u kopjua!");
+    }
 </script>

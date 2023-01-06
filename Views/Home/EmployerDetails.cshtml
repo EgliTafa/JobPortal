@@ -69,6 +69,19 @@
             font-weight:bold
         }
 
+        .customImage {
+            width: 30%;
+            height: 50%;
+            margin: 0 auto;
+        }
+
+        @@media screen and (max-width: 600px){
+            .customImage {
+                width: 50%;
+                height: 50%;
+                margin: 0 auto;
+            }
+        }
     </style>
 </head>
 
@@ -77,7 +90,7 @@
         <a href="#" onclick="history.back()"><i class="fa fa-arrow-circle-left fa-2x arror-hover" style="color:mediumpurple;"></i></a>
 
         <div class="card custom" style="margin:5%;">
-            <img class="card-img-top" src="@Model.CurrentEmployer.ImagePath" alt="Company Picture">
+            <img class="card-img-top img-fluid customImage" src="@Model.CurrentEmployer.ImagePath" alt="Company Picture">
             <div class="card-body" style="text-align:center;">
                 <h3 class="card-title">@Model.CurrentEmployer.FirstName</h3>
                 <h4 class="card-title" style="display:inline">Numri i Telefonit: </h4><a class="phone-number" href="tel:@Model.CurrentEmployer.PhoneNumber">@Model.CurrentEmployer.PhoneNumber</a>
