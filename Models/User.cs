@@ -19,9 +19,8 @@ namespace JobPortal.Models
         [MaxLength(10)]
         public string Gender { get; set; }
         public string Description { get; set; }
-
+        public int JobCount { get; set; }
         public override string PhoneNumber { get; set; }
-
         public string ImagePath { get; set; }
     }
 }

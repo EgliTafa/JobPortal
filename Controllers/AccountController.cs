@@ -50,6 +50,7 @@ namespace JobPortal.Controllers
             [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword","ImagePath", "PhoneNumber","Gender","Description")]
             EmployerRegisterViewModel model)
         {
+            int jobCount = 0;
             if (upload != null && upload.Length > 0)
             {
                 var fileName = Path.GetFileName(upload.FileName);
@@ -82,6 +83,7 @@ namespace JobPortal.Controllers
                 var user = new User
                 {
                     UserName = usr,
+                    JobCount = jobCount,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
@@ -144,6 +146,7 @@ namespace JobPortal.Controllers
             [Bind("FirstName", "LastName", "Email", "Password", "ConfirmPassword","ImagePath", "PhoneNumber","Gender","Description")]
             EmployeeRegisterViewModel model)
         {
+            int jobCount = 0;
             if (upload != null && upload.Length > 0)
             {
                 var fileName = Path.GetFileName(upload.FileName);
@@ -177,6 +180,7 @@ namespace JobPortal.Controllers
                 var user = new User
                 {
                     UserName = usr,
+                    JobCount = jobCount,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,

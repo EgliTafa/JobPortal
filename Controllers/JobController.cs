@@ -75,13 +75,17 @@ namespace JobPortal.Controllers
                     await upload.CopyToAsync(fileSrteam);
                 }
             }
-
+            
             if (ModelState.IsValid)
             {
                 TempData["type"] = "success";
                 TempData["message"] = "Job posted successfully";
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 model.User = user;
+
+                int currentJobCount = user.JobCount;
+
+                model.User.JobCount = currentJobCount+1; 
                 model.CompanyDescription = user.Description;
                 model.posterUrl = user.ImagePath;
                 model.CompanyPhoneNumber = user.PhoneNumber;
