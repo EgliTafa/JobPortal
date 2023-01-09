@@ -41,7 +41,6 @@ namespace JobPortal.Controllers
         public IActionResult Index()
         {
 
-
             var jobs = _context.Jobs.ToList();
 
             return View(jobs);
@@ -57,8 +56,7 @@ namespace JobPortal.Controllers
         [Route("jobs/save")]
         [Authorize(Roles = "Employer")]
         [HttpPost]
-        public async Task<IActionResult> Save([Bind("User","Title","Description","Website","Location","Type","CompanyName","CompanyDescription", "Job", "CVPath", "CreatedAt","Salary","Category","LastDate","posterUrl","PosterImageUrl","PreferredAge","Education","CompanyPhoneNumber")]
-                                                Job model, IFormFile upload)
+        public async Task<IActionResult> Save([Bind("User", "Title", "Description", "Website", "Location", "Type", "CompanyName", "CompanyDescription", "Job", "CVPath", "CreatedAt", "Salary", "Category", "LastDate", "posterUrl", "PosterImageUrl", "PreferredAge", "Education", "CompanyPhoneNumber")] Job model, IFormFile upload)
         {
 
             if (upload != null && upload.Length > 0)
@@ -75,7 +73,7 @@ namespace JobPortal.Controllers
                     await upload.CopyToAsync(fileSrteam);
                 }
             }
-            
+
             if (ModelState.IsValid)
             {
                 TempData["type"] = "success";
@@ -84,13 +82,13 @@ namespace JobPortal.Controllers
 
                 model.User = user;
                 int currentJobCount = user.JobCount;
-                model.User.JobCount = currentJobCount+1; 
+                model.User.JobCount = currentJobCount + 1;
 
                 model.CompanyDescription = user.Description;
                 model.posterUrl = user.ImagePath;
                 model.CompanyPhoneNumber = user.PhoneNumber;
                 _context.Jobs.Add(model);
-                
+
                 await _context.SaveChangesAsync();
 
                 return RedirectToActionPermanent("Index", "Home");
@@ -101,8 +99,7 @@ namespace JobPortal.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Apply(int id, IFormFile upload,
-            [Bind("User", "Job", "CVPath", "CreatedAt")]
-             JobApplicantsViewModel model ,[FromServices] IFluentEmail mailer)
+          [Bind("User", "Job", "CVPath", "CreatedAt")] JobApplicantsViewModel model)
         {
 
             var job = _context.Jobs.SingleOrDefault(x => x.Id == id);
@@ -133,7 +130,10 @@ namespace JobPortal.Controllers
                 if (!User.IsInRole("Employee"))
                 {
                     TempData["message"] = "You can't do this action";
-                    return RedirectToActionPermanent("JobDetails", "Home", new { id });
+                    return RedirectToActionPermanent("JobDetails", "Home", new
+                    {
+                        id
+                    });
                 }
             }
             var apply = new Applicant
@@ -164,17 +164,24 @@ namespace JobPortal.Controllers
             template.AppendLine("- ABC Bebitos");
 
             var email = await Email
-                .From("mymicrowaveisdry@gmail.com")
-                .To(user.Email)
-                .Subject("Application Sent Succesfully!")
-                .UsingTemplate(template.ToString(), new { FirstName = apply.User.FirstName, Job = job.Title })
-                .SendAsync();
+              .From("mymicrowaveisdry@gmail.com")
+              .To(user.Email)
+              .Subject("Application Sent Succesfully!")
+              .UsingTemplate(template.ToString(), new
+              {
+                  FirstName = apply.User.FirstName,
+                  Job = job.Title
+              })
+              .SendAsync();
 
             _context.Applicants.Add(apply);
 
             await _context.SaveChangesAsync();
 
-            return RedirectToActionPermanent("JobDetails", "Home", new { id });
+            return RedirectToActionPermanent("JobDetails", "Home", new
+            {
+                id
+            });
         }
 
         [Route("mark-as-filled/{id}")]
@@ -188,7 +195,7 @@ namespace JobPortal.Controllers
 
             return RedirectToActionPermanent("Index", "Dashboard");
         }
-        
+
         [Authorize(Roles = "Employer,Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -198,7 +205,7 @@ namespace JobPortal.Controllers
             }
 
             var job = await _context.Jobs
-                .FirstOrDefaultAsync(m => m.Id == id);
+              .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {
                 return NotFound();
@@ -206,7 +213,6 @@ namespace JobPortal.Controllers
 
             return View(job);
         }
-
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -239,7 +245,7 @@ namespace JobPortal.Controllers
         [HttpPost]
         [Authorize(Roles = "Employer,Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,IFormFile upload, Job model, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate","posterUrl","PosterImageURl", "PreferredAge", "Education","CompanyPhoneNumber")] Job job)
+        public async Task<IActionResult> Edit(int id, IFormFile upload, Job model, [Bind("Id", "Title", "Description", "Category", "Location", "Type", "CompanyName", "CompanyDescription", "Website", "Salary", "LastDate", "posterUrl", "PosterImageURl", "PreferredAge", "Education", "CompanyPhoneNumber")] Job job)
         {
             if (upload != null && upload.Length > 0)
             {

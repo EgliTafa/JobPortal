@@ -15,8 +15,16 @@ namespace JobPortal.Controllers
 {
     public class HomeController : Controller
     {
-        public IList<Job> JobList { get; set; }
-        public IList<User> EmployersList { get; set; }
+        public IList<Job> JobList
+        {
+            get;
+            set;
+        }
+        public IList<User> EmployersList
+        {
+            get;
+            set;
+        }
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
 
@@ -26,23 +34,21 @@ namespace JobPortal.Controllers
             _userManager = userManager;
         }
 
-
         public async Task<IActionResult> Index(int p = 1, int s = 5, int TotalRecords = 0, int count = 0)
         {
             TotalRecords = _context.Jobs.Count();
 
-
             var trendings = _context.Jobs
-                .Where(b => b.CreatedAt.Month == DateTime.Now.Month)
-                .Where(x => x.Filled == false)
-                .ToList();
+              .Where(b => b.CreatedAt.Month == DateTime.Now.Month)
+              .Where(x => x.Filled == false)
+              .ToList();
 
             JobList = await _context.Jobs
-                        //.OrderByDescending(x => x.ViewCount)
-                        .OrderByDescending(x => x.CreatedAt)
-                        //.Skip((p - 1) * s)
-                        //.Take(s)
-                        .ToListAsync();
+              //.OrderByDescending(x => x.ViewCount)
+              .OrderByDescending(x => x.CreatedAt)
+              //.Skip((p - 1) * s)
+              //.Take(s)
+              .ToListAsync();
 
             var model = new TrendingJobViewModel
             {
@@ -63,14 +69,14 @@ namespace JobPortal.Controllers
             var job = _context.Jobs.FirstOrDefault(x => x.Id == id);
 
             JobList = await _context.Jobs
-                        //.OrderByDescending(x => x.ViewCount)
-                        .OrderByDescending(x => x.CreatedAt)
-                        .Take(10)
-                        .ToListAsync();
+              //.OrderByDescending(x => x.ViewCount)
+              .OrderByDescending(x => x.CreatedAt)
+              .Take(10)
+              .ToListAsync();
 
             count++;
             job.ViewCount = job.ViewCount + count;
-             _context.Update(job);
+            _context.Update(job);
             await _context.SaveChangesAsync();
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var applied = false;
@@ -87,7 +93,7 @@ namespace JobPortal.Controllers
         }
 
         [Route("search")]
-        public async Task<IActionResult> Search(string searchString, string searchCategory,string searchShifts, int? id)
+        public async Task<IActionResult> Search(string searchString, string searchCategory, string searchShifts, int? id)
         {
             //creates a LINQ Query to select jobs
             var job = from j in _context.Jobs
@@ -99,32 +105,26 @@ namespace JobPortal.Controllers
             {
                 job = job.Where(s => s.Title!.Contains(searchString) && s.Category!.Contains(searchCategory) && s.Type!.Contains(searchShifts));
             }
-
             else if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchCategory))
             {
                 job = job.Where(s => s.Title!.Contains(searchString) && s.Category!.Contains(searchCategory));
             }
-
             else if (!String.IsNullOrEmpty(searchString) && !String.IsNullOrEmpty(searchShifts))
             {
                 job = job.Where(s => s.Title!.Contains(searchString) && s.Type!.Contains(searchShifts));
             }
-
             else if (!String.IsNullOrEmpty(searchCategory) && !String.IsNullOrEmpty(searchShifts))
             {
                 job = job.Where(s => s.Category!.Contains(searchCategory) && s.Type!.Contains(searchShifts));
             }
-
             else if (!String.IsNullOrEmpty(searchString))
             {
                 job = job.Where(s => s.Title!.Contains(searchString));
             }
-
             else if (!String.IsNullOrEmpty(searchCategory))
             {
                 job = job.Where(s => s.Category!.Contains(searchCategory));
             }
-
             else if (!String.IsNullOrEmpty(searchShifts))
             {
                 job = job.Where(s => s.Type!.Contains(searchShifts));
@@ -156,7 +156,7 @@ namespace JobPortal.Controllers
         }
 
         [Route("employer/{id}/details")]
-        public async Task<IActionResult> EmployerDetails(int jobId,string id ,int count = 0)
+        public async Task<IActionResult> EmployerDetails(int jobId, string id, int count = 0)
         {
             var employer = await _userManager.GetUsersInRoleAsync("Employer");
             EmployersList = employer.ToList();
@@ -180,7 +180,10 @@ namespace JobPortal.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }
