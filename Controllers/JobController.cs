@@ -81,11 +81,11 @@ namespace JobPortal.Controllers
                 TempData["type"] = "success";
                 TempData["message"] = "Job posted successfully";
                 var user = await _userManager.GetUserAsync(HttpContext.User);
+
                 model.User = user;
-
                 int currentJobCount = user.JobCount;
-
                 model.User.JobCount = currentJobCount+1; 
+
                 model.CompanyDescription = user.Description;
                 model.posterUrl = user.ImagePath;
                 model.CompanyPhoneNumber = user.PhoneNumber;

@@ -29,15 +29,15 @@
         }
 
         .card {
-            width: 340px;
-            height: 205px;
+            width: 250px;
+            height: 250px;
             border: none;
             transition: transform .2s;
         }
 
         .card-img-top {
-            width: 300px;
-            height: 175px;
+            width: 220px;
+            height: 220px;
         }
 
             .card:hover {
@@ -61,7 +61,7 @@
             <div class="row">
                 @foreach (var employer in Model.Employers)
                 {
-                    <div class="col-sm">
+                    <div class="col-sm" style="display:flex; justify-content:center;">
                         <a asp-controller="Home" asp-action="EmployerDetails" asp-route-id="@employer.Id">
                             <div class="card shadow p-3 mb-5 bg-white rounded" id="card-hover">
                                 <img class="card-img-top" src="@employer.ImagePath" alt="Card image cap">

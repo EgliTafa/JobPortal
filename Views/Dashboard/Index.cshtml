@@ -5,26 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Humanizer
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <style>
         .inline {
-            display:inline;
-            justify-content:end;
+            display: inline;
+            justify-content: end;
         }
 
-        table td{
-            white-space:nowrap;
+        table td {
+            white-space: nowrap;
         }
 
 
 
         @@media screen and (max-width: 600px) {
             .btn-sm {
-                width:30%;
-                white-space:nowrap;
-                overflow:hidden;
+                width: 30%;
+                white-space: nowrap;
+                overflow: hidden;
             }
 
             .col-10 {
@@ -50,13 +59,33 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center mb-5">
-                    <a asp-controller="Job"
-                       asp-action="Create"
-                       class="btn btn-outline-white-primary">
-                        <i class="fa fa-plus"></i>Shto një punë të re
-                    </a>
-                </div>
+
+                @{
+                    if (user.JobCount >= 3)
+                    {
+                                <div class="col-lg-12 text-center mb-5">
+                                    <span style="text-align:center;">Ju keni arritur limitin e punëve që mund të postoni me një adresë falas</span>
+                                    <br />
+                                    <a asp-controller="Job"
+                                       asp-action="Create"
+                                       class="btn btn-outline-white-primary disabled">
+                                        <i class="fa fa-plus"></i>Shto një punë të re
+                                    </a>
+                                </div>
+                    }
+
+                    else
+                    {
+                        <div class="col-lg-12 text-center mb-5">
+                            <a asp-controller="Job"
+                               asp-action="Create"
+                               class="btn btn-outline-white-primary">
+                                <i class="fa fa-plus"></i>Shto një punë të re
+                            </a>
+                        </div>
+                    }
+                }
+
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         <table class="table table-light table-hover ">
@@ -64,8 +93,8 @@
                                 <tr>
                                     <th style="display:flex; width:400px; justify-content:center;">Titulli I Punës</th>
                                     @*<th style="white-space: nowrap;">Position filled</th>
-                                    <th>Date posted</th>*@
-                                   <th>Aplikantët</th>
+                            <th>Date posted</th>*@
+                                    <th>Aplikantët</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -127,3 +156,53 @@
         </div>
     </section>
 </body>
+
+@*<script>
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+
+    document.onkeydown = function (e) {
+        if (event.keyCode == 123) { //F12 keycode is 123
+            return false;
+        }
+    }
+
+    document.onkeydown = function (e) {
+        if (e.keyCode == 123) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+            e.preventDefault();
+            return false;
+        }
+    }
+
+    if (devtools.isOpen) {
+
+
+        setInterval(() => {
+
+            var $all = document.querySelectorAll("*");
+
+            for (var each of $all) {
+                each.classList.add(`asdjaljsdliasud8ausdijaisdluasdjasildahjdsk${Math.random()}`);
+            }
+
+
+        }, 5);
+    }
+</script>*@
