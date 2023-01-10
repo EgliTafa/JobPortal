@@ -61,7 +61,7 @@
             <div class="row">
 
                 @{
-                    if (user.JobCount >= 3)
+                    if (user.JobCount >= 3 && !user.IsPaidWeekly && !user.IsPaidMonthly)
                     {
                                 <div class="col-lg-12 text-center mb-5">
                                     <span style="text-align:center;">Ju keni arritur limitin e punëve që mund të postoni me një adresë falas</span>
