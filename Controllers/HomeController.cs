@@ -133,6 +133,7 @@ namespace JobPortal.Controllers
             return View(await job.ToListAsync());
         }
 
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();

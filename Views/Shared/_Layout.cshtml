@@ -445,7 +445,8 @@
                                 <a class="text-white" asp-controller="Home" asp-action="AllEmployers">Kompanitë</a>
                             </p>
                             <p>
-                                @if (this.User.IsInRole("Employer") && SignInManager.IsSignedIn(User))
+                                <a class="text-white" asp-controller="Home" asp-action="Privacy">Rreth Nesh</a>
+                                @*@if (this.User.IsInRole("Employer") && SignInManager.IsSignedIn(User))
                                 {
                                     <a href="#" style="color:white; text-decoration:none;" onclick="document.getElementById('logout-form').submit();">Dil</a>
                                 }
@@ -456,7 +457,7 @@
                                 else
                                 {
                                     <a class="text-white" asp-controller="Account" asp-action="Login">Hyr</a>
-                                }
+                                }*@
                             </p>
                         </div>
                         <!-- Grid column -->
