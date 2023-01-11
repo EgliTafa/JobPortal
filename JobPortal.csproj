@@ -15,6 +15,9 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\raty\fonts\raty.svg" />
+    <None Include="wwwroot\raty\raty-4.1.0.zip" />
+    <None Include="wwwroot\raty\raty.js" />
   </ItemGroup>
 
 

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221111115854_Company Rating")]
-    partial class CompanyRating
+    [Migration("20230110102722_IsPaid")]
+    partial class IsPaid
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,9 +34,6 @@ namespace JobPortal.Migrations
 
                     b.Property<int?>("JobId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
@@ -64,14 +61,10 @@ namespace JobPortal.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("CompanyPhoneNumber")
                         .HasColumnType("longtext");
-
-                    b.Property<int>("CompanyRating")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -171,6 +164,15 @@ namespace JobPortal.Migrations
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("IsPaidMonthly")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsPaidWeekly")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("JobCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(60)

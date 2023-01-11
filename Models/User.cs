@@ -22,5 +22,7 @@ namespace JobPortal.Models
         public int JobCount { get; set; }
         public override string PhoneNumber { get; set; }
         public string ImagePath { get; set; }
+        public bool IsPaidWeekly { get; set; }
+        public bool IsPaidMonthly { get; set; }
     }
 }

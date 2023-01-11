@@ -1,0 +1,23 @@
+﻿
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/SearchBar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <form method="get" asp-controller="Home" asp-action="Search">
+        <div class="main">
+            <!-- Another variation with a button -->
+            <div class="input-group" style="border: 2px solid gray; border-radius: 5px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; ">
+                <input type="text" class="form-control" id="profession" name="SearchString" placeholder="Kërkoni sipas titullit" style="border-radius:5px; border:none;">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="submit" style="border-radius:5px;">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

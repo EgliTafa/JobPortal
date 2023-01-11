@@ -58,51 +58,115 @@
     </style>
 </head>
 
-<section class="">
-    <div class="container">
-        <div class="row">
-            <a href="#" onclick="history.back()"><i class="fa fa-arrow-circle-left fa-2x arror-hover" style="color:mediumpurple;"></i></a>
+<body>
+    <section class="job-form-section job-form-section--image">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="job-form-box">
+                        <h2 class="heading">
+                            Gjeni<span class="accent"> punën</span> që
+                            <span class="accent">dëshironi</span>
+                        </h2>
+                        <form id="job-main-form" method="get" asp-controller="Home" asp-action="Search" class="job-main-form">
+                            <div class="controls">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4">
+                                        <div class="form-group fade-in">
+                                            <input type="text" id="profession" name="SearchString"
+                                                   placeholder="Kërkoni sipas titullit" class="form-control rounded-lg">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 fade-in">
+                                        <div class="form-group">
+                                            <select typeof="text" name="searchCategory" class="form-control rounded-lg" id="location">
+                                                <option value="" disabled selected>Kërkoni sipas kategorisë</option>
+                                                <option value="web-design">Web design</option>
+                                                <option value="graphic-design">Graphic design</option>
+                                                <option value="web-development">Web development</option>
+                                                <option value="human-resource">Human Resources</option>
+                                                <option value="support">Support</option>
+                                                <option value="android">Android</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-            <div class="col-md">
-                @foreach (var job in Model)
-                {
-                    <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
-                        <div class="card">
-                            <div class="row no-gutters w-100 h-75">
-                                <div class="">
-                                    <img class="card-img rounded-1" src="@job.PosterImageURl" style="width:100px; height:80px; margin:5px;">
+                                    <div class="col-sm-4 fade-in">
+                                        <div class="form-group">
+                                            <select typeof="text" name="searchShifts" class="form-control rounded-lg" id="location">
+                                                <option value="" disabled selected>Kërkoni sipas orarit</option>
+                                                <option value="Full time">Full time</option>
+                                                <option value="Part time">Part time</option>
+                                                <option value="Internship">Internship</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 fade-in" style="margin-bottom:30px">
+                                        <button type="submit"
+                                                class="btn btn-outline-white-primary job-main-form__button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="text-left">
-                                    <div class="card-body" style="position:absolute; right:0;">
-                                        <h5 class="card-title" style="display:flex; justify-content:center; margin-left:80px;">@job.Category</h5>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                        <span style="margin:0 auto; margin-left:90px;"><i class="fa fa-map-marker"></i> @job.Location</span>
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <a href="#" onclick="history.back()"><i class="fa fa-arrow-circle-left fa-2x arror-hover" style="color:mediumpurple;"></i></a>
 
-                                        <span style="margin:0 auto;"><i class="fa fa-eye"></i> @job.ViewCount</span>
+                <div class="col-md">
+                    <h3 class="heading">
+                        Postimet<span class="accent"> më</span> të
+                        <span class="accent">fundit</span>
+                    </h3>
+                    @foreach (var job in Model)
+                    {
+                        <a asp-controller="Home" asp-action="JobDetails" asp-route-id="@job.Id">
+                            <div class="card">
+                                <div class="row no-gutters w-100 h-75">
+                                    <div class="">
+                                        <img class="card-img rounded-1" src="@job.PosterImageURl" style="width:100px; height:80px; margin:5px;">
+                                    </div>
+                                    <div class="text-left">
+                                        <div class="card-body" style="position:absolute; right:0;">
+                                            <h5 class="card-title" style="display:flex; justify-content:center; margin-left:80px;">@job.Category</h5>
 
-                                        <span style="text-transform: capitalize; text-align: right; font-size:13px;"><i class="fa fa-clock-o"></i>  @job.CreatedAt.Humanize()</span>
+                                            <span style="margin:0 auto; margin-left:90px;"><i class="fa fa-map-marker"></i> @job.Location</span>
 
-                                        @if ((DateTime.Now - job.CreatedAt).TotalDays < 7)
-                                        {
-                                            <div class="newJobPosting">
+                                            <span style="margin:0 auto;"><i class="fa fa-eye"></i> @job.ViewCount</span>
+
+                                            <span style="text-transform: capitalize; text-align: right; font-size:13px;"><i class="fa fa-clock-o"></i>  @job.CreatedAt.Humanize()</span>
+
+                                            @if ((DateTime.Now - job.CreatedAt).TotalDays < 7)
+                                            {
+                                                <div class="newJobPosting">
+                                                    <div class="newText">
+                                                        <i class="fa fa-star"></i>E Re &nbsp;
+                                                    </div>
+                                                </div>
+                                            }
+                                            <div class="newJobPosting" style="visibility:hidden;">
                                                 <div class="newText">
                                                     <i class="fa fa-star"></i>E Re &nbsp;
                                                 </div>
-                                            </div>
-                                        }
-                                        <div class="newJobPosting" style="visibility:hidden;">
-                                            <div class="newText">
-                                                <i class="fa fa-star"></i>E Re &nbsp;
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                    <br />
-                }
+                        </a>
+                        <br />
+                    }
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+</body>

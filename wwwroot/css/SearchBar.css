@@ -1,0 +1,38 @@
+﻿/* Styles for wrapping the search box */
+
+.main {
+    width: 70%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.search-Border {
+    border: 2px solid gray;
+    border-radius: 5px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+/*For Mobile View*/
+@media screen and (max-width: 600px) {
+    .main{
+        width:auto;
+    }
+}

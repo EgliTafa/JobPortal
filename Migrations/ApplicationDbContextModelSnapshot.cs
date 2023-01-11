@@ -59,7 +59,6 @@ namespace JobPortal.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("CompanyPhoneNumber")
@@ -164,6 +163,15 @@ namespace JobPortal.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsPaidMonthly")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsPaidWeekly")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("JobCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .HasMaxLength(60)
                         .HasColumnType("varchar(60)");
@@ -210,7 +218,7 @@ namespace JobPortal.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("Employers");
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

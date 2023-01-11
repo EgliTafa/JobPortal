@@ -261,6 +261,7 @@
             padding-top: 10px;
         }
     </style>
+    <script src="~/raty/raty.js"></script>
 </head>
 
 <body>
@@ -303,19 +304,19 @@
             </div>
             <div class="row bg-white social-buttons">
                 <div class="social-buttons">
-                    <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=https://localhost:44389/jobs/@Model.Job.Id/details" target="_blank">
+                    <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=https://zero.al/jobs/@Model.Job.Id/details" target="_blank">
                         <img src="~/img/social-buttons/facebook (1).svg" class="icons-style" />
                     </a>
-                    @*<a href="fb-messenger://share/?link= https://localhost:44389/jobs/@Model.Job.Id/details" target="_blank">
+                    @*<a href="fb-messenger://share/?link= https://zero.al/jobs/@Model.Job.Id/details" target="_blank">
                         <img src="~/img/social-buttons/messenger-icon.png" class="icons-style" />
                     </a>*@
                     @*<a href="#">
                         <img src="~/img/social-buttons/viber-icon.png" class="icons-style" />
                     </a>*@
-                    <a href="https://api.whatsapp.com/send?text=https://localhost:44389/jobs/@Model.Job.Id/details" data-action="share/whatsapp/share" target="_blank">
+                    <a href="https://api.whatsapp.com/send?text=https://zero.al/jobs/@Model.Job.Id/details" data-action="share/whatsapp/share" target="_blank">
                         <img src="~/img/social-buttons/whatspp.png" class="icons-style" />
                     </a>
-                    <a href="mailto:?subject=Share Post&amp;body=Share postings with others https://localhost:44389/jobs/@Model.Job.Id/details."
+                    <a href="mailto:?subject=Share Post&amp;body=Share postings with others https://zero.al/jobs/@Model.Job.Id/details."
                         title="Share by Email">
                         <img src="~/img/social-buttons/envelopes.svg" class="icons-style" />
                     </a>
@@ -324,13 +325,13 @@
                     </a>
                 </div>
             </div>
-            <input type="text" value="https://localhost:44389/jobs/@Model.Job.Id/details" id="myInput" style="display:none;">
+            <input type="text" value="https://zero.al/jobs/@Model.Job.Id/details" id="myInput" style="display:none;">
             <div class="row bg-white">
                 <div class="container" id="a">
                     <br />
                     <div class="font-weight-bold">
                         <h5 style="text-align:center; font-weight:bold;">@Model.Job.Title</h5>
-                        <p style=" white-space: pre-line; font-family: 'Lato', sans-serif !important;">@Model.Job.Description</p>
+                        <p style="font-size:14px; color:black; white-space: pre-line; font-family: 'Lato', sans-serif !important;">@Model.Job.Description</p>
                     </div>
                 </div>
             </div>
@@ -389,12 +390,9 @@
                     <a class="btn signInBtn" href="tel:@Model.Job.CompanyPhoneNumber">Telefononi Kompaninë</a>
                 </div>
 
-                <form runat="server" style="visibility:hidden;">
-                    <input id="input-id" type="text" class="rating" data-size="md">
+                <div id="star-rating">
 
-                    <asp:HiddenField ID="hdfRatingValue" runat="server" />
-
-                </form>
+                </div>
             </div>
         </div>
     </section>
@@ -447,6 +445,7 @@
 </body>
 
 <script>
+    new Raty(document.querySelector('#star-rating'));
     // Get the modal
     var modal = document.getElementById("myModal");
 
@@ -485,14 +484,15 @@
 
     function copyToClipboard() {
         // Get the text field
-        var copyText = document.getElementById("myInput");
+        var dummy = document.createElement('input'),
+            text = window.location.href;
 
-        // Select the text field
-        copyText.select();
-        copyText.setSelectionRange(0, 99999); // For mobile devices
-
-        // Copy the text inside the text field
-        navigator.clipboard.writeText(copyText.value);
+        //Copies the text field
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
 
         // Alert the copied text
         alert("Adresa u kopjua!");
