@@ -92,7 +92,7 @@
 
                                             <span style="text-transform: capitalize; text-align: right; font-size:13px;"><i class="fa fa-clock-o"></i>  @job.CreatedAt.Humanize()</span>
 
-                                            @if ((DateTime.Now - job.CreatedAt).TotalDays < 7)
+                                            @if ((DateTime.Now - job.CreatedAt).TotalDays < 1)
                                             {
                                                 <div class="newJobPosting">
                                                     <div class="newText">
