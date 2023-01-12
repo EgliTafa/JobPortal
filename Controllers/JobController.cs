@@ -164,7 +164,7 @@ namespace JobPortal.Controllers
             template.AppendLine("- ABC Bebitos");
 
             var email = await Email
-              .From("mymicrowaveisdry@gmail.com")
+              .From("noreply@zero.al")
               .To(user.Email)
               .Subject("Application Sent Succesfully!")
               .UsingTemplate(template.ToString(), new

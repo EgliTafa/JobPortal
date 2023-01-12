@@ -121,7 +121,11 @@ namespace JobPortal.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                    await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
+                    await _emailService.SendAsync(user.Email, "Konfirmoni E-Mailin", $"Ju faleminderit që u regjistruat në portalin, Zero.al.<br /> " +
+                        $"Për të kryer regjistrimin, ju lutemi klikoni në linkun e mëposhtëm: <a href=\"{confirmationLink}\">KONFIRMO!</a> <br />" +
+                        $"Nëse keni ndonjë pyetje ose nevojë për ndihmë, ju lutemi na kontaktoni në numrin e telefonit 0685553055 ose ne emailin : info@zero.al <br/>" +
+                        $"Me respekt," +
+                        $"Ekipi i zero.al", true);
                     return View("EmailVerification");
                 }
                 foreach (var error in result.Errors)
@@ -218,7 +222,11 @@ namespace JobPortal.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                    await _emailService.SendAsync(user.Email, "Confirm Your Email", $"<a href=\"{confirmationLink}\">Confirm Email Link</a>", true);
+                    await _emailService.SendAsync(user.Email, "Konfirmoni E-Mailin", $"Ju faleminderit që u regjistruat në portalin, Zero.al.<br /> " +
+                                            $"Për të kryer regjistrimin, ju lutemi klikoni në linkun e mëposhtëm: <a href=\"{confirmationLink}\">KONFIRMO!</a> <br />" +
+                                            $"Nëse keni ndonjë pyetje ose nevojë për ndihmë, ju lutemi na kontaktoni në numrin e telefonit 0685553055 ose ne emailin : info@zero.al <br/>" +
+                                            $"Me respekt," +
+                                            $"Ekipi i zero.al", true); 
                     return View("EmailVerification");
                 }
                 foreach (var error in result.Errors)
@@ -272,9 +280,11 @@ namespace JobPortal.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
+                
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Kredencialet nuk janë të sakta.");
+                    ModelState.AddModelError(string.Empty, "Ju lutem provoni përsëri!");
                     return View(model);
                 }
 
@@ -295,7 +305,10 @@ namespace JobPortal.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Invalid login attempt");
+            ModelState.AddModelError("", "Kredencialet nuk janë të sakta. Ju lutem provoni përsëri!");
+            ViewBag.Message = "You have entered wrong credentials. Please Try Again!";
+            ViewBag.Message = "This is second message. UserName or password is wrong";
+
             return View(model);
         }
 

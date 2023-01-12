@@ -3,6 +3,44 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/SearchBar.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        .searchBtn {
+            position: relative;
+            float: left;
+            line-height: 20px;
+            text-align: center;
+            color: #FFF;
+            background-color: #746EA9;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -webkit-transition: all 100ms ease-in-out;
+            -moz-transition: all 100ms ease-in-out;
+            -o-transition: all 100ms ease-in-out;
+            transition: all 100ms ease-in-out;
+        }
+
+            .searchBtn:hover {
+                position: relative;
+                float: left;
+                line-height: 20px;
+                text-align: center;
+                color: #FFF;
+                background-color: #6632a8;
+                border-radius: 5px;
+                cursor: pointer;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                -webkit-transition: all 100ms ease-in-out;
+                -moz-transition: all 100ms ease-in-out;
+                -o-transition: all 100ms ease-in-out;
+                transition: all 100ms ease-in-out;
+            }
+
+    </style>
 </head>
 
 <body>
@@ -12,7 +50,7 @@
             <div class="input-group" style="border: 2px solid gray; border-radius: 5px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; ">
                 <input type="text" class="form-control" id="profession" name="SearchString" placeholder="Kërkoni sipas titullit" style="border-radius:5px; border:none;">
                 <div class="input-group-append">
-                    <button class="btn btn-secondary" type="submit" style="border-radius:5px;">
+                    <button class="btn searchBtn" type="submit" style="border-radius:5px;">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>

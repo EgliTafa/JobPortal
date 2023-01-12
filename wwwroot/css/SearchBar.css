@@ -36,3 +36,38 @@
         width:auto;
     }
 }
+
+
+.searchBtn {
+    position: relative;
+    float: left;
+    line-height: 20px;
+    text-align: center;
+    color: #FFF;
+    background-color: #746EA9;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+}
+
+    .searchBtn:hover {
+        position: relative;
+        float: left;
+        line-height: 20px;
+        text-align: center;
+        color: #FFF;
+        background-color: #6632a8;
+        border-radius: 5px;
+        cursor: pointer;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -webkit-transition: all 100ms ease-in-out;
+        -moz-transition: all 100ms ease-in-out;
+        -o-transition: all 100ms ease-in-out;
+        transition: all 100ms ease-in-out;
+    }
