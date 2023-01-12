@@ -139,6 +139,12 @@ namespace JobPortal.Controllers
             return View();
         }
 
+        [Route("about-us")]
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
         [Route("employer/all-employers")]
         public async Task<IActionResult> AllEmployers(string id)
         {

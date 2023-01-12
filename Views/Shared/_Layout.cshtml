@@ -445,7 +445,12 @@
                                 <a class="text-white" asp-controller="Home" asp-action="AllEmployers">Kompanitë</a>
                             </p>
                             <p>
-                                <a class="text-white" asp-controller="Home" asp-action="Privacy">Rreth Nesh</a>
+                                <a class="text-white" asp-controller="Home" asp-action="AboutUs">Rreth Nesh</a>
+                            </p>
+                            <p>
+                                <a class="text-white" asp-controller="Home" asp-action="Privacy">
+                                    Politika e Privatësisë
+                                </a>
                                 @*@if (this.User.IsInRole("Employer") && SignInManager.IsSignedIn(User))
                                 {
                                     <a href="#" style="color:white; text-decoration:none;" onclick="document.getElementById('logout-form').submit();">Dil</a>

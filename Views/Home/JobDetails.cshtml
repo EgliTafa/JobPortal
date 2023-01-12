@@ -445,7 +445,6 @@
 </body>
 
 <script>
-    new Raty(document.querySelector('#star-rating'));
     // Get the modal
     var modal = document.getElementById("myModal");
 
@@ -471,16 +470,6 @@
             modal.style.display = "none";
         }
     }
-
-    //Get the rating value from the star
-    $(document).ready(function () {
-        $("#input-id").on("rating.change", function (event, value, caption) {
-
-            var ratingValue = $('#<%=hdfRatingValue.ClientID%>').val();
-            ratingValue = value;
-            alert(ratingValue);
-        });
-    });
 
     function copyToClipboard() {
         // Get the text field

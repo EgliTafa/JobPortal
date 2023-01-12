@@ -1,0 +1,59 @@
+﻿.advanced {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+.btn-secondary,
+.btn-secondary:focus,
+.btn-secondary:active {
+    color: #fff;
+    background-color: #00838f !important;
+    border-color: #00838f !important;
+    box-shadow: none;
+}
+
+
+.advanced {
+    color: #00838f !important;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 1px solid #00838f;
+}
+
+.searchBtn {
+    position: relative;
+    float: left;
+    line-height: 20px;
+    text-align: center;
+    color: #FFF;
+    background-color: #746EA9;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -o-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+}
+
+    .searchBtn:hover {
+        position: relative;
+        float: left;
+        line-height: 20px;
+        text-align: center;
+        color: #FFF;
+        background-color: #6632a8;
+        border-radius: 5px;
+        cursor: pointer;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -webkit-transition: all 100ms ease-in-out;
+        -moz-transition: all 100ms ease-in-out;
+        -o-transition: all 100ms ease-in-out;
+        transition: all 100ms ease-in-out;
+    }
