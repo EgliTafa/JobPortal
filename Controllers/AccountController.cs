@@ -124,7 +124,7 @@ namespace JobPortal.Controllers
                     await _emailService.SendAsync(user.Email, "Konfirmoni E-Mailin", $"Ju faleminderit që u regjistruat në portalin, Zero.al.<br /> " +
                         $"Për të kryer regjistrimin, ju lutemi klikoni në linkun e mëposhtëm: <a href=\"{confirmationLink}\">KONFIRMO!</a> <br />" +
                         $"Nëse keni ndonjë pyetje ose nevojë për ndihmë, ju lutemi na kontaktoni në numrin e telefonit 0685553055 ose ne emailin : info@zero.al <br/>" +
-                        $"Me respekt," +
+                        $"Me respekt,<br />" +
                         $"Ekipi i zero.al", true);
                     return View("EmailVerification");
                 }
@@ -225,7 +225,7 @@ namespace JobPortal.Controllers
                     await _emailService.SendAsync(user.Email, "Konfirmoni E-Mailin", $"Ju faleminderit që u regjistruat në portalin, Zero.al.<br /> " +
                                             $"Për të kryer regjistrimin, ju lutemi klikoni në linkun e mëposhtëm: <a href=\"{confirmationLink}\">KONFIRMO!</a> <br />" +
                                             $"Nëse keni ndonjë pyetje ose nevojë për ndihmë, ju lutemi na kontaktoni në numrin e telefonit 0685553055 ose ne emailin : info@zero.al <br/>" +
-                                            $"Me respekt," +
+                                            $"Me respekt, <br />" +
                                             $"Ekipi i zero.al", true); 
                     return View("EmailVerification");
                 }
